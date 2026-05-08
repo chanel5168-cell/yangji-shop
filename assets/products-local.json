@@ -1,0 +1,618 @@
+[
+  {
+    "origId": "3853656",
+    "id": "p-3853656",
+    "images": [
+      "assets/imgs/7532640_602349-1.jpg.full.jpg"
+    ],
+    "name": "7090休閒塑杯180ml/150只",
+    "code": "602349",
+    "price": 31,
+    "stock": 100,
+    "specs": [
+      {
+        "name": "容量",
+        "value": "180ml"
+      },
+      {
+        "name": "數量",
+        "value": "150 只/包"
+      },
+      {
+        "name": "貨號",
+        "value": "602349"
+      }
+    ],
+    "categoryId": "cat-6669",
+    "unit": "包",
+    "minOrder": 1,
+    "isActive": true,
+    "description": "7090休閒塑杯180ml/150只\n貨號：602349\n適用：批發、零售、聚會、辦公室",
+    "createdAt": 1777734161034,
+    "origPrice": 6.2
+  },
+  {
+    "origId": "3853655",
+    "id": "p-3853655",
+    "images": [
+      "assets/imgs/7532634_602347-1.jpg.full.jpg"
+    ],
+    "name": "7112特色紙杯210ml/120只",
+    "code": "602347",
+    "price": 32,
+    "stock": 100,
+    "specs": [
+      {
+        "name": "容量",
+        "value": "210ml"
+      },
+      {
+        "name": "數量",
+        "value": "120 只/包"
+      },
+      {
+        "name": "貨號",
+        "value": "602347"
+      }
+    ],
+    "categoryId": "cat-6669",
+    "unit": "包",
+    "minOrder": 1,
+    "isActive": true,
+    "description": "7112特色紙杯210ml/120只\n貨號：602347\n適用：批發、零售、聚會、辦公室",
+    "createdAt": 1777734101034,
+    "origPrice": 6.3
+  },
+  {
+    "origId": "3829437",
+    "id": "p-3829437",
+    "images": [
+      "assets/imgs/7472144_602164-1.jpg.full.jpg"
+    ],
+    "name": "1117福字袋裝紙杯230ml/100只",
+    "code": "602164",
+    "price": 34,
+    "stock": 100,
+    "specs": [
+      {
+        "name": "容量",
+        "value": "230ml"
+      },
+      {
+        "name": "數量",
+        "value": "100 只/包"
+      },
+      {
+        "name": "貨號",
+        "value": "602164"
+      }
+    ],
+    "categoryId": "cat-6669",
+    "unit": "包",
+    "minOrder": 1,
+    "isActive": true,
+    "description": "1117福字袋裝紙杯230ml/100只\n貨號：602164\n適用：批發、零售、聚會、辦公室",
+    "createdAt": 1777734041034,
+    "origPrice": 6.8
+  },
+  {
+    "origId": "3829436",
+    "id": "p-3829436",
+    "images": [
+      "assets/imgs/7472141_602163-1.jpg.full.jpg"
+    ],
+    "name": "1118特惠紙杯235ml/150只",
+    "code": "602163",
+    "price": 34,
+    "stock": 100,
+    "specs": [
+      {
+        "name": "容量",
+        "value": "235ml"
+      },
+      {
+        "name": "數量",
+        "value": "150 只/包"
+      },
+      {
+        "name": "貨號",
+        "value": "602163"
+      }
+    ],
+    "categoryId": "cat-6669",
+    "unit": "包",
+    "minOrder": 1,
+    "isActive": true,
+    "description": "1118特惠紙杯235ml/150只\n貨號：602163\n適用：批發、零售、聚會、辦公室",
+    "createdAt": 1777733981035,
+    "origPrice": 6.9
+  },
+  {
+    "origId": "3829435",
+    "id": "p-3829435",
+    "images": [
+      "assets/imgs/7472138_602162-1.jpg.full.jpg"
+    ],
+    "name": "0027 商務特厚紙杯235ml/50只",
+    "code": "602162",
+    "price": 20,
+    "stock": 100,
+    "specs": [
+      {
+        "name": "容量",
+        "value": "235ml"
+      },
+      {
+        "name": "數量",
+        "value": "50 只/包"
+      },
+      {
+        "name": "貨號",
+        "value": "602162"
+      }
+    ],
+    "categoryId": "cat-6669",
+    "unit": "包",
+    "minOrder": 1,
+    "isActive": true,
+    "description": "0027 商務特厚紙杯235ml/50只\n貨號：602162\n適用：批發、零售、聚會、辦公室",
+    "createdAt": 1777733921035,
+    "origPrice": 3.9
+  },
+  {
+    "origId": "3829434",
+    "id": "p-3829434",
+    "images": [
+      "assets/imgs/7472135_602161-1.jpg.full.jpg"
+    ],
+    "name": "0010 商務特厚紙杯235ml/100只",
+    "code": "602161",
+    "price": 39,
+    "stock": 100,
+    "specs": [
+      {
+        "name": "容量",
+        "value": "235ml"
+      },
+      {
+        "name": "數量",
+        "value": "100 只/包"
+      },
+      {
+        "name": "貨號",
+        "value": "602161"
+      }
+    ],
+    "categoryId": "cat-6669",
+    "unit": "包",
+    "minOrder": 1,
+    "isActive": true,
+    "description": "0010 商務特厚紙杯235ml/100只\n貨號：602161\n適用：批發、零售、聚會、辦公室",
+    "createdAt": 1777733861035,
+    "origPrice": 7.8
+  },
+  {
+    "origId": "3829433",
+    "id": "p-3829433",
+    "images": [
+      "assets/imgs/7472132_602160-1.jpg.full.jpg"
+    ],
+    "name": "1113輕鬆雙色紙杯230ml/50只",
+    "code": "602160",
+    "price": 20,
+    "stock": 100,
+    "specs": [
+      {
+        "name": "容量",
+        "value": "230ml"
+      },
+      {
+        "name": "數量",
+        "value": "50 只/包"
+      },
+      {
+        "name": "貨號",
+        "value": "602160"
+      }
+    ],
+    "categoryId": "cat-6669",
+    "unit": "包",
+    "minOrder": 1,
+    "isActive": true,
+    "description": "1113輕鬆雙色紙杯230ml/50只\n貨號：602160\n適用：批發、零售、聚會、辦公室",
+    "createdAt": 1777733801035,
+    "origPrice": 3.9
+  },
+  {
+    "origId": "3829432",
+    "id": "p-3829432",
+    "images": [
+      "assets/imgs/7472129_602159-1.jpg.full.jpg"
+    ],
+    "name": "1115水果四色紙杯230ml/88只",
+    "code": "602159",
+    "price": 32,
+    "stock": 100,
+    "specs": [
+      {
+        "name": "容量",
+        "value": "230ml"
+      },
+      {
+        "name": "數量",
+        "value": "88 只/包"
+      },
+      {
+        "name": "貨號",
+        "value": "602159"
+      }
+    ],
+    "categoryId": "cat-6669",
+    "unit": "包",
+    "minOrder": 1,
+    "isActive": true,
+    "description": "1115水果四色紙杯230ml/88只\n貨號：602159\n適用：批發、零售、聚會、辦公室",
+    "createdAt": 1777733741035,
+    "origPrice": 6.3
+  },
+  {
+    "origId": "3829431",
+    "id": "p-3829431",
+    "images": [
+      "assets/imgs/7472126_602158-1.jpg.full.jpg"
+    ],
+    "name": "0386音樂紙杯235ml/50只裝",
+    "code": "602158",
+    "price": 16,
+    "stock": 100,
+    "specs": [
+      {
+        "name": "容量",
+        "value": "235ml"
+      },
+      {
+        "name": "數量",
+        "value": "50 只/包"
+      },
+      {
+        "name": "貨號",
+        "value": "602158"
+      }
+    ],
+    "categoryId": "cat-6669",
+    "unit": "包",
+    "minOrder": 1,
+    "isActive": true,
+    "description": "0386音樂紙杯235ml/50只裝\n貨號：602158\n適用：批發、零售、聚會、辦公室",
+    "createdAt": 1777733681035,
+    "origPrice": 3.2
+  },
+  {
+    "origId": "3829430",
+    "id": "p-3829430",
+    "images": [
+      "assets/imgs/7472123_602157-1.jpg.full.jpg"
+    ],
+    "name": "0379音樂紙杯235ml/100只",
+    "code": "602157",
+    "price": 31,
+    "stock": 100,
+    "specs": [
+      {
+        "name": "容量",
+        "value": "235ml"
+      },
+      {
+        "name": "數量",
+        "value": "100 只/包"
+      },
+      {
+        "name": "貨號",
+        "value": "602157"
+      }
+    ],
+    "categoryId": "cat-6669",
+    "unit": "包",
+    "minOrder": 1,
+    "isActive": true,
+    "description": "0379音樂紙杯235ml/100只\n貨號：602157\n適用：批發、零售、聚會、辦公室",
+    "createdAt": 1777733621035,
+    "origPrice": 6.2
+  },
+  {
+    "origId": "3829429",
+    "id": "p-3829429",
+    "images": [
+      "assets/imgs/7472120_602156-1.jpg.full.jpg"
+    ],
+    "name": "1000個陽光紙杯235ml/50只",
+    "code": "602156",
+    "price": 13,
+    "stock": 100,
+    "specs": [
+      {
+        "name": "容量",
+        "value": "235ml"
+      },
+      {
+        "name": "數量",
+        "value": "1000 只/包"
+      },
+      {
+        "name": "貨號",
+        "value": "602156"
+      }
+    ],
+    "categoryId": "cat-6669",
+    "unit": "包",
+    "minOrder": 1,
+    "isActive": true,
+    "description": "1000個陽光紙杯235ml/50只\n貨號：602156\n適用：批發、零售、聚會、辦公室",
+    "createdAt": 1777733561035,
+    "origPrice": 2.6
+  },
+  {
+    "origId": "3829428",
+    "id": "p-3829428",
+    "images": [
+      "assets/imgs/7472117_602155-1.jpg.full.jpg"
+    ],
+    "name": "009陽光紙杯235ml/100只",
+    "code": "602155",
+    "price": 25,
+    "stock": 100,
+    "specs": [
+      {
+        "name": "容量",
+        "value": "235ml"
+      },
+      {
+        "name": "數量",
+        "value": "100 只/包"
+      },
+      {
+        "name": "貨號",
+        "value": "602155"
+      }
+    ],
+    "categoryId": "cat-6669",
+    "unit": "包",
+    "minOrder": 1,
+    "isActive": true,
+    "description": "009陽光紙杯235ml/100只\n貨號：602155\n適用：批發、零售、聚會、辦公室",
+    "createdAt": 1777733501035,
+    "origPrice": 5.0
+  },
+  {
+    "origId": "3615933",
+    "id": "p-3615933",
+    "images": [
+      "assets/imgs/6842732_856276-1.jpg.full.jpg"
+    ],
+    "name": "1346一次性塑杯210只170ml",
+    "code": "856276",
+    "price": 34,
+    "stock": 100,
+    "specs": [
+      {
+        "name": "容量",
+        "value": "170ml"
+      },
+      {
+        "name": "數量",
+        "value": "210 只/包"
+      },
+      {
+        "name": "貨號",
+        "value": "856276"
+      }
+    ],
+    "categoryId": "cat-6669",
+    "unit": "包",
+    "minOrder": 1,
+    "isActive": true,
+    "description": "1346一次性塑杯210只170ml\n貨號：856276\n適用：批發、零售、聚會、辦公室",
+    "createdAt": 1777733441035,
+    "origPrice": 6.7
+  },
+  {
+    "origId": "3427210",
+    "id": "p-3427210",
+    "images": [
+      "assets/imgs/6521641_CP853305-1.jpg.full.jpg"
+    ],
+    "name": "9855時尚塑膠膠杯100只",
+    "code": "CP853305",
+    "price": 17,
+    "stock": 100,
+    "specs": [
+      {
+        "name": "數量",
+        "value": "100 只/包"
+      },
+      {
+        "name": "貨號",
+        "value": "CP853305"
+      }
+    ],
+    "categoryId": "cat-6669",
+    "unit": "包",
+    "minOrder": 1,
+    "isActive": true,
+    "description": "9855時尚塑膠膠杯100只\n貨號：CP853305\n適用：批發、零售、聚會、辦公室",
+    "createdAt": 1777733381035,
+    "origPrice": 3.4
+  },
+  {
+    "origId": "3085729",
+    "id": "p-3085729",
+    "images": [
+      "assets/imgs/6084405_855504-1.jpg.full.jpg"
+    ],
+    "name": "杯小樂紙杯0305(樂享杯80只裝)",
+    "code": "855504",
+    "price": 33,
+    "stock": 100,
+    "specs": [
+      {
+        "name": "數量",
+        "value": "80 只/包"
+      },
+      {
+        "name": "貨號",
+        "value": "855504"
+      }
+    ],
+    "categoryId": "cat-6669",
+    "unit": "包",
+    "minOrder": 1,
+    "isActive": true,
+    "description": "杯小樂紙杯0305(樂享杯80只裝)\n貨號：855504\n適用：批發、零售、聚會、辦公室",
+    "createdAt": 1777733321035,
+    "origPrice": 6.6
+  },
+  {
+    "origId": "3085728",
+    "id": "p-3085728",
+    "images": [
+      "assets/imgs/6084402_855503-1.jpg.full.jpg"
+    ],
+    "name": "杯小樂紙杯0304(樂享杯40隻裝)",
+    "code": "855503",
+    "price": 17,
+    "stock": 100,
+    "specs": [
+      {
+        "name": "數量",
+        "value": "40 只/包"
+      },
+      {
+        "name": "貨號",
+        "value": "855503"
+      }
+    ],
+    "categoryId": "cat-6669",
+    "unit": "包",
+    "minOrder": 1,
+    "isActive": true,
+    "description": "杯小樂紙杯0304(樂享杯40隻裝)\n貨號：855503\n適用：批發、零售、聚會、辦公室",
+    "createdAt": 1777733261035,
+    "origPrice": 3.45
+  },
+  {
+    "origId": "3085727",
+    "id": "p-3085727",
+    "images": [
+      "assets/imgs/6084399_855502-1.jpg.full.jpg"
+    ],
+    "name": "杯小樂紙杯0301(樂飲20只裝)",
+    "code": "855502",
+    "price": 7,
+    "stock": 100,
+    "specs": [
+      {
+        "name": "數量",
+        "value": "20 只/包"
+      },
+      {
+        "name": "貨號",
+        "value": "855502"
+      }
+    ],
+    "categoryId": "cat-6669",
+    "unit": "包",
+    "minOrder": 1,
+    "isActive": true,
+    "description": "杯小樂紙杯0301(樂飲20只裝)\n貨號：855502\n適用：批發、零售、聚會、辦公室",
+    "createdAt": 1777733201035,
+    "origPrice": 1.4
+  },
+  {
+    "origId": "3085726",
+    "id": "p-3085726",
+    "images": [
+      "assets/imgs/6091923_2b98f1a4169b74260c0d76ab3f9eac5a.jpg.full.jpg"
+    ],
+    "name": "0006(拾光紙杯50只裝)230ML",
+    "code": "855501",
+    "price": 15,
+    "stock": 100,
+    "specs": [
+      {
+        "name": "數量",
+        "value": "50 只/包"
+      },
+      {
+        "name": "貨號",
+        "value": "855501"
+      }
+    ],
+    "categoryId": "cat-6669",
+    "unit": "包",
+    "minOrder": 1,
+    "isActive": true,
+    "description": "0006(拾光紙杯50只裝)230ML\n貨號：855501\n適用：批發、零售、聚會、辦公室",
+    "createdAt": 1777733141035,
+    "origPrice": 3.05
+  },
+  {
+    "origId": "3085725",
+    "id": "p-3085725",
+    "images": [
+      "assets/imgs/6084396_855500-1.jpg.full.jpg"
+    ],
+    "name": "0051(榮拾好運紙杯100只裝)",
+    "code": "855500",
+    "price": 33,
+    "stock": 100,
+    "specs": [
+      {
+        "name": "數量",
+        "value": "100 只/包"
+      },
+      {
+        "name": "貨號",
+        "value": "855500"
+      }
+    ],
+    "categoryId": "cat-6669",
+    "unit": "包",
+    "minOrder": 1,
+    "isActive": true,
+    "description": "0051(榮拾好運紙杯100只裝)\n貨號：855500\n適用：批發、零售、聚會、辦公室",
+    "createdAt": 1777733081035,
+    "origPrice": 6.6
+  },
+  {
+    "origId": "3085724",
+    "id": "p-3085724",
+    "images": [
+      "assets/imgs/6084393_855498-1.jpg.full.jpg"
+    ],
+    "name": "0059(榮拾幸運塑杯100只裝)180ml",
+    "code": "855498",
+    "price": 29,
+    "stock": 100,
+    "specs": [
+      {
+        "name": "容量",
+        "value": "180ml"
+      },
+      {
+        "name": "數量",
+        "value": "100 只/包"
+      },
+      {
+        "name": "貨號",
+        "value": "855498"
+      }
+    ],
+    "categoryId": "cat-6669",
+    "unit": "包",
+    "minOrder": 1,
+    "isActive": true,
+    "description": "0059(榮拾幸運塑杯100只裝)180ml\n貨號：855498\n適用：批發、零售、聚會、辦公室",
+    "createdAt": 1777733021035,
+    "origPrice": 5.8
+  }
+]

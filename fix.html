@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>授權修復工具</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,'Microsoft JhengHei',sans-serif;max-width:600px;margin:40px auto;padding:20px;background:#f5f5f5;color:#333}
+h1{color:#1a2a4a}
+.box{background:#fff;border:2px solid #c9a95c;border-radius:8px;padding:20px;margin:16px 0}
+.ok{background:#dcfce7;border-color:#16a34a;color:#065f46}
+.err{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.info{background:#dbeafe;border-color:#3b82f6;color:#1e3a8a}
+pre{background:#fff;padding:10px;border-radius:4px;font-size:12px;overflow-x:auto;white-space:pre-wrap;word-break:break-all}
+button{background:#1a2a4a;color:#fde68a;border:0;padding:12px 24px;border-radius:6px;font-size:16px;cursor:pointer;margin-top:12px}
+button:hover{background:#2d4a7a}
+.btn-link{background:#c9a95c;color:#1a2a4a;display:inline-block;text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+<h1>🔧 暘基商城授權自動修復</h1>
+<div id="output" class="box info">準備執行修復…</div>
+<div>
+  <a href="admin.html?after-fix=1" class="btn-link" style="background:#c9a95c;color:#1a2a4a;display:inline-block;text-decoration:none;font-weight:bold;padding:12px 24px;border-radius:6px;font-size:16px">→ 回到後台</a>
+</div>
+
+<script>
+const LICENSE_SECRET = 'YJ-2026-SHOP-V1-SALT-7K3M9';
+const out = document.getElementById('output');
+
+function show(html, cls) {
+  out.className = 'box ' + (cls || 'info');
+  out.innerHTML = html;
+}
+
+function tohex(s){
+  return [...(s||'')].map(c=>c.codePointAt(0).toString(16).toUpperCase().padStart(4,'0')).join(' ');
+}
+
+try {
+  const raw = localStorage.getItem('shop_settings');
+  if (!raw) { show('❌ localStorage 沒有 shop_settings — 你可能是第一次開後台,直接點下方「回到後台」即可', 'err'); throw 'stop'; }
+  const s = JSON.parse(raw);
+  if (!s.licenseKey) { show('❌ 沒有授權碼 — 直接到後台啟用即可', 'err'); throw 'stop'; }
+
+  const m = String(s.licenseKey).trim().match(/^YJ-([A-Za-z0-9_\-]+)-([a-z0-9]{8})$/);
+  if (!m) { show('❌ 授權碼格式不對<br><pre>'+s.licenseKey+'</pre>', 'err'); throw 'stop'; }
+
+  const payload = decodeURIComponent(escape(atob(m[1].replace(/-/g,'+').replace(/_/g,'/'))));
+  const src = payload + LICENSE_SECRET;
+  let h = 5381;
+  for (let i = 0; i < src.length; i++) h = ((h << 5) + h + src.charCodeAt(i)) | 0;
+  let sig = '';
+  for (let j = 0; j < 8; j++) { h = (h * 33 + j) | 0; sig += Math.abs(h % 36).toString(36); }
+
+  if (sig !== m[2]) { show('❌ 授權碼校驗碼錯誤(key 被改過)<br>計算: '+sig+'<br>提供: '+m[2], 'err'); throw 'stop'; }
+
+  const [keyCompany, keyExpiry] = payload.split('|');
+  const today = new Date().toISOString().slice(0,10).replace(/-/g,'');
+  if (keyExpiry < today) { show('❌ 授權已過期,期限: '+keyExpiry+',今日: '+today, 'err'); throw 'stop'; }
+
+  // 修復前比對
+  const oldShop = s.shopName || '';
+  const oldLic = s.licenseCompany || '';
+  const oldShopHex = tohex(oldShop);
+  const newHex = tohex(keyCompany);
+
+  if (oldShop === keyCompany && oldLic === keyCompany) {
+    show('✓ 授權狀態完全正常,不需要修復<br><br>'+
+      '<strong>公司名:</strong> '+keyCompany+'<br>'+
+      '<strong>到期日:</strong> '+keyExpiry.slice(0,4)+'-'+keyExpiry.slice(4,6)+'-'+keyExpiry.slice(6,8)+'<br>'+
+      '<strong>byte 比對:</strong> 一致<br><br>'+
+      '紅色「授權失效」如果還在,請按下方[回到後台]按鈕(會自動帶 ?after-fix=1 query string,強迫繞過快取)', 'ok');
+    throw 'stop';
+  }
+
+  // 真的需要修復
+  s.shopName = keyCompany;
+  s.licenseCompany = keyCompany;
+  localStorage.setItem('shop_settings', JSON.stringify(s));
+
+  show('🎉 修復完成!<br><br>' +
+    '<strong>檢測到 hidden char 不一致:</strong><br>' +
+    '<pre>shopName 修改前: ' + oldShop + '\n  hex: ' + oldShopHex + '\nshopName 修改後: ' + keyCompany + '\n  hex: ' + newHex + '\nbyte 差異:       ' + (oldShopHex !== newHex ? '✓ 確實不一致' : '? hex 同但物件不同') + '</pre>' +
+    '<strong>到期日:</strong> ' + keyExpiry.slice(0,4)+'-'+keyExpiry.slice(4,6)+'-'+keyExpiry.slice(6,8) + '<br><br>' +
+    '請按下方「→ 回到後台」按鈕,授權失效應該消失。', 'ok');
+} catch (e) {
+  if (e !== 'stop') show('💥 修復過程出錯: ' + (e && e.message), 'err');
+}
+</script>
+</body>
+</html>

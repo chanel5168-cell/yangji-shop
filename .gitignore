@@ -1,0 +1,53 @@
+# 暘基商城 .gitignore
+# 排除不該推上公開 repo 的檔案
+
+# ─── 備份檔案 (本地開發歷史紀錄,不上 GitHub) ───
+_backups/
+*.bak.*
+*.bak
+*backup_*
+*_backup_*
+
+# ─── 暫存檔 ───
+*.tmp
+*.tmp.js
+*.tmp.html
+_twd_*
+_jc*.tmp.js
+_jcseed.tmp.js
+_jcindex.tmp.js
+_jscheck.tmp.js
+_js_check.tmp.js
+
+# ─── 螢幕截圖 (放在根目錄的隨機 UUID png 通常是測試貼上的) ───
+/[0-9a-f][0-9a-f]*.png
+/*.png.bak
+
+# ─── Python ───
+__pycache__/
+*.pyc
+*.pyo
+
+# ─── IDE / OS ───
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ─── 環境變數 / 密鑰 (未來用) ───
+.env
+.env.*
+!.env.example
+
+# ─── 賣家內部工具 (不上 public repo) ───
+# _gen_keys.js 是授權碼產生器,只給賣家用,不該公開
+# (注意:LICENSE_SECRET 已在 admin.html 內,真正的長期解法是把驗證移到後端)
+_gen_keys.js
+
+# ─── 大型生成資料 (CSV / xlsx 樣本) ───
+*.xlsx
+!欄位_*.xlsx
+
+# ─── Node (如果未來加 build 工具) ───
+node_modules/
+package-lock.json

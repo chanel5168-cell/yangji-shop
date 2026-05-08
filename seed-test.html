@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>整合測試環境播種</title>
+<style>
+body{font-family:-apple-system,'Microsoft JhengHei',sans-serif;max-width:840px;margin:30px auto;padding:20px;background:#f5f5f5;color:#333}
+h1{color:#1a2a4a;border-bottom:3px solid #c9a95c;padding-bottom:8px}
+.box{background:#fff;border:2px solid #c9a95c;border-radius:8px;padding:18px;margin:14px 0}
+.warn{background:#fef3c7;border-color:#f59e0b;color:#78350f}
+.ok{background:#dcfce7;border-color:#16a34a;color:#065f46}
+.err{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.info{background:#dbeafe;border-color:#3b82f6;color:#1e3a8a}
+button{background:#1a2a4a;color:#fde68a;border:0;padding:12px 22px;border-radius:6px;font-size:15px;cursor:pointer;margin:6px 4px;font-weight:bold}
+button:hover{background:#2d4a7a}
+button.danger{background:#dc2626;color:#fff}
+button.go{background:#c9a95c;color:#1a2a4a}
+.btn-link{display:inline-block;text-decoration:none;background:#c9a95c;color:#1a2a4a;padding:12px 22px;border-radius:6px;font-size:15px;font-weight:bold;margin:6px 4px}
+pre{background:#1a2a4a;color:#fde68a;padding:12px;border-radius:4px;overflow-x:auto;font-size:11px;line-height:1.6}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th,td{border:1px solid #ddd;padding:6px 10px;text-align:left}
+th{background:#1a2a4a;color:#fde68a}
+.tag{display:inline-block;background:#fde68a;color:#78350f;padding:2px 8px;border-radius:10px;font-size:11px;margin:2px}
+</style>
+</head>
+<body>
+
+<h1>🧪 暘基商城 — 整合測試環境播種器</h1>
+
+<div class="box warn">
+  <strong>⚠ 這個頁面會做什麼</strong>
+  <ol style="margin:8px 0 0 18px">
+    <li>把目前 localStorage 的所有 <code>shop_*</code> key 備份到 <code>_backup_&lt;timestamp&gt;_*</code>（隨時可還原）</li>
+    <li>清掉所有 shop_* key</li>
+    <li>注入下方 7+10+3+30 組測試資料</li>
+    <li>重設後台帳號為 <code>admin@shop.local / admin123</code></li>
+    <li>保留授權碼 + 公司名（避免又掉到唯讀模式）</li>
+  </ol>
+</div>
+
+<div class="box info">
+  <strong>📋 測試資料規劃</strong>
+  <table style="margin-top:10px">
+    <tr><th width="100">類型</th><th>內容</th></tr>
+    <tr><td><strong>10 類別</strong></td><td>01-鐵線製品 / 02-彎折成型 / 03-點焊組立 / 04-五金扣件 / 05-工具器具 / 06-表面處理 / 07-食品器皿 / 08-寵物用品 / 09-園藝用品 / 10-清潔用具</td></tr>
+    <tr><td><strong>3 倉庫</strong></td><td>主倉(A 區 4 貨架) / 二倉(B 區 2 貨架) / 中部倉(C 區 2 貨架) — 總計 <strong>8 個貨架</strong></td></tr>
+    <tr><td><strong>7 廠商</strong></td><td>2 中國(CNY) / 2 台灣(TWD) / 1 美國(USD) / 1 香港 / 1 日本 — 不同付款條件</td></tr>
+    <tr><td><strong>30 商品</strong></td><td>每類 3 件,3 種幣別交錯(10 件 CNY / 10 件 USD / 10 件 TWD),廠商分配輪流</td></tr>
+    <tr><td><strong>4 後台帳號</strong></td><td>super / accountant / picker / sales(預設密碼參見手冊)</td></tr>
+  </table>
+</div>
+
+<div style="text-align:center;margin:24px 0">
+  <div style="margin-bottom:14px">
+    <button class="danger" onclick="seedAll()">🔥 ① 全清並注入基礎測試資料</button>
+  </div>
+  <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+    <button class="go" onclick="simulatePurchase()" title="採購員角色:對廠商下進貨單並確認入庫,商品庫存增加">🚛 ② 模擬進貨入庫(B)</button>
+    <button class="go" onclick="simulateOrder()" title="客戶角色:加購物車下單,庫存扣減">🛒 ③ 模擬客戶下單(C)</button>
+    <button class="go" onclick="simulatePayments()" title="會計角色:訂單收現金+轉帳,廠商支票付款,進項發票">💰 ④ 模擬收/付款(D)</button>
+    <button class="go" onclick="verifyReconcile()" title="稽合驗證:應收/應付/客票,庫存,促銷,會員等級,圖片,上架">🧾 ⑤ 稽合驗證(E)</button>
+  </div>
+  <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px">
+    <button class="go" onclick="simulateBouncedCheck()" title="模擬客戶開的客票退票 → 訂單應收回沖 → 狀態退回已出貨" style="background:#fef3c7">⚠ ⑥ 退票連動測試</button>
+    <button class="go" onclick="simulateTransfer()" title="模擬主倉 → 二倉 倉間調撥,雙倉庫存連動" style="background:#fef3c7">🔄 ⑦ 倉間調撥測試</button>
+    <button class="go" onclick="simulateMemberLevelUp()" title="客戶累積消費突破門檻自動晉級" style="background:#fef3c7">👑 ⑧ 會員等級晉升測試</button>
+  </div>
+  <div style="margin-top:14px">
+    <button onclick="restoreBackup()">↩ 還原最後一次備份</button>
+    <a href="admin.html?seeded=1" class="btn-link">→ 開後台</a>
+    <a href="index.html?seeded=1" class="btn-link" style="background:#10b981">→ 開前台</a>
+  </div>
+</div>
+
+<div id="output" class="box" style="display:none"></div>
+
+<script>
+const SHOP_KEYS = [
+  'shop_products','shop_categories','shop_orders','shop_users','shop_purchases',
+  'shop_transfers','shop_suppliers','shop_settings','shop_admin_login',
+  'shop_checkbooks','shop_invoice_books','shop_input_invoices','shop_customer_checks',
+  'shop_adminUsers','shop_cart','shop_user'
+];
+
+function logBox(html, cls) {
+  const o = document.getElementById('output');
+  o.style.display = 'block';
+  o.className = 'box ' + (cls||'');
+  o.innerHTML = html;
+}
+
+function backup() {
+  const ts = new Date().toISOString().replace(/[:.]/g,'-').slice(0,19);
+  let cnt = 0;
+  for (const k of SHOP_KEYS) {
+    const v = localStorage.getItem(k);
+    if (v != null) {
+      localStorage.setItem('_backup_' + ts + '_' + k, v);
+      cnt++;
+    }
+  }
+  localStorage.setItem('_lastBackupTs', ts);
+  return { ts, cnt };
+}
+
+function restoreBackup() {
+  const ts = localStorage.getItem('_lastBackupTs');
+  if (!ts) { logBox('❌ 沒有可還原的備份', 'err'); return; }
+  let cnt = 0;
+  for (const k of SHOP_KEYS) {
+    const v = localStorage.getItem('_backup_' + ts + '_' + k);
+    if (v != null) {
+      localStorage.setItem(k, v);
+      cnt++;
+    }
+  }
+  logBox(`✓ 已還原 ${cnt} 個 key (備份時間 ${ts})`, 'ok');
+}
+
+function seedAll() {
+  if (!confirm('確定要清空並注入測試資料?(會自動備份原狀,可隨時還原)')) return;
+
+  // 1. 備份保留授權
+  const oldSettings = JSON.parse(localStorage.getItem('shop_settings') || '{}');
+  const preservedLicense = {
+    licenseKey: oldSettings.licenseKey || '',
+    licenseCompany: oldSettings.licenseCompany || '',
+    licenseFirstRun: oldSettings.licenseFirstRun || '',
+    shopName: oldSettings.shopName || '暘基五金有限公司'
+  };
+
+  const { ts, cnt: bcnt } = backup();
+
+  // 2. 清空
+  for (const k of SHOP_KEYS) localStorage.removeItem(k);
+
+  // 3. 後台帳號
+  const adminUsers = [
+    { id:'au-1', email:'admin@shop.local',     password:'admin123',  role:'super',     name:'超級管理員', isActive:true },
+    { id:'au-2', email:'accountant@shop.local',password:'acc123',    role:'accountant',name:'會計',     isActive:true },
+    { id:'au-3', email:'picker@shop.local',    password:'pick123',   role:'picker',    name:'揀貨員',   isActive:true },
+    { id:'au-4', email:'sales@shop.local',     password:'sales123',  role:'sales',     name:'業務',     isActive:true }
+  ];
+  localStorage.setItem('shop_adminUsers', JSON.stringify(adminUsers));
+  localStorage.setItem('shop_admin_login', JSON.stringify({ id:'au-1', email:'admin@shop.local', role:'super', name:'超級管理員' }));
+
+  // 4. 10 類別 (依編碼前綴)
+  const categories = [
+    { id:'cat-01', name:'01-鐵線製品',  parentId:null, sort:1, icon:'🔗', description:'各式鐵線加工成品' },
+    { id:'cat-02', name:'02-彎折成型',  parentId:null, sort:2, icon:'➰', description:'CNC 彎折客製件' },
+    { id:'cat-03', name:'03-點焊組立',  parentId:null, sort:3, icon:'⚡', description:'點焊組合件' },
+    { id:'cat-04', name:'04-五金扣件',  parentId:null, sort:4, icon:'🔩', description:'螺絲螺母墊圈' },
+    { id:'cat-05', name:'05-工具器具',  parentId:null, sort:5, icon:'🔧', description:'手工具' },
+    { id:'cat-06', name:'06-表面處理',  parentId:null, sort:6, icon:'✨', description:'電鍍烤漆鈍化' },
+    { id:'cat-07', name:'07-食品器皿',  parentId:null, sort:7, icon:'🍴', description:'食品級不鏽鋼製品' },
+    { id:'cat-08', name:'08-寵物用品',  parentId:null, sort:8, icon:'🐾', description:'寵物籠/食盆' },
+    { id:'cat-09', name:'09-園藝用品',  parentId:null, sort:9, icon:'🌱', description:'花架網架支撐架' },
+    { id:'cat-10', name:'10-清潔用具',  parentId:null, sort:10,icon:'🧹', description:'清潔工具' }
+  ];
+  localStorage.setItem('shop_categories', JSON.stringify(categories));
+
+  // 5. 7 廠商
+  const now = Date.now();
+  const suppliers = [
+    { id:'sup-1', name:'東莞精工五金有限公司', taxId:'',         contact:'王經理', phone:'+86-769-1234567',   address:'廣東省東莞市大朗鎮',       email:'wang@dgjg.cn',   country:'中國', defaultCurrency:'CNY', paymentTerms:'TT 30%訂金/70%出貨前',     note:'主力鐵線/彎折供應商', isActive:true, createdAt:now },
+    { id:'sup-2', name:'深圳寶安金屬製品廠', taxId:'',         contact:'李廠長', phone:'+86-755-9876543',   address:'深圳市寶安區沙井街道',     email:'li@szbm.cn',     country:'中國', defaultCurrency:'CNY', paymentTerms:'TT 100% 出貨前',           note:'點焊組立',            isActive:true, createdAt:now },
+    { id:'sup-3', name:'台中精密機械有限公司', taxId:'12345678',  contact:'陳董',   phone:'04-23456789',     address:'台中市西屯區工業區',       email:'chen@tcjm.tw',   country:'台灣', defaultCurrency:'TWD', paymentTerms:'月結 30 天',                note:'五金扣件本地供應',    isActive:true, createdAt:now },
+    { id:'sup-4', name:'彰化金屬加工社',     taxId:'87654321',  contact:'張老闆', phone:'04-7654321',      address:'彰化縣鹿港鎮工業區',       email:'',               country:'台灣', defaultCurrency:'TWD', paymentTerms:'月結 60 天 + 票期 30 天',  note:'鄰近,可彈性下單',    isActive:true, createdAt:now },
+    { id:'sup-5', name:'Pacific Hardware Trading USA', taxId:'', contact:'John', phone:'+1-213-5550100',  address:'Los Angeles, CA, USA',     email:'john@phtus.com', country:'美國', defaultCurrency:'USD', paymentTerms:'TT 50% 訂金/50% B/L copy', note:'美規工具/食品器皿',   isActive:true, createdAt:now },
+    { id:'sup-6', name:'香港利信貿易有限公司', taxId:'',         contact:'Peter Wong', phone:'+852-29001234', address:'九龍觀塘工業區',           email:'peter@lsxt.hk',  country:'香港', defaultCurrency:'HKD', paymentTerms:'TT 30 天',                  note:'港台轉口,小批量',    isActive:true, createdAt:now },
+    { id:'sup-7', name:'日本精工株式会社',    taxId:'',         contact:'山田',   phone:'+81-3-12345678',  address:'東京都中央区',             email:'yamada@nsk.jp',  country:'日本', defaultCurrency:'JPY', paymentTerms:'L/C at sight',              note:'高規工業件',          isActive:true, createdAt:now }
+  ];
+  localStorage.setItem('shop_suppliers', JSON.stringify(suppliers));
+
+  // 6. 30 商品 — 平均每類 3 件,3 幣別輪流(CNY/USD/TWD),廠商輪流
+  const currencies = ['CNY','USD','TWD'];
+  // 為了簡化:CNY 商品 → sup-1/sup-2;USD → sup-5;TWD → sup-3/sup-4;HKD/JPY 留給特殊類別
+  const productPlans = [
+    // cat-01 鐵線製品
+    { name:'熱浸鍍鋅鐵線 #14',      cat:'cat-01', cur:'CNY', sup:'sup-1', cost:3.20,  price:60,  stock:500 },
+    { name:'304 不鏽鋼鐵線 1.2mm',   cat:'cat-01', cur:'TWD', sup:'sup-3', cost:120,   price:280, stock:200 },
+    { name:'高碳鋼琴線 0.8mm',       cat:'cat-01', cur:'USD', sup:'sup-5', cost:0.85,  price:95,  stock:300 },
+    // cat-02 彎折成型
+    { name:'圓圈彎折掛鉤(50mm)',     cat:'cat-02', cur:'CNY', sup:'sup-1', cost:0.85,  price:18,  stock:1000 },
+    { name:'L 型支架烤漆',           cat:'cat-02', cur:'TWD', sup:'sup-4', cost:35,    price:80,  stock:400 },
+    { name:'S 型扣件鍍鋅',           cat:'cat-02', cur:'USD', sup:'sup-5', cost:0.32,  price:35,  stock:600 },
+    // cat-03 點焊組立
+    { name:'網片籃 30x30cm',         cat:'cat-03', cur:'CNY', sup:'sup-2', cost:8.50,  price:180, stock:150 },
+    { name:'雙層收納籃',             cat:'cat-03', cur:'TWD', sup:'sup-3', cost:280,   price:680, stock:80  },
+    { name:'點焊網片(白色)',         cat:'cat-03', cur:'USD', sup:'sup-5', cost:4.20,  price:480, stock:120 },
+    // cat-04 五金扣件
+    { name:'M6 不鏽鋼螺絲(100顆)',   cat:'cat-04', cur:'CNY', sup:'sup-2', cost:12.00, price:280, stock:300 },
+    { name:'M8 六角螺帽(100顆)',     cat:'cat-04', cur:'TWD', sup:'sup-3', cost:65,    price:150, stock:400 },
+    { name:'墊圈組合包',             cat:'cat-04', cur:'USD', sup:'sup-5', cost:1.20,  price:135, stock:500 },
+    // cat-05 工具器具
+    { name:'六角扳手套組(10件)',     cat:'cat-05', cur:'CNY', sup:'sup-1', cost:18.50, price:380, stock:80  },
+    { name:'尖嘴鉗 6"',              cat:'cat-05', cur:'TWD', sup:'sup-4', cost:120,   price:250, stock:120 },
+    { name:'多功能瑞士刀',           cat:'cat-05', cur:'USD', sup:'sup-5', cost:6.80,  price:780, stock:60  },
+    // cat-06 表面處理
+    { name:'電鍍鋅鐵絲(亮面)',       cat:'cat-06', cur:'CNY', sup:'sup-2', cost:4.20,  price:88,  stock:250 },
+    { name:'熱浸鍍鋅扁鐵',           cat:'cat-06', cur:'TWD', sup:'sup-4', cost:180,   price:420, stock:90  },
+    { name:'粉體烤漆掛鉤(白色)',     cat:'cat-06', cur:'USD', sup:'sup-5', cost:0.95,  price:108, stock:350 },
+    // cat-07 食品器皿
+    { name:'304 不鏽鋼烤盤',         cat:'cat-07', cur:'CNY', sup:'sup-1', cost:25.00, price:480, stock:60  },
+    { name:'食品級不鏽鋼夾',         cat:'cat-07', cur:'TWD', sup:'sup-3', cost:85,    price:180, stock:200 },
+    { name:'瀝水架(食品級)',         cat:'cat-07', cur:'USD', sup:'sup-5', cost:8.50,  price:980, stock:50  },
+    // cat-08 寵物用品
+    { name:'寵物籠(中型)',           cat:'cat-08', cur:'CNY', sup:'sup-2', cost:38.00, price:780, stock:30  },
+    { name:'狗碗鐵架',               cat:'cat-08', cur:'TWD', sup:'sup-4', cost:150,   price:380, stock:80  },
+    { name:'貓抓網支架',             cat:'cat-08', cur:'USD', sup:'sup-5', cost:5.20,  price:580, stock:100 },
+    // cat-09 園藝用品
+    { name:'花架網片(綠色)',         cat:'cat-09', cur:'CNY', sup:'sup-1', cost:6.80,  price:140, stock:180 },
+    { name:'番茄支撐架(高 1.5m)',    cat:'cat-09', cur:'TWD', sup:'sup-4', cost:45,    price:120, stock:250 },
+    { name:'花盆掛架(可調)',         cat:'cat-09', cur:'USD', sup:'sup-5', cost:2.30,  price:280, stock:150 },
+    // cat-10 清潔用具
+    { name:'不鏽鋼清潔刷',           cat:'cat-10', cur:'CNY', sup:'sup-2', cost:1.80,  price:38,  stock:400 },
+    { name:'地拖桿(伸縮式)',         cat:'cat-10', cur:'TWD', sup:'sup-3', cost:55,    price:120, stock:200 },
+    { name:'金屬掃把架',             cat:'cat-10', cur:'USD', sup:'sup-5', cost:1.50,  price:180, stock:300 }
+  ];
+
+  // 30 張現成商品圖(取 assets/imgs/ 前 30 張,輪流配)
+  const imgFiles = [
+    '000579b5c1c53102','0052b82c04392b98','006d37b6966f88ed','0089c0274e49917c','00f19e027a128b87',
+    '015361b74b148633','01e59bffe94968fb','02460d632633d4d3','02d879d67d9f1fe9','0317c942ab2e42f0',
+    '0489cc7d9c29baca','04911efacf47cfa1','0533137663aa92ff','05b4d9d0774cc065','06b6009f9374c396',
+    '0729a661580b9e4e','074afaaa6f3555ea','07b5bb4d58750d8a','08bf64c01b389d90','08c6c848aaae468b',
+    '09ebe48add7a886e','0c8d4c23e81df79a','0d60da96f9b9f85d','0d7570ca5f6ee1ea','0d97bc39fdfed625',
+    '0db7158c8f377d44','0f0641496bb1ac50','0f8c7087b82ff67e','0fc1db444b3aca38','10b97a63bc9ffef7'
+  ];
+
+  // 一條龍配貨架:每類 3 件分到「上/中/下」三層,8 個貨架配給 10 類(部分共用)
+  // 主倉(wh-main) A-1~A-4 / 二倉(wh-second) B-1~B-2 / 中部倉(wh-central) C-1~C-2
+  const shelfPlan = {
+    'cat-01': { wh:'wh-main',    shelf:'A-1' },  // 鐵線製品
+    'cat-02': { wh:'wh-main',    shelf:'A-2' },  // 彎折成型
+    'cat-03': { wh:'wh-main',    shelf:'A-3' },  // 點焊組立
+    'cat-04': { wh:'wh-main',    shelf:'A-4' },  // 五金扣件
+    'cat-05': { wh:'wh-second',  shelf:'B-1' },  // 工具器具
+    'cat-06': { wh:'wh-second',  shelf:'B-2' },  // 表面處理
+    'cat-07': { wh:'wh-central', shelf:'C-1' },  // 食品器皿
+    'cat-08': { wh:'wh-central', shelf:'C-2' },  // 寵物用品
+    'cat-09': { wh:'wh-main',    shelf:'A-1' },  // 園藝用品(共用 A-1)
+    'cat-10': { wh:'wh-second',  shelf:'B-1' }   // 清潔用具(共用 B-1)
+  };
+  const layers = ['上','中','下'];
+
+  const products = productPlans.map((p, i) => {
+    const catNum = p.cat.slice(-2);
+    const sp = shelfPlan[p.cat];
+    const layer = layers[i % 3];   // 同類 3 件輪流上中下
+    const fullShelf = sp.shelf + '-' + layer;
+    const imgPath = '/assets/imgs/' + imgFiles[i] + '.jpg';
+    return {
+      id: 'p-test-' + (1000 + i),
+      name: p.name,
+      nameEn: '',
+      categoryId: p.cat,
+      internalCode: 'FG-' + catNum + '-' + String(i+1).padStart(4,'0'),
+      supplierCode: 'SC-' + (i+1).toString().padStart(3,'0'),
+      supplierId: p.sup,
+      cost: p.cost,
+      costCurrency: p.cur,
+      price: p.price,
+      vipPrice: Math.round(p.price * 0.9),
+      stock: p.stock,
+      // 一條龍上架:整批庫存放這個倉的這個貨架
+      stockByWarehouse: { [sp.wh]: p.stock },
+      shelfByWarehouse: { [sp.wh]: fullShelf },
+      shelfLocation: fullShelf,    // 兼容舊欄位
+      minOrder: 1,
+      unit: '件',
+      weightG: 100 + i*15,
+      pcsPerCarton: 50,
+      cbm: 0.05 + i*0.005,
+      grossWeightKg: 5 + i*0.3,
+      countryOfOrigin: ({CNY:'CN',USD:'US',TWD:'TW',HKD:'HK',JPY:'JP'})[p.cur] || 'CN',
+      hsCode: '7314.50',
+      images: [imgPath],
+      description: '',
+      specs: '',
+      isActive: true,
+      lastConfirmedAt: now - (25 - i) * 86400000,   // 標記:已進過貨,不再回到草稿狀態
+      createdAt: now - (30 - i) * 86400000,
+      updatedAt: now - (30 - i) * 86400000
+    };
+  });
+  localStorage.setItem('shop_products', JSON.stringify(products));
+
+  // 7. 設定:倉庫 / 匯率 / 銀行戶頭 / 公司資料 / 保留授權
+  const settings = {
+    shopName: preservedLicense.shopName,
+    shopNameEn: 'YANG JI HARDWARE CO., LTD.',
+    taxId: '83273097',
+    slogan: '穩固久遠 · 品質至上',
+    contactPhone: '04-12345678',
+    contactLine: '@yangji',
+    contactEmail: 'yang.ji.hardware@gmail.com',
+    contactAddress: '彰化縣伸港鄉定興村定興路53號',
+    shippingFee: 80,
+    freeShippingThreshold: 1000,
+    announcement: '🧪 測試環境 — 整合測試播種於 ' + new Date().toLocaleString('zh-TW'),
+    lowStockThreshold: 5,
+    notifyOnOrder: true, notifyOnLowStock: true, notifyOnPurchase: false,
+    slowMovingDays: 90, lowTurnoverRate: 2,
+    notifyOnSlowMoving: true, notifyOnDueCheck: true, notifyOnBouncedCheck: true, notifyOnCreditOver: true, notifyOnLowTurnover: false,
+    // 3 倉庫 / 8 貨架(zones × shelvesPerZone 配出來)
+    warehouses: [
+      { id:'wh-main',    code:'A', name:'主倉(彰化)',     address:'彰化縣伸港鄉', isActive:true, zones:['A'],     shelvesPerZone:4, layerLabels:['上','中','下'] },
+      { id:'wh-second',  code:'B', name:'二倉(伸港)',     address:'彰化縣伸港鄉', isActive:true, zones:['B'],     shelvesPerZone:2, layerLabels:['上','下'] },
+      { id:'wh-central', code:'C', name:'中部倉(台中)',   address:'台中市西屯區', isActive:true, zones:['C'],     shelvesPerZone:2, layerLabels:['上','下'] }
+    ],
+    // 銀行戶頭(2 家)
+    bankAccounts: [
+      { id:'ba-1', label:'玉山主帳',   bankName:'玉山銀行', bankCode:'808', branchName:'彰化分行', branchCode:'0336', accountNo:'1234-567-890123', accountName:'暘基五金有限公司', isActive:true },
+      { id:'ba-2', label:'中信備援',   bankName:'中國信託', bankCode:'822', branchName:'彰化分行', branchCode:'0428', accountNo:'9876-543-210987', accountName:'暘基五金有限公司', isActive:true }
+    ],
+    // 常用清單
+    commonPayees: ['台灣電力公司', '中華電信', '台灣自來水', '國稅局', '勞健保局'],
+    commonPurposes: ['電費', '電話費', '水費', '營業稅', '勞健保費', '租金'],
+    commonBouncedReasons: ['存款不足', '簽章不符', '拒絕往來', '帳戶已結清', '票期未到'],
+    commonInputCategories: ['加油', '文具', '餐費', '維修', '運輸', '水電瓦斯'],
+    commonBranches: [
+      { bankCode:'808', branchCode:'0336', branchName:'彰化分行' },
+      { bankCode:'808', branchCode:'1285', branchName:'頭份分行' },
+      { bankCode:'822', branchCode:'0428', branchName:'彰化分行' },
+      { bankCode:'009', branchCode:'6006', branchName:'彰化分行' },
+      { bankCode:'012', branchCode:'7211', branchName:'板橋分行' }
+    ],
+    codeNumberFormat: 'gregorian',
+    codeNumberOrderPrefix: 'O',
+    codeNumberPurchasePrefix: 'P',
+    licenseKey: preservedLicense.licenseKey,
+    licenseCompany: preservedLicense.licenseCompany,
+    licenseFirstRun: preservedLicense.licenseFirstRun || new Date().toISOString().slice(0,10),
+    brandPrimary: '#1a2a4a',
+    brandAccent: '#c9a95c',
+    brandAccentLight: '#fde68a',
+    brandAccentDark: '#7c5e1f',
+    brandLogoUrl: '',
+    lineOfficialId: '', lineAddFriendUrl: '', liffId: '',
+    memberLevels: [
+      { id:'L0', name:'一般會員', discount:1.00, threshold:0,     color:'#94a3b8', icon:'👤' },
+      { id:'L1', name:'銀卡會員', discount:0.95, threshold:5000,  color:'#64748b', icon:'🥈' },
+      { id:'L2', name:'金卡會員', discount:0.90, threshold:20000, color:'#c9a95c', icon:'🥇' },
+      { id:'L3', name:'白金會員', discount:0.85, threshold:50000, color:'#1a2a4a', icon:'💎' }
+    ],
+    pricing: {
+      exchangeRates: [
+        { code:'CNY', name:'人民幣', symbol:'¥',   rate: 4.5  },
+        { code:'USD', name:'美元',   symbol:'$',   rate: 32   },
+        { code:'JPY', name:'日幣',   symbol:'¥',   rate: 0.21 },
+        { code:'HKD', name:'港幣',   symbol:'HK$', rate: 4.1  },
+        { code:'TWD', name:'台幣',   symbol:'NT$', rate: 1    }
+      ],
+      defaultCurrency: 'TWD',
+      tariffPresets: [
+        { name:'免稅', rate:0 }, { name:'一般商品', rate:6 }, { name:'紡織品', rate:8 },
+        { name:'電器類', rate:5 }, { name:'食品類', rate:12 }
+      ],
+      defaultTariff: 6, defaultMargin: 30, defaultMode: 'sea',
+      shippingSeaPerKg: 25, shippingAirPerKg: 80, shippingByItem: 50
+    },
+    autoCategorize: { enabled: false, rules: [] },
+    // 🎉 3 種促銷活動 (整合測試用)
+    promotions: [
+      {
+        id:'promo-bundle-1', type:'bundle', name:'五金扣件 5 件 NT$ 800',
+        enabled:true, qty:5, fixedPrice:800,
+        categoryIds:['cat-04'], categoryId:'cat-04',
+        startAt:'', endAt:''
+      },
+      {
+        id:'promo-sitewide-1', type:'sitewide_discount', name:'週年慶全館 95 折',
+        enabled:true, value:5,    // 5% off
+        startAt:'', endAt:''
+      },
+      {
+        id:'promo-freeship-1', type:'free_shipping', name:'滿 NT$ 1500 免運',
+        enabled:true, threshold:1500,
+        startAt:'', endAt:''
+      },
+      {
+        id:'promo-gift-1', type:'gift', name:'滿額贈鑰匙圈',
+        enabled:true, giftMode:'highest',
+        tiers:[
+          { threshold:2000, gift:'金屬鑰匙圈 ×1', description:'限量,送完為止' },
+          { threshold:5000, gift:'不鏽鋼禮盒組', description:'高級禮盒' }
+        ],
+        startAt:'', endAt:''
+      }
+    ],
+    about: {
+      enabled: true, title: '關於暘基', heroTitle: '專業鐵線加工製品',
+      heroSubtitle: '客製化加工 · 品質穩定 · 交期準確',
+      intro: '暘基五金有限公司專業生產各式鐵線加工製品。',
+      description: '從原料到成品,層層把關。',
+      services: ['鐵線加工', '彎折成型', '點焊組立', '表面處理'],
+      bannerImage: '',
+      whyChooseUs: [
+        { icon:'💎', title:'品質穩定', description:'嚴格品管' },
+        { icon:'🛠', title:'專業技術', description:'多年經驗' },
+        { icon:'🤝', title:'客製服務', description:'量身打造' },
+        { icon:'🚚', title:'交期準確', description:'準時交貨' }
+      ],
+      customers: ['OEM／ODM 製造商', '五金製品工廠', '食品器具廠', '家用品製造廠'],
+      certifications: [], galleryImages: []
+    }
+  };
+  localStorage.setItem('shop_settings', JSON.stringify(settings));
+
+  // 8. 空集合 (購物車/會員等)
+  localStorage.setItem('shop_users', JSON.stringify([]));
+  localStorage.setItem('shop_orders', JSON.stringify([]));
+  localStorage.setItem('shop_purchases', JSON.stringify([]));
+  localStorage.setItem('shop_transfers', JSON.stringify([]));
+  localStorage.setItem('shop_checkbooks', JSON.stringify([]));
+  localStorage.setItem('shop_invoice_books', JSON.stringify([]));
+  localStorage.setItem('shop_input_invoices', JSON.stringify([]));
+  localStorage.setItem('shop_customer_checks', JSON.stringify([]));
+
+  // 報告
+  const html = `
+    <strong>🎉 測試環境播種完成!</strong>
+    <table style="margin-top:10px">
+      <tr><th>項目</th><th>數量</th></tr>
+      <tr><td>後台帳號</td><td>${adminUsers.length} 組</td></tr>
+      <tr><td>商品分類</td><td>${categories.length} 類</td></tr>
+      <tr><td>廠商</td><td>${suppliers.length} 家</td></tr>
+      <tr><td>商品</td><td>${products.length} 件 (CNY ${products.filter(p=>p.costCurrency==='CNY').length} / USD ${products.filter(p=>p.costCurrency==='USD').length} / TWD ${products.filter(p=>p.costCurrency==='TWD').length})</td></tr>
+      <tr><td>倉庫 / 貨架</td><td>${settings.warehouses.length} 倉,共 ${settings.warehouses.reduce((s,w)=>s+w.zones.length*w.shelvesPerZone,0)} 個貨架</td></tr>
+      <tr><td>銀行戶頭</td><td>${settings.bankAccounts.length} 家</td></tr>
+      <tr><td>備份時間戳</td><td>${ts}</td></tr>
+    </table>
+    <p style="margin-top:14px"><strong>下一步:</strong> 點上方 ② ③ ④ ⑤ 按順序執行,模擬完整流程</p>
+  `;
+  logBox(html, 'ok');
+}
+
+// =====================================================================
+// 共用工具
+// =====================================================================
+function loadJson(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }
+function saveJson(k, v) { localStorage.setItem(k, JSON.stringify(v)); }
+function ensureSeeded() {
+  if (!loadJson('shop_products', []).length) {
+    logBox('❌ 請先按 ① 注入基礎測試資料', 'err');
+    return false;
+  }
+  return true;
+}
+function newId(prefix) { return prefix + '-' + Date.now() + '-' + Math.floor(Math.random()*1000); }
+
+// =====================================================================
+// ② 模擬進貨入庫 — 採購員視角
+// =====================================================================
+function simulatePurchase() {
+  if (!ensureSeeded()) return;
+  const products = loadJson('shop_products', []);
+  const purchases = loadJson('shop_purchases', []);
+  const settings = loadJson('shop_settings', {});
+
+  // 從 sup-1 (東莞精工) 進 3 個鐵線製品/彎折 商品 (CNY)
+  const candidates = products.filter(p => p.supplierId === 'sup-1').slice(0, 3);
+  if (candidates.length < 3) { logBox('❌ 找不到 sup-1 的商品', 'err'); return; }
+
+  const today = new Date().toISOString().slice(0,10);
+  const purchaseNo = 'P' + today.replace(/-/g,'') + '-0001';
+  const items = candidates.map((p, i) => {
+    const qty = [100, 200, 50][i];
+    return {
+      productId: p.id,
+      productName: p.name,
+      qty,
+      cost: p.cost,
+      unit: p.unit,
+      // 進貨同樣放主倉(已在商品上架的位置)
+      targetWarehouse: p.stockByWarehouse ? Object.keys(p.stockByWarehouse)[0] : 'wh-main',
+      targetShelf: p.shelfByWarehouse ? Object.values(p.shelfByWarehouse)[0] : ''
+    };
+  });
+
+  // 模擬 confirmPurchase 邏輯:每個商品的 stockByWarehouse + 總 stock 加上去
+  const stockChanges = [];
+  const updatedProducts = products.map(prod => {
+    const myItems = items.filter(it => it.productId === prod.id);
+    if (myItems.length === 0) return prod;
+    const newSBW = { ...(prod.stockByWarehouse || {}) };
+    const newSheBW = { ...(prod.shelfByWarehouse || {}) };
+    let totalAdded = 0;
+    for (const it of myItems) {
+      const wh = it.targetWarehouse;
+      const q = parseInt(it.qty) || 0;
+      newSBW[wh] = (newSBW[wh] || 0) + q;
+      if (it.targetShelf) newSheBW[wh] = String(it.targetShelf);
+      totalAdded += q;
+    }
+    const newTotal = Object.values(newSBW).reduce((s,v) => s + (parseInt(v)||0), 0);
+    stockChanges.push({ name: prod.name, before: prod.stock, after: newTotal, added: totalAdded });
+    return { ...prod, stock: newTotal, stockByWarehouse: newSBW, shelfByWarehouse: newSheBW, lastConfirmedAt: Date.now(), updatedAt: Date.now() };
+  });
+
+  const newPurchase = {
+    id: newId('pur'),
+    purchaseNo,
+    supplier: '東莞精工五金有限公司',
+    supplierId: 'sup-1',
+    items,
+    currency: 'CNY',
+    exchangeRate: 4.5,
+    shippingMode: 'sea',
+    shipRate: 25,
+    tariffPercent: 6,
+    marginPercent: 30,
+    autoCalcSellPrice: false,
+    importAsDraft: false,
+    defaultWarehouse: 'wh-main',
+    confirmed: true,
+    confirmedAt: Date.now(),
+    payments: [],
+    note: '模擬整合測試 — 採購員建立',
+    createdAt: Date.now()
+  };
+  purchases.push(newPurchase);
+
+  saveJson('shop_products', updatedProducts);
+  saveJson('shop_purchases', purchases);
+
+  let html = '<strong>✅ ② 進貨入庫完成</strong><br>';
+  html += '<p>建立進貨單 <code>' + purchaseNo + '</code> (廠商:東莞精工,幣別 CNY,項目 3),狀態:已確認入庫</p>';
+  html += '<table><tr><th>商品</th><th>進貨前庫存</th><th>進貨數量</th><th>進貨後庫存</th></tr>';
+  stockChanges.forEach(c => { html += '<tr><td>'+c.name+'</td><td>'+c.before+'</td><td>+'+c.added+'</td><td><strong>'+c.after+'</strong></td></tr>'; });
+  html += '</table>';
+  html += '<p style="margin-top:10px">→ 接下來按 ③ 模擬客戶下單</p>';
+  logBox(html, 'ok');
+}
+
+// =====================================================================
+// ③ 模擬客戶下單 — 客戶角色 (前台下單 + 後台揀貨)
+// =====================================================================
+function simulateOrder() {
+  if (!ensureSeeded()) return;
+  const products = loadJson('shop_products', []);
+  const orders = loadJson('shop_orders', []);
+  const users = loadJson('shop_users', []);
+
+  // 註冊一個客戶
+  const customerId = 'u-test-' + Date.now();
+  const customer = {
+    uid: customerId,
+    name: '測試客戶 王小明',
+    email: 'test_customer@example.com',
+    phone: '0912345678',
+    address: '彰化縣彰化市中山路一段100號',
+    taxId: '',
+    levelId: 'L0',
+    totalSpent: 0,
+    note: '整合測試客戶',
+    isActive: true,
+    createdAt: Date.now()
+  };
+  users.push(customer);
+
+  // 加 3 件不同類別的商品到訂單(模擬購物車結帳)
+  const cartItems = [];
+  const pickProds = [products[0], products[6], products[12]];   // cat-01 / cat-03 / cat-05
+  const qtys = [5, 2, 1];
+
+  // 模擬庫存扣減
+  const stockChanges = [];
+  const updatedProducts = products.map(prod => {
+    const idx = pickProds.findIndex(p => p && p.id === prod.id);
+    if (idx < 0) return prod;
+    const q = qtys[idx];
+    const wh = Object.keys(prod.stockByWarehouse || {})[0];
+    const newSBW = { ...(prod.stockByWarehouse || {}) };
+    if (wh) newSBW[wh] = Math.max(0, (newSBW[wh] || 0) - q);
+    const newTotal = Object.values(newSBW).reduce((s,v) => s + (parseInt(v)||0), 0);
+    cartItems.push({
+      productId: prod.id, productName: prod.name,
+      qty: q, price: prod.price, subtotal: q * prod.price,
+      shelfLocation: prod.shelfByWarehouse ? Object.values(prod.shelfByWarehouse)[0] : ''
+    });
+    stockChanges.push({ name: prod.name, before: prod.stock, qty: q, after: newTotal });
+    return { ...prod, stock: newTotal, stockByWarehouse: newSBW, updatedAt: Date.now() };
+  });
+
+  const today = new Date().toISOString().slice(0,10);
+  const orderNo = 'O' + today.replace(/-/g,'') + '-0001';
+  const subtotal = cartItems.reduce((s,it) => s + it.subtotal, 0);
+  const shippingFee = subtotal >= 1000 ? 0 : 80;
+  const total = subtotal + shippingFee;
+
+  const newOrder = {
+    id: newId('ord'),
+    orderNo,
+    userId: customerId,
+    userName: customer.name,
+    userPhone: customer.phone,
+    userEmail: customer.email,
+    shippingAddress: customer.address,
+    items: cartItems,
+    subtotal, shippingFee, discount: 0, total,
+    payments: [],
+    status: 'pending',
+    paymentStatus: 'unpaid',
+    note: '模擬整合測試訂單',
+    createdAt: Date.now()
+  };
+  orders.push(newOrder);
+
+  saveJson('shop_users', users);
+  saveJson('shop_products', updatedProducts);
+  saveJson('shop_orders', orders);
+
+  let html = '<strong>✅ ③ 客戶下單完成</strong><br>';
+  html += '<p>新增會員 <code>' + customer.name + '</code>,訂單 <code>' + orderNo + '</code></p>';
+  html += '<table><tr><th>商品</th><th>下單前</th><th>本單扣</th><th>下單後</th></tr>';
+  stockChanges.forEach(c => { html += '<tr><td>'+c.name+'</td><td>'+c.before+'</td><td>-'+c.qty+'</td><td><strong>'+c.after+'</strong></td></tr>'; });
+  html += '</table>';
+  html += '<p style="margin-top:8px">小計 NT$ ' + subtotal.toLocaleString() + ' + 運費 ' + shippingFee + ' = <strong>總計 NT$ ' + total.toLocaleString() + '</strong></p>';
+  html += '<p>→ 接下來按 ④ 模擬收/付款</p>';
+  logBox(html, 'ok');
+}
+
+// =====================================================================
+// ④ 模擬收/付款 — 會計角色
+// =====================================================================
+function simulatePayments() {
+  if (!ensureSeeded()) return;
+  const orders = loadJson('shop_orders', []);
+  const purchases = loadJson('shop_purchases', []);
+  const customerChecks = loadJson('shop_customer_checks', []);
+
+  if (orders.length === 0 || purchases.length === 0) {
+    logBox('❌ 請先按 ② 跟 ③ 建立進貨/訂單,再來收/付款', 'err');
+    return;
+  }
+
+  const order = orders[0];
+  const purchase = purchases[0];
+  const today = new Date().toISOString().slice(0,10);
+  const dueDate = new Date(Date.now() + 30*86400000).toISOString().slice(0,10);
+
+  // 1. 訂單收款:現金 50% + 客票 50%
+  const half = Math.round(order.total / 2);
+  const orderPayments = [
+    { id: newId('pay'), method: 'cash', amount: half, paidAt: today, note: '現金收款 50%', billType:'cash' },
+    { id: newId('pay'), method: 'check', billType:'check', amount: order.total - half, paidAt: today,
+      checkNo: 'CC-001', checkBank:'國泰世華銀行', checkBankCode:'013', checkBranchCode:'0475', checkBranch:'彰化分行',
+      checkDueDate: dueDate, checkPayer: order.userName, checkStatus:'pending',
+      bankAccountId:'ba-1', note: '客票 50%(待兌現)' }
+  ];
+  order.payments = orderPayments;
+  order.paymentStatus = 'paid';
+  order.status = 'shipped';
+  order.completedAt = Date.now();
+
+  // 加客票紀錄
+  customerChecks.push({
+    id: newId('cc'),
+    no: 'CC-001',
+    payerName: order.userName,
+    payerVAT: '',
+    payerBankCode:'013', payerBank:'國泰世華銀行',
+    payerBranchCode:'0475', payerBranch:'彰化分行',
+    payerAccountNo: '0123-456-789012',
+    receiveDate: today, dueDate,
+    amount: order.total - half,
+    status: 'pending',
+    fromOrderId: order.id, fromPaymentId: orderPayments[1].id,
+    note: '客戶開立的客票,票期 30 天'
+  });
+
+  // 2. 廠商付款:用支票本付給東莞精工
+  const purchaseTotal = purchase.items.reduce((s,it) => s + (it.qty || 0) * (it.cost || 0), 0);
+  const purchaseTotalTWD = Math.round(purchaseTotal * (purchase.exchangeRate || 4.5));
+  purchase.payments = [{
+    id: newId('pay'),
+    method: 'check', billType:'check',
+    amount: purchaseTotalTWD,
+    paidAt: today,
+    checkNo: 'CK-2024-001',
+    checkBank:'玉山銀行', checkBankCode:'808', checkBranchCode:'0336', checkBranch:'彰化分行',
+    checkDueDate: dueDate,
+    checkStatus: 'pending',
+    bankAccountId: 'ba-1',
+    note: '本票付廠商,30 天票期'
+  }];
+
+  saveJson('shop_orders', orders);
+  saveJson('shop_purchases', purchases);
+  saveJson('shop_customer_checks', customerChecks);
+
+  let html = '<strong>✅ ④ 收/付款完成</strong><br>';
+  html += '<p><strong>1. 訂單收款</strong> ' + order.orderNo + ' 總額 NT$ ' + order.total.toLocaleString() + '</p>';
+  html += '<ul><li>現金 NT$ ' + half.toLocaleString() + ' (已收)</li>';
+  html += '<li>客票 CC-001 (國泰013-0475 彰化分行) NT$ ' + (order.total - half).toLocaleString() + ' (待兌,票期 ' + dueDate + ')</li></ul>';
+  html += '<p><strong>2. 廠商付款</strong> ' + purchase.purchaseNo + ' 應付:¥' + purchaseTotal.toLocaleString() + ' × 4.5 = NT$ ' + purchaseTotalTWD.toLocaleString() + '</p>';
+  html += '<ul><li>本票 CK-2024-001 (玉山808-0336 彰化分行) NT$ ' + purchaseTotalTWD.toLocaleString() + ' (待兌,票期 ' + dueDate + ')</li></ul>';
+  html += '<p>→ 接下來按 ⑤ 稽合驗證</p>';
+  logBox(html, 'ok');
+}
+
+// =====================================================================
+// ⑤ 稽合驗證 — 稽合所有金額是否平衡
+// =====================================================================
+function verifyReconcile() {
+  if (!ensureSeeded()) return;
+  const orders = loadJson('shop_orders', []);
+  const purchases = loadJson('shop_purchases', []);
+  const customerChecks = loadJson('shop_customer_checks', []);
+  const products = loadJson('shop_products', []);
+
+  // 應收(客戶未付清)
+  const receivable = orders.reduce((s, o) => {
+    const paid = (o.payments || []).filter(p => p.checkStatus !== 'bounced').reduce((a,p) => a + (parseFloat(p.amount)||0), 0);
+    return s + Math.max(0, (o.total || 0) - paid);
+  }, 0);
+  // 待兌客票總額
+  const pendingChecks = customerChecks.filter(c => c.status === 'pending').reduce((s,c) => s + (c.amount || 0), 0);
+  // 應付(廠商未付清)
+  const payable = purchases.reduce((s, p) => {
+    const total = p.items.reduce((a,it) => a + (it.qty||0) * (it.cost||0), 0);
+    const totalTWD = Math.round(total * (p.exchangeRate || 1));
+    const paid = (p.payments || []).reduce((a,py) => a + (parseFloat(py.amount)||0), 0);
+    return s + Math.max(0, totalTWD - paid);
+  }, 0);
+  // 總庫存價值(用 cost × 匯率)
+  const settings = loadJson('shop_settings', {});
+  const rates = settings.pricing && settings.pricing.exchangeRates || [];
+  const rateOf = (cur) => (rates.find(r => r.code === cur) || {}).rate || 1;
+  const stockValue = products.reduce((s,p) => s + (p.stock||0) * (p.cost||0) * rateOf(p.costCurrency), 0);
+
+  // 檢查
+  const checks = [];
+  // ✓ 訂單已付清 + 客票待兌 = 訂單總額
+  if (orders.length > 0) {
+    const o = orders[0];
+    const paidNow = (o.payments || []).filter(p => p.billType !== 'check' || p.checkStatus === 'cleared').reduce((a,p) => a + (p.amount||0), 0);
+    const checkPending = (o.payments || []).filter(p => p.billType === 'check' && p.checkStatus === 'pending').reduce((a,p) => a + (p.amount||0), 0);
+    checks.push({
+      label: '訂單金額平衡',
+      ok: (paidNow + checkPending) === o.total,
+      detail: '已付現 NT$ ' + paidNow.toLocaleString() + ' + 客票待兌 NT$ ' + checkPending.toLocaleString() + ' = NT$ ' + (paidNow+checkPending).toLocaleString() + ' / 訂單總 NT$ ' + o.total.toLocaleString()
+    });
+  }
+  // ✓ 廠商付款 = 進貨總額
+  if (purchases.length > 0) {
+    const p = purchases[0];
+    const total = p.items.reduce((a,it) => a + (it.qty||0) * (it.cost||0), 0);
+    const totalTWD = Math.round(total * (p.exchangeRate || 1));
+    const paid = (p.payments || []).reduce((a,py) => a + (py.amount||0), 0);
+    checks.push({
+      label: '廠商付款平衡',
+      ok: paid === totalTWD,
+      detail: '已付 NT$ ' + paid.toLocaleString() + ' / 應付 NT$ ' + totalTWD.toLocaleString()
+    });
+  }
+  // ✓ 庫存:商品 stock 總和 = sum(stockByWarehouse 各倉)
+  const stockMatch = products.every(p => {
+    const sbwSum = Object.values(p.stockByWarehouse || {}).reduce((s,v) => s + (parseInt(v)||0), 0);
+    return p.stock === sbwSum;
+  });
+  checks.push({ label: '商品 stock = sum(stockByWarehouse)', ok: stockMatch, detail: stockMatch ? '所有 30 件商品兩邊一致' : '⚠ 有商品不一致,前端會顯示錯誤庫存' });
+  // ✓ 每件商品有圖片
+  const noImg = products.filter(p => !p.images || p.images.length === 0);
+  checks.push({ label: '所有商品都有圖片', ok: noImg.length === 0, detail: noImg.length === 0 ? '30/30 都有' : noImg.length + ' 件無圖' });
+  // ✓ 每件商品有上架位置
+  const noShelf = products.filter(p => !p.shelfByWarehouse || Object.keys(p.shelfByWarehouse).length === 0);
+  checks.push({ label: '所有商品都有上架位置', ok: noShelf.length === 0, detail: noShelf.length === 0 ? '30/30 都已上架' : noShelf.length + ' 件未上架' });
+  // ✓ 促銷活動已設定且至少 1 個啟用中
+  const promos = settings.promotions || [];
+  const activePromos = promos.filter(p => p.enabled);
+  checks.push({ label: '促銷活動已設定 (≥3 個)', ok: promos.length >= 3, detail: promos.length + ' 個促銷;啟用中:' + activePromos.length + ' 個 (' + activePromos.map(p=>({sitewide_discount:'全館折',spend_discount:'滿額折',bundle:'多件特價',gift:'滿額贈',free_shipping:'免運'})[p.type]||p.type).join('/') + ')' });
+  // ✓ 會員等級表完整 (4 級)
+  const levels = settings.memberLevels || [];
+  checks.push({ label: '會員等級表完整 (≥4 級)', ok: levels.length >= 4, detail: '共 ' + levels.length + ' 級: ' + levels.map(l => l.name + '(滿' + l.threshold + '/' + Math.round((1-l.discount)*100) + '%off)').join(', ') });
+  // ✓ 銀行戶頭已設 (≥1)
+  const banks = settings.bankAccounts || [];
+  checks.push({ label: '銀行戶頭已設 (≥1)', ok: banks.length >= 1, detail: banks.length + ' 家:' + banks.map(b => b.bankName + '(' + b.bankCode + ')').join(', ') });
+  // ✓ 庫存覆蓋 ≥3 個倉
+  const whUsed = new Set();
+  products.forEach(p => Object.keys(p.stockByWarehouse||{}).forEach(w => whUsed.add(w)));
+  checks.push({ label: '庫存橫跨多倉 (≥2 倉)', ok: whUsed.size >= 2, detail: '商品分佈在 ' + whUsed.size + ' 個倉庫: ' + [...whUsed].join(', ') });
+  // ✓ 多幣別商品都有
+  const currencies = new Set(products.map(p => p.costCurrency));
+  checks.push({ label: '多幣別商品 (≥3 幣)', ok: currencies.size >= 3, detail: '使用 ' + currencies.size + ' 種幣別: ' + [...currencies].join(', ') });
+
+  let html = '<strong>🧾 ⑤ 稽合驗證報告</strong><br>';
+  html += '<table style="margin-top:10px">';
+  html += '<tr><th>項目</th><th>金額/狀態</th></tr>';
+  html += '<tr><td>應收帳款(客戶未付清)</td><td>NT$ ' + receivable.toLocaleString() + '</td></tr>';
+  html += '<tr><td>待兌客票總額</td><td>NT$ ' + pendingChecks.toLocaleString() + '</td></tr>';
+  html += '<tr><td>應付帳款(廠商未付清)</td><td>NT$ ' + payable.toLocaleString() + '</td></tr>';
+  html += '<tr><td>庫存價值估計</td><td>NT$ ' + Math.round(stockValue).toLocaleString() + '</td></tr>';
+  html += '</table>';
+  html += '<h3 style="margin-top:14px">數據完整性檢查</h3>';
+  html += '<table>';
+  html += '<tr><th>檢查項目</th><th>結果</th><th>細節</th></tr>';
+  checks.forEach(c => {
+    html += '<tr><td>' + c.label + '</td><td>' + (c.ok ? '✅ 通過' : '❌ 失敗') + '</td><td>' + c.detail + '</td></tr>';
+  });
+  html += '</table>';
+  const allOk = checks.every(c => c.ok);
+  html += '<p style="margin-top:14px;font-size:16px"><strong>總結:</strong> ' + (allOk ? '🎉 所有檢查通過,可以開後台 / 前台驗證 UI 顯示是否正確' : '⚠ 有失敗項目,需修正') + '</p>';
+  html += '<p>→ 開 <a href="admin.html?tested=1">後台</a> 或 <a href="index.html?tested=1">前台</a> 看實際畫面</p>';
+  logBox(html, allOk ? 'ok' : 'warn');
+}
+
+// =====================================================================
+// ⑥ 退票連動測試 — 客票退票 → 訂單應收回沖 → 狀態退回已出貨
+// =====================================================================
+function simulateBouncedCheck() {
+  const customerChecks = loadJson('shop_customer_checks', []);
+  const orders = loadJson('shop_orders', []);
+  if (customerChecks.length === 0) {
+    logBox('❌ 請先按 ④ 建立客票,再做退票測試', 'err');
+    return;
+  }
+  const cc = customerChecks[0];
+  if (cc.status !== 'pending') {
+    logBox('❌ 客票狀態不是 pending,無法退票', 'err');
+    return;
+  }
+
+  // 退票 → cc.status = 'bounced'
+  cc.status = 'bounced';
+  cc.bouncedReason = '存款不足';
+  cc.bouncedAt = Date.now();
+
+  // 連動訂單:從 fromOrderId 找到訂單,把對應 payment 的 checkStatus 設為 bounced
+  let orderRevertInfo = null;
+  if (cc.fromOrderId) {
+    const order = orders.find(o => o.id === cc.fromOrderId);
+    if (order) {
+      const py = (order.payments || []).find(p => p.id === cc.fromPaymentId);
+      if (py) {
+        py.checkStatus = 'bounced';
+        py.bouncedReason = '存款不足';
+        py.bouncedAt = Date.now();
+      }
+      // 重算應收:已收 = 非退票的 payments
+      const paid = (order.payments || []).filter(p => p.checkStatus !== 'bounced').reduce((s,p) => s + (p.amount||0), 0);
+      const remain = order.total - paid;
+      // 若退票 → 訂單退回 shipped (尚有應收)
+      const oldStatus = order.status;
+      if (remain > 0 && order.status === 'completed') {
+        order.status = 'shipped';
+        delete order.completedAt;
+      }
+      orderRevertInfo = { orderNo: order.orderNo, oldStatus, newStatus: order.status, remain };
+    }
+  }
+
+  saveJson('shop_customer_checks', customerChecks);
+  saveJson('shop_orders', orders);
+
+  let html = '<strong>⚠ ⑥ 退票連動完成</strong><br>';
+  html += '<p>客票 <code>' + cc.no + '</code> 狀態 pending → <strong style="color:#dc2626">bounced</strong> (原因:存款不足)</p>';
+  if (orderRevertInfo) {
+    html += '<p>連動訂單 <code>' + orderRevertInfo.orderNo + '</code>:</p>';
+    html += '<ul>';
+    html += '<li>應收金額由 0 → <strong>NT$ ' + orderRevertInfo.remain.toLocaleString() + '</strong> (退票金額重新變應收)</li>';
+    html += '<li>訂單狀態 ' + orderRevertInfo.oldStatus + ' → ' + orderRevertInfo.newStatus + '</li>';
+    html += '</ul>';
+  }
+  html += '<p>→ 開後台「客票管理」可看到退票警示;再按 ⑤ 重新稽合會看到應收增加</p>';
+  logBox(html, 'warn');
+}
+
+// =====================================================================
+// ⑦ 倉間調撥測試 — 主倉 → 二倉 5 件
+// =====================================================================
+function simulateTransfer() {
+  if (!ensureSeeded()) return;
+  const products = loadJson('shop_products', []);
+  const transfers = loadJson('shop_transfers', []);
+
+  // 找一件主倉有庫存的商品,調 5 件到二倉
+  const target = products.find(p => p.stockByWarehouse && (p.stockByWarehouse['wh-main'] || 0) >= 5);
+  if (!target) {
+    logBox('❌ 主倉沒有任何商品庫存 ≥ 5,無法測試調撥', 'err');
+    return;
+  }
+
+  const moveQty = 5;
+  const before = { main: target.stockByWarehouse['wh-main'] || 0, second: target.stockByWarehouse['wh-second'] || 0 };
+
+  const updated = products.map(p => {
+    if (p.id !== target.id) return p;
+    const sbw = { ...(p.stockByWarehouse || {}) };
+    sbw['wh-main']   = (sbw['wh-main']   || 0) - moveQty;
+    sbw['wh-second'] = (sbw['wh-second'] || 0) + moveQty;
+    const newTotal = Object.values(sbw).reduce((s,v) => s + (parseInt(v)||0), 0);
+    // 二倉貨架 (預設放 B-1-中)
+    const sheBW = { ...(p.shelfByWarehouse || {}) };
+    if (!sheBW['wh-second']) sheBW['wh-second'] = 'B-1-中';
+    return { ...p, stockByWarehouse: sbw, shelfByWarehouse: sheBW, stock: newTotal, updatedAt: Date.now() };
+  });
+
+  const transfer = {
+    id: newId('tr'),
+    fromWarehouse: 'wh-main',
+    toWarehouse: 'wh-second',
+    date: new Date().toISOString().slice(0,10),
+    items: [{ productId: target.id, productName: target.name, qty: moveQty }],
+    note: '整合測試:主倉 → 二倉',
+    createdAt: Date.now()
+  };
+  transfers.push(transfer);
+
+  saveJson('shop_products', updated);
+  saveJson('shop_transfers', transfers);
+
+  const after = { main: before.main - moveQty, second: before.second + moveQty };
+  let html = '<strong>🔄 ⑦ 倉間調撥完成</strong><br>';
+  html += '<p>商品 <strong>' + target.name + '</strong> 調撥 ' + moveQty + ' 件:主倉 → 二倉</p>';
+  html += '<table>';
+  html += '<tr><th>倉庫</th><th>調撥前</th><th>調撥後</th></tr>';
+  html += '<tr><td>主倉(wh-main)</td><td>' + before.main + '</td><td><strong>' + after.main + '</strong></td></tr>';
+  html += '<tr><td>二倉(wh-second)</td><td>' + before.second + '</td><td><strong>' + after.second + '</strong></td></tr>';
+  html += '<tr><td>總庫存</td><td colspan="2">' + (before.main + before.second) + ' (不變,只是位置移轉)</td></tr>';
+  html += '</table>';
+  html += '<p>→ 開後台「倉庫管理 → 調撥記錄」應看到這筆</p>';
+  logBox(html, 'ok');
+}
+
+// =====================================================================
+// ⑧ 會員等級晉升測試 — 累積消費觸發等級提升
+// =====================================================================
+function simulateMemberLevelUp() {
+  const users = loadJson('shop_users', []);
+  const settings = loadJson('shop_settings', {});
+  const orders = loadJson('shop_orders', []);
+  if (users.length === 0) {
+    logBox('❌ 請先按 ③ 建立客戶,再做晉級測試', 'err');
+    return;
+  }
+  const customer = users[0];
+  const levels = (settings.memberLevels || []).slice().sort((a,b) => (a.threshold||0) - (b.threshold||0));
+
+  // 累積消費:現有訂單 + 模擬再加幾筆讓客戶突破白金門檻 (50000)
+  const realSpent = orders.filter(o => o.userId === customer.uid && o.status !== 'cancelled' && o.status !== 'refunded')
+                          .reduce((s,o) => s + (o.total||0), 0);
+
+  // 直接設定為 60000 (白金等級)
+  const targetSpent = 60000;
+  customer.totalSpent = targetSpent;
+  // 計算對應等級
+  let matchedLevel = levels[0];
+  for (const lv of levels) {
+    if (targetSpent >= (lv.threshold || 0)) matchedLevel = lv;
+  }
+  customer.levelId = matchedLevel.id;
+
+  saveJson('shop_users', users.map(u => u.uid === customer.uid ? customer : u));
+
+  let html = '<strong>👑 ⑧ 會員等級晉升完成</strong><br>';
+  html += '<p>客戶 <strong>' + customer.name + '</strong></p>';
+  html += '<table>';
+  html += '<tr><th>項目</th><th>內容</th></tr>';
+  html += '<tr><td>實際累積消費</td><td>NT$ ' + realSpent.toLocaleString() + '</td></tr>';
+  html += '<tr><td>調整後累積消費</td><td><strong>NT$ ' + targetSpent.toLocaleString() + '</strong> (測試用)</td></tr>';
+  html += '<tr><td>套用等級</td><td><strong>' + matchedLevel.icon + ' ' + matchedLevel.name + '</strong> (門檻 NT$ ' + matchedLevel.threshold.toLocaleString() + ')</td></tr>';
+  html += '<tr><td>享受折扣</td><td><strong>' + Math.round(matchedLevel.discount * 100) + '% 收費</strong> (約 ' + Math.round((1-matchedLevel.discount) * 100) + '% off)</td></tr>';
+  html += '</table>';
+  html += '<p>→ 後台「會員管理 → ' + customer.name + '」會看到等級已升級為 ' + matchedLevel.name + '</p>';
+  html += '<p>→ 客戶下次下單時 VIP 價自動套用 (商品有 vipPrice 才生效)</p>';
+  logBox(html, 'ok');
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2976 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>暘基五金有限公司</title>
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_4427726_9sj3a9g1igo.css">
+<style>
+:root{
+  --primary:#1a2a4a;          /* 鋼鐵深藍 */
+  --primary-dark:#0d1830;     /* 深夜鋼 */
+  --primary-light:#2d3e50;    /* 鐵灰藍 */
+  --accent:#c9a95c;           /* 黃銅金 */
+  --accent-dark:#a88838;      /* 深黃銅 */
+  --steel:#4a5568;            /* 鋼鐵灰 */
+  --steel-light:#a0aec0;      /* 淺鋼灰 */
+  --bg:#eceff3;               /* 帶冷調的鐵灰底 */
+  --card:#ffffff;
+  --text:#1a1d24;
+  --text-light:#6b7280;
+  --border:#cbd5e0;            /* 鐵線色 */
+  --border-dark:#94a3b8;      /* 較深的鐵框 */
+  --success:#16a34a;
+  --warning:#d97706;
+  --danger:#dc2626;
+  --metal-grad:linear-gradient(180deg,#2d3e50 0%,#1a2a4a 50%,#0d1830 100%);
+  --brass-grad:linear-gradient(180deg,#d4b367 0%,#c9a95c 50%,#a88838 100%);
+  --steel-grad:linear-gradient(180deg,#fff 0%,#f1f5f9 100%);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:-apple-system,"PingFang TC","Microsoft JhengHei","Heiti TC",sans-serif;color:var(--text);font-size:14px;line-height:1.6}
+body{
+  background:var(--bg);
+  /* ★ 鐵線網格背景：細交叉鐵線 + 鉚釘節點 */
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0, transparent 23px, rgba(74,85,104,0.10) 23px, rgba(74,85,104,0.10) 24px),
+    repeating-linear-gradient(90deg, transparent 0, transparent 23px, rgba(74,85,104,0.10) 23px, rgba(74,85,104,0.10) 24px),
+    radial-gradient(circle at 24px 24px, rgba(26,42,74,0.18) 1.2px, transparent 1.5px);
+  background-size:24px 24px, 24px 24px, 24px 24px;
+  min-height:100vh;
+}
+/* 金屬鉚釘裝飾 — 卡片、容器邊角會自動加上 */
+.rivet{position:relative}
+.rivet::before,.rivet::after{
+  content:'';position:absolute;width:6px;height:6px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #cbd5e0, #4a5568 60%, #1a2a4a);
+  box-shadow:0 1px 1px rgba(0,0,0,.3), inset 0 0 1px rgba(255,255,255,.4);
+  z-index:1;
+}
+.rivet::before{top:6px;left:6px}
+.rivet::after{top:6px;right:6px}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;border:none;font-family:inherit;font-size:inherit;background:transparent}
+input,textarea,select{font-family:inherit;font-size:inherit}
+img{display:block;max-width:100%}
+.hidden{display:none!important}
+
+/* ============ HEADER (工業風 / 鋼鐵金屬) ============ */
+.top-bar{
+  background:linear-gradient(180deg,#0d1830,#1a1d24);
+  color:#a0aec0;font-size:12px;padding:6px 0;
+  border-bottom:1px solid rgba(201,169,92,0.3);
+}
+.top-bar .wrap{max-width:1280px;margin:0 auto;padding:0 16px;display:flex;justify-content:space-between;align-items:center}
+.top-bar a{cursor:pointer;margin-left:14px;color:#cbd5e0}
+.top-bar a:hover{color:var(--accent)}
+
+header.main-header{
+  background:var(--metal-grad);
+  border-bottom:3px solid var(--accent);
+  position:sticky;top:0;z-index:100;
+  /* 拉絲金屬效果 */
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 2px),
+    var(--metal-grad);
+  box-shadow:0 2px 8px rgba(0,0,0,0.3), inset 0 -1px 0 rgba(0,0,0,0.4);
+}
+.header-wrap{max-width:1280px;margin:0 auto;padding:18px 16px;display:flex;align-items:center;gap:24px;position:relative}
+/* 角落鉚釘已移除（業主要求乾淨版面） */
+
+.logo{font-size:30px;font-weight:bold;color:#fff;white-space:nowrap;cursor:pointer;display:flex;align-items:center;gap:14px;
+  text-shadow:0 1px 2px rgba(0,0,0,.5);letter-spacing:2px;
+}
+.logo .icon{font-size:38px;
+  background:var(--brass-grad);-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 1px 1px rgba(0,0,0,.5));
+}
+.logo .name-zh{color:#fff;font-size:28px;line-height:1.1;display:block}
+.logo .name-sub{font-size:14px;color:var(--accent);letter-spacing:4px;display:block;line-height:1.2;font-weight:500;margin-top:4px}
+
+.search-box{flex:1;max-width:560px;position:relative}
+.search-box input{width:100%;padding:10px 44px 10px 16px;border:2px solid var(--accent);border-radius:4px;outline:none;
+  background:#1a1d24;color:#fff;
+  box-shadow:inset 0 2px 4px rgba(0,0,0,0.4);
+}
+.search-box input::placeholder{color:#6b7280}
+.search-box input:focus{border-color:#d4b367;box-shadow:inset 0 2px 4px rgba(0,0,0,0.4), 0 0 0 2px rgba(201,169,92,0.2)}
+.search-box button{position:absolute;right:0;top:0;height:100%;padding:0 18px;
+  background:var(--brass-grad);color:#1a1d24;border-radius:0 2px 2px 0;
+  font-weight:bold;border-left:1px solid var(--accent-dark);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.3);
+}
+.search-box button:hover{background:linear-gradient(180deg,#e0c280,#c9a95c,#b8983d)}
+
+.header-actions{display:flex;align-items:center;gap:8px}
+.header-btn{padding:8px 14px;border-radius:4px;display:flex;align-items:center;gap:6px;cursor:pointer;color:#cbd5e0;
+  border:1px solid rgba(201,169,92,0.3);
+}
+.header-btn:hover{background:rgba(255,255,255,0.08);color:var(--accent);border-color:var(--accent)}
+.header-btn .badge{background:var(--brass-grad);color:#1a1d24;border-radius:10px;font-size:11px;padding:1px 6px;min-width:18px;text-align:center;display:inline-block;font-weight:bold;box-shadow:0 1px 2px rgba(0,0,0,0.3)}
+
+/* ============ NAV BAR (鋼鐵深色 + 鉚釘) ============ */
+.cat-nav{
+  background:linear-gradient(180deg,#1a2a4a,#0d1830);
+  color:#fff;
+  border-bottom:1px solid rgba(0,0,0,0.5);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.05), 0 1px 2px rgba(0,0,0,0.2);
+}
+.cat-nav .wrap{max-width:1280px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:0}
+.cat-nav-item{padding:13px 18px;cursor:pointer;font-size:14px;white-space:nowrap;color:#e2e8f0;
+  border-right:1px solid rgba(255,255,255,0.05);transition:all .15s;position:relative;
+  display:inline-flex;align-items:center;
+}
+.cat-nav-item:hover{background:rgba(201,169,92,0.15);color:var(--accent)}
+.cat-nav-item.active{background:rgba(201,169,92,0.2);font-weight:bold;color:var(--accent);
+  box-shadow:inset 0 -3px 0 var(--accent);
+}
+.cat-nav-spacer{flex:1}
+/* 頂部橫條右側公告（靜態，截斷顯示） */
+.cat-nav-announce{font-size:13px;color:var(--accent);padding:0 16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:400px}
+
+/* 🎉 促銷橫幅區塊（首頁顯示） */
+.promo-banner{
+  background:linear-gradient(135deg,#fff8e1,#fff3cd);
+  border:2px solid var(--accent);border-radius:4px;
+  padding:18px 20px;margin:14px 0;
+  position:relative;overflow:hidden;
+  box-shadow:0 2px 10px rgba(201,169,92,0.2);
+}
+.promo-banner::before, .promo-banner::after{
+  content:'';position:absolute;width:8px;height:8px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #d4b367, #a88838 60%, #5a4818);
+  box-shadow:0 1px 2px rgba(0,0,0,.3);
+}
+.promo-banner::before{top:8px;left:8px}
+.promo-banner::after{top:8px;right:8px}
+.promo-banner h3{
+  color:var(--primary);font-size:18px;letter-spacing:2px;
+  margin-bottom:10px;text-align:center;
+}
+.promo-banner h3::before{content:'🎉 ';margin-right:4px}
+.promo-cards{display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:10px}
+.promo-card-mini{
+  background:#fff;border:1px solid var(--border);border-left:3px solid var(--accent);
+  border-radius:3px;padding:10px 12px;font-size:13px;
+}
+.promo-card-mini .ptype{font-size:11px;color:var(--text-light);margin-bottom:4px;letter-spacing:1px}
+.promo-card-mini .pname{font-weight:bold;color:var(--primary);margin-bottom:4px}
+.promo-card-mini .pdesc{font-size:12px;color:#555;line-height:1.5}
+.promo-card-mini.gift{border-left-color:#dc2626;background:linear-gradient(180deg,#fff,#fee2e2);min-width:280px}
+/* 贈品圖文卡 — 預設縱排（每階一行：左圖右文） */
+.promo-card-mini.gift{min-width:420px}
+.gift-tiers{display:flex;flex-direction:column}
+.gift-row{display:flex;gap:14px;padding:10px 0;border-bottom:1px dashed #fca5a5;align-items:center}
+.gift-row:last-child{border-bottom:none}
+.gift-row img{width:170px;height:170px;border-radius:8px;object-fit:cover;border:3px solid #fbbf24;flex-shrink:0;box-shadow:0 4px 12px rgba(0,0,0,0.18)}
+.gift-row .gift-placeholder{width:170px;height:170px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:72px;border-radius:8px;border:3px dashed #fbbf24;flex-shrink:0}
+.gift-row-text{flex:1;min-width:0;font-size:13px;line-height:1.5}
+.gift-row-text .gthresh{color:#991b1b;font-size:12px;font-weight:600}
+.gift-row-text .gname{color:#dc2626;font-weight:bold;font-size:16px;margin:3px 0}
+.gift-row-text .gdesc{color:#555;font-size:12px;line-height:1.5;margin-top:2px}
+
+/* 橫排：每階變一張卡，左右並排 */
+.gift-tiers.horizontal{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:12px;
+}
+.gift-tiers.horizontal .gift-row{
+  flex-direction:column;
+  text-align:center;
+  border:1px solid #fbbf24;
+  border-bottom:1px solid #fbbf24;
+  padding:10px;
+  border-radius:8px;
+  background:#fff;
+  gap:8px;
+}
+.gift-tiers.horizontal .gift-row img,
+.gift-tiers.horizontal .gift-row .gift-placeholder{
+  width:140px;height:140px;
+}
+.gift-tiers.horizontal .gift-row-text{text-align:center}
+.gift-tiers.horizontal .gift-row-text .gname{font-size:14px}
+/* 橫排時整張贈品卡也放寬 */
+.promo-card-mini.gift.horizontal{min-width:540px;max-width:760px}
+
+/* ============ LAYOUT ============ */
+.layout{max-width:1280px;margin:16px auto;padding:0 16px;display:grid;grid-template-columns:220px 1fr;gap:16px;align-items:start}
+@media (max-width:900px){.layout{grid-template-columns:1fr}.sidebar{display:none}.search-box{display:none}}
+
+/* ============ SIDEBAR (鋼板側欄) ============ */
+.sidebar{
+  background:var(--steel-grad);
+  border:1px solid var(--border-dark);border-top:3px solid var(--accent);
+  border-radius:2px;padding:0;position:sticky;top:80px;max-height:calc(100vh - 100px);overflow-y:auto;
+  box-shadow:0 2px 4px rgba(0,0,0,0.08), inset 0 1px 0 #fff;
+}
+.sidebar h3{padding:12px 16px;font-size:14px;color:#fff;font-weight:bold;letter-spacing:2px;
+  background:linear-gradient(180deg,#2d3e50,#1a2a4a);
+  border-bottom:1px solid var(--border-dark);margin:0;
+  display:flex;align-items:center;gap:8px;
+}
+.sidebar h3::before{content:'⚙';color:var(--accent);font-size:16px}
+.cat-tree{list-style:none;padding:6px 0}
+.cat-tree li{padding:0}
+.cat-link{display:flex;justify-content:space-between;align-items:center;padding:9px 16px;cursor:pointer;
+  border-left:3px solid transparent;transition:all .15s;
+  border-bottom:1px dashed rgba(74,85,104,0.15);
+}
+.cat-link:hover{background:rgba(201,169,92,0.08);color:var(--primary)}
+.cat-link.active{background:linear-gradient(90deg,rgba(201,169,92,0.15),rgba(255,255,255,0));
+  color:var(--primary);border-left-color:var(--accent);font-weight:bold;
+}
+.cat-link .arrow{font-size:11px;transition:transform .2s;color:var(--steel)}
+.cat-link.expanded .arrow{transform:rotate(90deg);color:var(--accent)}
+.cat-children{padding-left:0;background:rgba(74,85,104,0.04);border-top:1px solid var(--border)}
+.cat-children .cat-link{padding:7px 16px 7px 32px;font-size:13px;border-bottom:none;color:#475569}
+.cat-children .cat-link::before{content:'└';margin-right:6px;color:var(--steel-light)}
+
+/* ============ MAIN / TOOLBAR (鋼板) ============ */
+.main-area{min-width:0}
+.toolbar{
+  background:var(--steel-grad);
+  border:1px solid var(--border-dark);border-top:2px solid var(--primary);
+  border-radius:2px;padding:12px 16px;margin-bottom:12px;
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  box-shadow:0 1px 3px rgba(0,0,0,0.08), inset 0 1px 0 #fff;
+}
+.toolbar h2{font-size:17px;flex:1;min-width:120px;color:var(--primary);font-weight:bold;letter-spacing:1px}
+.toolbar h2::before{content:'▎';color:var(--accent);margin-right:6px}
+.toolbar .filter-row{display:flex;gap:8px;flex-wrap:wrap}
+.tag-btn{padding:5px 12px;border:1px solid var(--border-dark);border-radius:2px;background:#fff;cursor:pointer;font-size:12px;color:#4a5568;transition:all .15s}
+.tag-btn:hover{border-color:var(--primary);color:var(--primary);background:#f8fafc}
+.tag-btn.active{background:var(--metal-grad);color:var(--accent);border-color:var(--primary-dark);font-weight:bold;box-shadow:inset 0 1px 2px rgba(0,0,0,0.3)}
+.sort-select{padding:5px 10px;border:1px solid var(--border-dark);border-radius:2px;background:#fff;cursor:pointer}
+
+/* ============ PRODUCT GRID (金屬框商品卡) ============ */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.product-card{
+  background:#fff;
+  border:1px solid var(--border-dark);
+  border-top:3px solid transparent;
+  border-radius:2px;overflow:hidden;cursor:pointer;
+  transition:all .2s;display:flex;flex-direction:column;
+  box-shadow:0 1px 3px rgba(0,0,0,0.06);position:relative;
+}
+.product-card::before{
+  /* 上邊鉚釘裝飾 */
+  content:'';position:absolute;top:8px;right:8px;width:6px;height:6px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #cbd5e0, #4a5568 60%, #1a2a4a);
+  box-shadow:0 1px 1px rgba(0,0,0,.3);z-index:2;
+}
+.product-card:hover{
+  box-shadow:0 4px 14px rgba(26,42,74,0.18);
+  border-color:var(--primary);border-top-color:var(--accent);
+  transform:translateY(-2px);
+}
+.product-img{width:100%;aspect-ratio:1/1;background:linear-gradient(135deg,#f1f5f9,#e2e8f0);position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+/* 載入時的微動效（鋼鐵刷光） */
+.product-img::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,0.5) 50%,transparent 70%);
+  background-size:200% 100%;
+  animation:shimmer 1.6s infinite linear;
+  z-index:1;opacity:0;transition:opacity .3s;
+}
+.product-img.loading::before{opacity:1}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.product-img img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .3s, opacity .4s, filter .4s;
+  opacity:0;filter:blur(8px);
+}
+.product-img img.loaded{opacity:1;filter:blur(0)}
+.product-card:hover .product-img img{transform:scale(1.05)}
+.product-img .placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:56px}
+.product-tag{position:absolute;top:8px;left:8px;background:var(--metal-grad);color:var(--accent);padding:2px 10px;border-radius:2px;font-size:11px;font-weight:bold;border:1px solid var(--accent);box-shadow:0 1px 2px rgba(0,0,0,0.3);letter-spacing:1px}
+.product-info{padding:10px 12px;flex:1;display:flex;flex-direction:column}
+.product-name{font-size:14px;line-height:1.4;color:#1a1d24;font-weight:500;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:39px;margin-bottom:6px}
+.product-price{color:var(--primary);font-weight:bold;font-size:20px;margin-bottom:4px;font-family:"Helvetica Neue",sans-serif}
+.product-price small{font-size:12px;font-weight:normal;color:var(--steel)}
+.product-meta{font-size:11px;color:var(--text-light);display:flex;justify-content:space-between;margin-top:auto;padding-top:6px;border-top:1px dashed var(--border)}
+.product-add{margin-top:8px;padding:7px;
+  background:var(--brass-grad);color:#1a1d24;
+  border-radius:2px;text-align:center;font-size:13px;font-weight:bold;
+  border:1px solid var(--accent-dark);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.4), 0 1px 2px rgba(0,0,0,0.15);
+  transition:all .15s;letter-spacing:2px;
+}
+.product-add:hover{background:linear-gradient(180deg,#e0c280,#c9a95c,#b8983d);box-shadow:inset 0 1px 0 rgba(255,255,255,0.4), 0 2px 4px rgba(0,0,0,0.2)}
+.product-card.out-of-stock{opacity:.55;pointer-events:none;filter:grayscale(50%)}
+.product-card.out-of-stock .product-add{background:#94a3b8;border-color:#64748b;color:#fff}
+
+.empty{text-align:center;padding:80px 20px;color:var(--text-light)}
+.empty .icon{font-size:64px;margin-bottom:12px;opacity:.4}
+
+/* ============ PAGINATION ============ */
+.pagination{display:flex;justify-content:center;gap:6px;margin:24px 0;flex-wrap:wrap}
+.pagination button{padding:6px 12px;border:1px solid var(--border);background:#fff;border-radius:4px;min-width:36px}
+.pagination button:disabled{opacity:.4;cursor:not-allowed}
+.pagination button.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+/* ============ MODAL ============ */
+.modal-mask{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:flex;align-items:center;justify-content:center;padding:16px;animation:fadeIn .15s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{background:#fff;border-radius:10px;max-width:900px;width:100%;max-height:90vh;overflow-y:auto;animation:slideUp .2s}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:#fff;z-index:1}
+.modal-header h3{font-size:17px}
+.modal-close{font-size:22px;color:#999;cursor:pointer;line-height:1;padding:0 4px}
+.modal-close:hover{color:#333}
+.modal-body{padding:20px}
+.modal-footer{padding:14px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px;background:#fafafa;border-radius:0 0 10px 10px}
+
+/* ============ PRODUCT DETAIL ============ */
+.pd-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:700px){.pd-grid{grid-template-columns:1fr}}
+/* ★ 產品介紹卡：響應式 3x2 → 2 → 1 */
+@media(max-width:900px){.prod-grid-3{grid-template-columns:repeat(2,1fr)!important}}
+@media(max-width:500px){.prod-grid-3{grid-template-columns:1fr!important}}
+.pd-img-main{width:100%;aspect-ratio:1/1;background:#f5f5f5;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.pd-img-main img{width:100%;height:100%;object-fit:contain}
+.pd-thumbs{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.pd-thumbs img{width:60px;height:60px;border-radius:4px;cursor:pointer;border:2px solid transparent;object-fit:cover}
+.pd-thumbs img.active{border-color:var(--primary)}
+.pd-name{font-size:18px;font-weight:bold;margin-bottom:8px;line-height:1.4}
+.pd-price-row{background:linear-gradient(135deg,#fff8f0,#fff5f5);padding:12px 14px;border-radius:6px;margin-bottom:14px}
+.pd-price{font-size:28px;color:var(--primary);font-weight:bold}
+.pd-price small{font-size:14px;font-weight:normal;color:#888}
+.pd-stock{font-size:13px;color:var(--text-light);margin-top:4px}
+.pd-spec-row{display:flex;margin:8px 0;font-size:13px}
+.pd-spec-row label{width:80px;color:var(--text-light);flex-shrink:0}
+.pd-qty{display:flex;align-items:center;gap:0;margin:14px 0}
+.pd-qty button{width:32px;height:32px;border:1px solid var(--border);background:#fff;font-size:16px}
+.pd-qty input{width:60px;height:32px;border:1px solid var(--border);border-left:none;border-right:none;text-align:center;outline:none}
+.pd-actions{display:flex;gap:10px;margin-top:16px}
+.pd-actions button{flex:1;padding:10px;border-radius:4px;font-weight:bold;font-size:14px}
+.btn-cart{background:#fff5f0;color:var(--primary);border:1px solid var(--primary)!important}
+.btn-cart:hover{background:#ffeae0}
+.btn-buy{background:var(--primary);color:#fff}
+.btn-buy:hover{background:var(--primary-dark)}
+.pd-desc{margin-top:20px;padding-top:16px;border-top:1px solid var(--border);line-height:1.7;color:#555;white-space:pre-wrap}
+
+/* ============ CART DRAWER ============ */
+.drawer-mask{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:300;animation:fadeIn .15s}
+.drawer{position:fixed;top:0;right:0;height:100vh;width:420px;max-width:90vw;background:#fff;z-index:301;display:flex;flex-direction:column;animation:slideIn .2s}
+@keyframes slideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
+.drawer-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.drawer-body{flex:1;overflow-y:auto;padding:0}
+.drawer-footer{padding:16px 20px;border-top:1px solid var(--border);background:#fafafa}
+
+.cart-item{display:flex;gap:10px;padding:12px 16px;border-bottom:1px solid #f5f5f5}
+.cart-item img{width:60px;height:60px;object-fit:cover;border-radius:4px;background:#f5f5f5;flex-shrink:0}
+.cart-item-info{flex:1;min-width:0}
+.cart-item-name{font-size:13px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:4px}
+.cart-item-price{color:var(--primary);font-weight:bold}
+.cart-item-actions{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.cart-qty{display:flex;align-items:center}
+.cart-qty button{width:24px;height:24px;border:1px solid var(--border);background:#fff;font-size:14px}
+.cart-qty input{width:42px;height:24px;border:1px solid var(--border);border-left:none;border-right:none;text-align:center;outline:none;font-size:12px}
+.cart-remove{color:var(--text-light);font-size:12px;cursor:pointer}
+.cart-remove:hover{color:var(--danger)}
+
+.cart-total{display:flex;justify-content:space-between;align-items:center;font-size:16px;margin-bottom:12px}
+.cart-total .price{font-size:22px;color:var(--primary);font-weight:bold}
+.checkout-btn{width:100%;padding:12px;background:var(--primary);color:#fff;border-radius:6px;font-size:16px;font-weight:bold}
+.checkout-btn:hover{background:var(--primary-dark)}
+.checkout-btn:disabled{background:#ccc;cursor:not-allowed}
+
+/* ============ FORM ============ */
+.form-row{margin-bottom:14px}
+.form-row label{display:block;margin-bottom:5px;font-size:13px;color:#555}
+.form-row label .req{color:var(--danger);margin-left:2px}
+.form-row input,.form-row textarea,.form-row select{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:4px;outline:none;transition:border-color .15s}
+.form-row input:focus,.form-row textarea:focus,.form-row select:focus{border-color:var(--primary)}
+.form-row textarea{resize:vertical;min-height:80px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr}}
+
+.btn{padding:8px 18px;border-radius:4px;font-size:14px;cursor:pointer;font-weight:500;transition:all .15s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary-dark)}
+.btn-default{background:#fff;border:1px solid var(--border);color:#555}
+.btn-default:hover{border-color:var(--primary);color:var(--primary)}
+
+/* ============ AUTH ============ */
+.auth-tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:18px}
+.auth-tabs button{flex:1;padding:10px;text-align:center;cursor:pointer;border-bottom:2px solid transparent;font-size:15px}
+.auth-tabs button.active{color:var(--primary);border-bottom-color:var(--primary);font-weight:bold}
+
+/* ============ ORDER LIST ============ */
+.order-card{background:#fff;border:1px solid var(--border);border-radius:6px;margin-bottom:12px;overflow:hidden}
+.order-head{padding:10px 14px;background:#fafafa;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--text-light)}
+.order-head .status{padding:2px 10px;border-radius:12px;color:#fff;font-size:12px}
+.status-pending{background:var(--warning)}
+.status-paid{background:#1890ff}
+.status-shipped{background:#722ed1}
+.status-completed{background:var(--success)}
+.status-cancelled{background:#999}
+.order-body{padding:0}
+.order-row{display:flex;gap:10px;padding:10px 14px;border-bottom:1px solid #f5f5f5}
+.order-row:last-child{border-bottom:none}
+.order-row img{width:50px;height:50px;border-radius:4px;object-fit:cover;background:#f5f5f5}
+.order-foot{padding:10px 14px;background:#fafafa;border-top:1px solid var(--border);text-align:right}
+.order-foot .total{font-size:16px;color:var(--primary);font-weight:bold}
+
+/* ============ LINE 浮動客服按鈕 ============ */
+.line-float-btn{
+  position:fixed;right:20px;bottom:20px;z-index:9000;
+  width:60px;height:60px;border-radius:50%;
+  background:linear-gradient(180deg,#06c755,#04a843);
+  color:#fff;text-decoration:none;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  box-shadow:0 4px 12px rgba(6,199,85,0.4), 0 2px 4px rgba(0,0,0,0.2);
+  transition:transform .15s, box-shadow .15s;font-weight:bold;
+}
+.line-float-btn:hover{transform:scale(1.08);box-shadow:0 6px 18px rgba(6,199,85,0.5)}
+
+/* ============ TOAST ============ */
+.toast{position:fixed;top:80px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.85);color:#fff;padding:10px 20px;border-radius:6px;z-index:9999;font-size:14px;animation:fadeIn .15s}
+.toast.success{background:var(--success)}
+.toast.error{background:var(--danger)}
+
+/* ============ FOOTER (鋼鐵基座) ============ */
+footer{
+  background:linear-gradient(180deg,#1a2a4a,#0d1830);
+  color:#94a3b8;margin-top:40px;padding:30px 16px 20px;font-size:13px;
+  border-top:3px solid var(--accent);
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0, transparent 39px, rgba(255,255,255,0.02) 39px, rgba(255,255,255,0.02) 40px),
+    repeating-linear-gradient(90deg, transparent 0, transparent 39px, rgba(255,255,255,0.02) 39px, rgba(255,255,255,0.02) 40px),
+    linear-gradient(180deg,#1a2a4a,#0d1830);
+}
+.footer-wrap{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;margin-bottom:20px}
+.footer-col h4{color:var(--accent);font-size:14px;margin-bottom:10px;letter-spacing:2px;border-bottom:1px solid rgba(201,169,92,0.3);padding-bottom:6px}
+.footer-col ul{list-style:none;line-height:2;color:#cbd5e0}
+.footer-col a{cursor:pointer}
+.footer-col a:hover{color:var(--accent)}
+.copyright{text-align:center;border-top:1px solid rgba(201,169,92,0.2);padding-top:14px;font-size:12px;letter-spacing:1px}
+
+/* ============ LOADING ============ */
+.loading{text-align:center;padding:40px;color:var(--text-light)}
+.spinner{display:inline-block;width:32px;height:32px;border:3px solid #ddd;border-top-color:var(--primary);border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div id="app">
+  <!-- ============ TOP BAR ============ -->
+  <div class="top-bar">
+    <div class="wrap">
+      <span>⚙ {{ settings.shopName || '暘基五金有限公司' }}　|　{{ settings.slogan || '穩固久遠 · 品質至上' }}</span>
+      <span>
+        <a v-if="!user" @click="openAuth('login')">登入</a>
+        <a v-if="!user" @click="openAuth('register')">註冊</a>
+        <a v-if="user">您好，{{ user.name || user.email }}</a>
+        <a v-if="user" @click="view='orders'">我的訂單</a>
+        <a v-if="user" @click="openProfile">會員中心</a>
+        <a v-if="user" @click="logout">登出</a>
+        <a v-if="user && user.role==='admin'" :href="'admin.html'" target="_blank">管理後台</a>
+      </span>
+    </div>
+  </div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="main-header">
+    <div class="header-wrap">
+      <div class="logo" @click="goHome">
+        <div>
+          <span class="name-zh">{{ settings.shopName || '暘基五金有限公司' }}</span>
+          <span class="name-sub">{{ settings.shopNameEn || 'YANG JI HARDWARE CO., LTD.' }}</span>
+        </div>
+      </div>
+      <div class="search-box">
+        <input v-model="searchQuery" @keyup.enter="doSearch" placeholder="搜尋商品名稱、貨號、規格…">
+        <button @click="doSearch">🔍 搜尋</button>
+      </div>
+      <div class="header-actions">
+        <div class="header-btn" @click="cartOpen=true">
+          🛒 購物車
+          <span class="badge" v-if="cartCount>0">{{ cartCount }}</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ CATEGORY NAV（依 settings.navItems 排序 + 顯示） ============ -->
+  <nav class="cat-nav">
+    <div class="wrap">
+      <template v-for="n in sortedNavItems" :key="n.id">
+        <!-- 全部商品 -->
+        <div v-if="n.type==='all'" class="cat-nav-item" :class="{active:!currentCategory&&view==='shop'}" @click="goHome">{{ n.label || '全部商品' }}</div>
+        <!-- 自動：前 N 個頂層分類 -->
+        <div v-else-if="n.type==='top-categories'" class="cat-nav-item"
+             v-for="c in topCategories.slice(0, n.limit || 7)"
+             :key="'cat-'+c.id"
+             :class="{active:currentCategory===c.id}"
+             @click="selectCategory(c.id)">{{ c.name }}</div>
+        <!-- 單一分類連結 -->
+        <div v-else-if="n.type==='category' && n.categoryId" class="cat-nav-item"
+             :class="{active:currentCategory===n.categoryId}"
+             @click="selectCategory(n.categoryId)">{{ n.label }}</div>
+        <!-- 活動頁 -->
+        <div v-else-if="n.type==='promotions' && activePromotions.length > 0" class="cat-nav-item" @click="view='promotions'" :class="{active: view==='promotions'}">{{ n.label || '🎉 活動' }}</div>
+        <!-- 關於我們（金色鐵線盤狀 SVG 圖示） -->
+        <div v-else-if="n.type==='about' && settings.about && settings.about.enabled" class="cat-nav-item" @click="view='about'" :class="{active: view==='about'}">
+          <svg viewBox="0 0 28 24" width="22" height="20" style="vertical-align:middle;margin-right:6px;flex-shrink:0">
+            <defs>
+              <linearGradient id="navGold" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#fde68a"/>
+                <stop offset="50%" stop-color="#c9a95c"/>
+                <stop offset="100%" stop-color="#7c5e1f"/>
+              </linearGradient>
+            </defs>
+            <!-- 盤狀鐵線（橢圓堆疊） -->
+            <ellipse cx="14" cy="17" rx="11" ry="3.2" fill="none" stroke="url(#navGold)" stroke-width="1.4"/>
+            <ellipse cx="14" cy="14.5" rx="9" ry="2.6" fill="none" stroke="url(#navGold)" stroke-width="1.3" opacity="0.95"/>
+            <ellipse cx="14" cy="12" rx="7" ry="2" fill="none" stroke="url(#navGold)" stroke-width="1.2" opacity="0.9"/>
+            <ellipse cx="14" cy="9.8" rx="5" ry="1.5" fill="none" stroke="url(#navGold)" stroke-width="1.1" opacity="0.85"/>
+            <ellipse cx="14" cy="8" rx="3" ry="1" fill="none" stroke="url(#navGold)" stroke-width="1" opacity="0.8"/>
+            <!-- 鐵線頭尾突出 -->
+            <line x1="3" y1="17" x2="3" y2="3" stroke="url(#navGold)" stroke-width="1.6" stroke-linecap="round"/>
+            <line x1="25" y1="17" x2="25" y2="3" stroke="url(#navGold)" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <span>{{ (n.label || '').replace(/^🏢\s*/, '') || (settings.about.title || '關於我們') }}</span>
+        </div>
+        <!-- 自訂外部連結 -->
+        <a v-else-if="n.type==='link' && n.url" :href="n.url" target="_blank" class="cat-nav-item" style="text-decoration:none">{{ n.label }}</a>
+        <!-- 上新（最近 30 天 createdAt 商品） -->
+        <div v-else-if="n.type==='new'" class="cat-nav-item" :class="{active: view==='new'}" @click="view='new'">{{ n.label || '🆕 新品' }}</div>
+      </template>
+      <div class="cat-nav-spacer"></div>
+      <div class="cat-nav-announce" v-if="settings.announcement">📢 {{ settings.announcement }}</div>
+    </div>
+  </nav>
+
+  <!-- ============ 🎉 促銷橫幅（首頁顯示） ============ -->
+  <div v-if="view==='shop' && activePromotions.length > 0" style="max-width:1280px;margin:0 auto;padding:0 16px">
+    <div class="promo-banner">
+      <h3>限時優惠 · 數量有限</h3>
+      <div class="promo-cards">
+        <div v-for="p in activePromotions" :key="p.id" class="promo-card-mini"
+             :class="{gift: p.type === 'gift', horizontal: p.type === 'gift' && p.tierLayout === 'horizontal'}">
+          <div class="ptype">{{ ({sitewide_discount:'🌐 全館折扣', spend_discount:'💸 滿額折扣', bundle:'📦 多件特價', gift:'🎁 滿額贈', free_shipping:'🚚 滿額免運'})[p.type] }}</div>
+          <div class="pname">{{ p.name }}</div>
+          <div class="pdesc">
+            <template v-if="p.type === 'sitewide_discount'">全館 <strong>{{ (100 - (p.value||0))/10 }} 折</strong></template>
+            <template v-else-if="p.type === 'spend_discount'">滿 NT$ {{ p.threshold }} 享 <strong>{{ (100 - (p.value||0))/10 }} 折</strong></template>
+            <template v-else-if="p.type === 'bundle'">{{ p.qty }} 件 <strong>NT$ {{ p.fixedPrice }}</strong> · {{ bundleScopeText(p) }}</template>
+            <template v-else-if="p.type === 'gift'">
+              <div v-if="p.giftMode" style="text-align:center;font-size:11px;color:#991b1b;margin-bottom:6px;background:#fff;padding:3px 8px;border-radius:10px;display:inline-block">
+                <strong>{{ p.giftMode === 'cumulative' ? '🎁🎁 累贈：達標全給' : '🎁 最高階：只給最高那一階' }}</strong>
+              </div>
+              <div class="gift-tiers" :class="{horizontal: p.tierLayout === 'horizontal'}">
+                <div v-for="(t, ti) in (p.tiers || [])" :key="ti" class="gift-row">
+                  <img v-if="t.image" :src="t.image" :alt="t.gift">
+                  <div v-else class="gift-placeholder">🎁</div>
+                  <div class="gift-row-text">
+                    <div class="gthresh">滿 NT$ {{ t.threshold.toLocaleString() }} 加贈</div>
+                    <div class="gname">{{ t.gift }}</div>
+                    <div v-if="t.description" class="gdesc">{{ t.description }}</div>
+                  </div>
+                </div>
+              </div>
+            </template>
+            <template v-else-if="p.type === 'free_shipping'">滿 NT$ {{ p.threshold }} <strong style="color:#06c755">免運</strong></template>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:12px">
+        <button @click="view='promotions'" style="padding:6px 18px;background:transparent;border:1px solid var(--accent);color:var(--primary);border-radius:3px;cursor:pointer;font-size:12px;letter-spacing:1px">查看活動詳情 →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MAIN LAYOUT ============ -->
+  <div v-if="view==='shop'" class="layout">
+    <aside class="sidebar">
+      <h3>商品分類</h3>
+      <ul class="cat-tree">
+        <li>
+          <div class="cat-link" :class="{active:!currentCategory}" @click="selectCategory(null)">
+            <span>📋 全部商品</span>
+            <span>{{ products.length }}</span>
+          </div>
+        </li>
+        <li v-for="c in topCategories" :key="c.id">
+          <div class="cat-link"
+               :class="{active:currentCategory===c.id, expanded:expandedCats[c.id]}"
+               @click="selectCategory(c.id)">
+            <span>{{ c.name }}</span>
+            <span class="arrow" v-if="getChildren(c.id).length">▶</span>
+          </div>
+          <ul class="cat-children" v-if="expandedCats[c.id] && getChildren(c.id).length">
+            <li v-for="sc in getChildren(c.id)" :key="sc.id">
+              <div class="cat-link" :class="{active:currentCategory===sc.id}" @click="selectCategory(sc.id)">
+                <span>{{ sc.name }}</span>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </aside>
+
+    <div class="main-area">
+      <div class="toolbar">
+        <h2>{{ currentCategoryName }}<small style="color:#999;margin-left:8px;font-size:13px;font-weight:normal">共 {{ filteredProducts.length }} 件商品</small></h2>
+        <div class="filter-row">
+          <button class="tag-btn" :class="{active:sortBy==='default'}" @click="sortBy='default'">綜合</button>
+          <button class="tag-btn" :class="{active:sortBy==='priceAsc'}" @click="sortBy='priceAsc'">價格 ↑</button>
+          <button class="tag-btn" :class="{active:sortBy==='priceDesc'}" @click="sortBy='priceDesc'">價格 ↓</button>
+          <button class="tag-btn" :class="{active:sortBy==='newest'}" @click="sortBy='newest'">最新</button>
+        </div>
+      </div>
+
+      <div v-if="loading" class="loading"><div class="spinner"></div><p>載入中...</p></div>
+
+      <div v-else-if="pagedProducts.length===0" class="empty">
+        <div class="icon">📦</div>
+        <p>沒有找到符合條件的商品</p>
+      </div>
+
+      <div v-else class="product-grid">
+        <div class="product-card" :class="{'out-of-stock':p.stock<=0}"
+             v-for="p in pagedProducts" :key="p.id"
+             @click="openProduct(p)">
+          <div class="product-img loading">
+            <img v-if="p.images && p.images[0]" :src="p.images[0]" :alt="p.name" loading="lazy"
+                 decoding="async"
+                 @load="$event.target.classList.add('loaded'); $event.target.parentElement.classList.remove('loading')"
+                 @error="$event.target.style.display='none'; $event.target.parentElement.classList.remove('loading')">
+            <div class="placeholder" v-else>📦</div>
+            <span class="product-tag" v-if="p.stock<=0">缺貨</span>
+            <span class="product-tag" v-else-if="p.tag">{{ p.tag }}</span>
+          </div>
+          <div class="product-info">
+            <div class="product-name">{{ p.name }}</div>
+            <div class="product-price">
+              <small>NT$</small> {{ priceFor(p) }}
+              <small v-if="p.unit"> / {{ p.unit }}</small>
+            </div>
+            <div class="product-meta">
+              <span v-if="p.stock>0">庫存 {{ p.stock }}</span>
+              <span v-else style="color:var(--danger)">已售完</span>
+              <span v-if="p.minOrder>1">起訂 {{ p.minOrder }}</span>
+            </div>
+            <button class="product-add" @click.stop="quickAdd(p)" v-if="p.stock>0">加入購物車</button>
+            <button class="product-add" disabled v-else>暫時缺貨</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination" v-if="totalPages>1">
+        <button @click="page=1" :disabled="page<=1">«</button>
+        <button @click="page--" :disabled="page<=1">‹</button>
+        <button v-for="n in pageRange" :key="n" :class="{active:n===page}" @click="page=n">{{ n }}</button>
+        <button @click="page++" :disabled="page>=totalPages">›</button>
+        <button @click="page=totalPages" :disabled="page>=totalPages">»</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PROMOTIONS (活動頁) ============ -->
+  <div v-if="view==='promotions'" style="max-width:1100px;margin:0 auto;padding:0 16px">
+    <!-- Hero -->
+    <div style="background:linear-gradient(135deg,#dc2626 0%,#ef4444 50%,#f59e0b 100%);color:#fff;padding:50px 20px 40px;border-radius:4px;text-align:center;margin:16px 0;box-shadow:0 4px 20px rgba(220,38,38,0.3);position:relative;overflow:hidden">
+      <div style="font-size:60px;margin-bottom:10px;text-shadow:0 2px 6px rgba(0,0,0,0.3)">🎉</div>
+      <h1 style="font-size:34px;margin-bottom:10px;letter-spacing:6px;text-shadow:0 2px 6px rgba(0,0,0,0.3)">促銷活動</h1>
+      <p style="font-size:15px;letter-spacing:2px;opacity:0.95">限時優惠 · 數量有限 · 售完為止</p>
+    </div>
+
+    <!-- 沒活動 -->
+    <div v-if="activePromotions.length === 0" class="empty" style="padding:60px;background:#fff;border:1px solid var(--border);border-radius:4px">
+      <div class="icon">🎉</div>
+      <p>目前沒有進行中的活動，請持續關注我們！</p>
+      <button class="btn-buy" @click="goHome" style="margin-top:14px;padding:10px 30px">繼續逛商城</button>
+    </div>
+
+    <!-- 活動卡片 -->
+    <div v-else style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px">
+      <div v-for="(p, i) in activePromotions" :key="p.id || i"
+           :style="{
+             background: ({sitewide_discount:'linear-gradient(135deg,#fef3c7,#fde68a)', spend_discount:'linear-gradient(135deg,#dbeafe,#bfdbfe)', bundle:'linear-gradient(135deg,#fce7f3,#fbcfe8)', gift:'linear-gradient(135deg,#fee2e2,#fecaca)', free_shipping:'linear-gradient(135deg,#d1fae5,#a7f3d0)'})[p.type] || '#fff',
+             border:'2px solid var(--accent)', borderRadius:'4px', padding:'24px', position:'relative'
+           }">
+        <!-- 角落鉚釘 -->
+        <div style="position:absolute;top:8px;right:8px;font-size:24px">{{ ({sitewide_discount:'🌐', spend_discount:'💸', bundle:'📦', gift:'🎁', free_shipping:'🚚'})[p.type] || '🎯' }}</div>
+        <div style="display:inline-block;padding:2px 12px;background:var(--metal-grad);color:var(--accent);border:1px solid var(--accent);border-radius:12px;font-size:11px;font-weight:bold;margin-bottom:10px;letter-spacing:1px">
+          {{ ({sitewide_discount:'全館折扣', spend_discount:'滿額折扣', bundle:'多件特價', gift:'滿額贈', free_shipping:'滿額免運'})[p.type] }}
+        </div>
+        <h3 style="color:var(--primary);font-size:22px;margin-bottom:14px;letter-spacing:2px">{{ p.name }}</h3>
+
+        <div style="font-size:14px;line-height:1.8;color:#333;margin-bottom:14px">
+          <template v-if="p.type === 'sitewide_discount'">
+            全館商品 <strong style="color:var(--danger);font-size:24px">{{ (100 - (p.value||0))/10 }}</strong> 折
+          </template>
+          <template v-else-if="p.type === 'spend_discount'">
+            單筆滿 <strong style="color:var(--primary)">NT$ {{ p.threshold }}</strong>
+            享 <strong style="color:var(--danger);font-size:20px">{{ (100 - (p.value||0))/10 }}</strong> 折
+          </template>
+          <template v-else-if="p.type === 'bundle'">
+            指定商品 <strong>{{ p.qty }}</strong> 件僅
+            <strong style="color:var(--danger);font-size:20px">NT$ {{ p.fixedPrice }}</strong>
+            <div style="font-size:12px;color:#666;margin-top:4px">適用：{{ bundleScopeText(p) }}</div>
+          </template>
+          <template v-else-if="p.type === 'gift'">
+            <div :style="{display: p.tierLayout === 'horizontal' ? 'grid' : 'block', gridTemplateColumns: p.tierLayout === 'horizontal' ? 'repeat(auto-fit,minmax(200px,1fr))' : '', gap: p.tierLayout === 'horizontal' ? '14px' : ''}">
+              <div v-for="(t, ti) in (p.tiers || [])" :key="ti"
+                   :style="p.tierLayout === 'horizontal'
+                     ? 'display:flex;flex-direction:column;text-align:center;padding:14px;border:1px solid #fbbf24;border-radius:8px;background:#fff;gap:8px;align-items:center'
+                     : 'display:flex;gap:14px;padding:12px 0;border-bottom:1px dashed #ddd;align-items:center'">
+                <img v-if="t.image" :src="t.image" style="width:160px;height:160px;object-fit:cover;border-radius:8px;border:3px solid #fbbf24;flex-shrink:0;box-shadow:0 3px 8px rgba(0,0,0,0.18)">
+                <div v-else style="width:160px;height:160px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:72px;border-radius:8px;border:3px dashed #fbbf24;flex-shrink:0">🎁</div>
+                <div style="flex:1;min-width:0">
+                  <div style="font-size:13px;color:#991b1b;font-weight:600">滿 NT$ {{ t.threshold }} 加贈</div>
+                  <div style="font-weight:bold;color:var(--danger);font-size:18px;margin:4px 0">{{ t.gift }}</div>
+                  <div v-if="t.description" style="font-size:13px;color:#555;line-height:1.6">{{ t.description }}</div>
+                </div>
+              </div>
+            </div>
+          </template>
+          <template v-else-if="p.type === 'free_shipping'">
+            單筆滿 <strong style="color:var(--primary)">NT$ {{ p.threshold }}</strong>
+            <strong style="color:#06c755;font-size:20px"> 免運費</strong> 🚚
+          </template>
+        </div>
+
+        <div v-if="p.startAt || p.endAt" style="font-size:12px;color:#666;padding-top:10px;border-top:1px dashed #ccc">
+          ⏰ 期間：{{ p.startAt ? p.startAt.replace('T',' ') : '即日起' }} ~ {{ p.endAt ? p.endAt.replace('T',' ') : '永久有效' }}
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin:30px 0">
+      <button class="btn-buy" @click="goHome" style="padding:14px 40px;font-size:16px;letter-spacing:3px">🛒 立即訂購商品</button>
+    </div>
+  </div>
+
+  <!-- ============ ABOUT US (形象官網) ============ -->
+  <div v-if="view==='about'" style="max-width:1200px;margin:0 auto;padding:0 16px">
+    <!-- ★ A：簡潔 Hero — 與首頁風格一致（金色橫條 + 公司名 + 標語 + CTA） -->
+    <div style="margin:16px 0;background:linear-gradient(135deg,#1a2a4a 0%,#0d1830 50%,#2d3e50 100%);
+                color:#fff;padding:50px 30px;border-radius:6px;text-align:center;
+                border-top:4px solid var(--accent);border-bottom:4px solid var(--accent);
+                box-shadow:0 4px 20px rgba(0,0,0,0.15)">
+      <h1 style="font-size:32px;letter-spacing:5px;margin-bottom:10px;line-height:1.4;font-weight:bold;
+                 background:linear-gradient(90deg,#fde68a,#e6d090,#c9a95c);
+                 -webkit-background-clip:text;background-clip:text;color:transparent">
+        {{ settings.about.heroTitle || '專業鐵線加工製品' }}
+      </h1>
+      <div style="display:inline-block;padding:6px 22px;
+                  border-top:1.5px solid var(--accent);border-bottom:1.5px solid var(--accent);
+                  font-size:18px;letter-spacing:4px;color:#fff;margin:8px 0 14px">
+        {{ settings.slogan || '堅固 · 精準 · 值得信賴' }}
+      </div>
+      <p style="font-size:15px;line-height:1.8;color:rgba(255,255,255,0.92);letter-spacing:2px;margin-bottom:24px">
+        {{ settings.about.heroSubtitle || '客製化加工 · 品質穩定 · 交期準確' }}
+      </p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button @click="goHome" style="padding:13px 36px;background:linear-gradient(180deg,#fde68a,#c9a95c,#7c5e1f);color:#3a2a0c;border:1px solid #5a4818;border-radius:4px;font-weight:bold;font-size:15px;letter-spacing:3px;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,0.4), 0 3px 10px rgba(0,0,0,0.3)">
+          🛒 立即訂購
+        </button>
+      </div>
+    </div>
+
+    <!-- ★ A：關於暘基 — 簡介段落 -->
+    <div style="margin:24px 0;padding:36px 30px;background:linear-gradient(180deg,#f8fafc,#fff);
+                border:1px solid var(--border-dark);border-radius:6px;
+                box-shadow:0 2px 8px rgba(0,0,0,0.05)">
+      <div style="display:grid;grid-template-columns:1fr 2fr;gap:30px;align-items:start">
+        <div>
+          <h2 style="color:var(--primary);font-size:32px;letter-spacing:4px;
+                     border-left:5px solid var(--accent);padding-left:16px;line-height:1.3">
+            關於暘基
+          </h2>
+        </div>
+        <div>
+          <p style="font-size:16px;line-height:2.0;color:var(--text);white-space:pre-wrap">{{ settings.about.description || settings.about.intro }}</p>
+          <button @click="goHome" style="margin-top:16px;padding:10px 26px;
+                  background:var(--primary);color:#fff;border:none;border-radius:3px;
+                  font-size:14px;letter-spacing:2px;cursor:pointer;
+                  box-shadow:0 2px 6px rgba(26,42,74,0.3)">
+            了解更多 →
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ★ A：產品介紹（6 卡，深藍 hero icon + 金色光暈） -->
+    <div v-if="settings.about.productCategories && settings.about.productCategories.length"
+         style="margin:24px 0;padding:40px 20px;background:linear-gradient(180deg,#fff,#f1f5f9);
+                border:1px solid var(--border-dark);border-radius:6px">
+      <h2 style="text-align:center;margin-bottom:34px;color:var(--primary);font-size:28px;letter-spacing:6px;font-weight:bold;position:relative">
+        產 品 介 紹
+        <div style="width:60px;height:3px;background:linear-gradient(90deg,#fde68a,#c9a95c,#7c5e1f);margin:10px auto 0;border-radius:2px"></div>
+      </h2>
+      <div class="prod-grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1100px;margin:0 auto">
+        <div v-for="(p, i) in settings.about.productCategories" :key="i"
+             style="background:#fff;border:1px solid var(--border);border-radius:10px;
+                    overflow:hidden;transition:transform .3s,box-shadow .3s;cursor:pointer;
+                    box-shadow:0 4px 14px rgba(0,0,0,0.08)"
+             onmouseover="this.style.transform='translateY(-6px) scale(1.015)';this.style.boxShadow='0 14px 36px rgba(201,169,92,0.32), 0 6px 14px rgba(0,0,0,0.12)'"
+             onmouseout="this.style.transform='translateY(0) scale(1)';this.style.boxShadow='0 4px 14px rgba(0,0,0,0.08)'">
+          <!-- Hero 圖區（深色金屬底 + 實照 / SVG 預設） -->
+          <div style="height:200px;background:linear-gradient(160deg,#0d1830 0%,#1a2a4a 40%,#2d3e50 100%);
+                      display:flex;align-items:center;justify-content:center;
+                      position:relative;overflow:hidden;border-bottom:2px solid var(--accent)">
+            <!-- 上方光線（spotlight 效果） -->
+            <div style="position:absolute;inset:0;background:
+                        radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.12) 0%, rgba(201,169,92,0.06) 30%, transparent 65%);
+                        pointer-events:none;z-index:2"></div>
+            <!-- 暗角（vignette） -->
+            <div style="position:absolute;inset:0;box-shadow:inset 0 0 60px rgba(0,0,0,0.5);pointer-events:none;z-index:3"></div>
+            <!-- 業主可後台上傳實照（useImage 沒設時 fallback 為「有圖才顯示」舊行為） -->
+            <img v-if="p.image && (p.useImage === true || p.useImage === undefined)" :src="p.image" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1" @error="$event.target.style.display='none'">
+            <!-- 沒設 image 時用 SVG 真實風（金屬光澤 + 立體陰影） -->
+            <svg v-else viewBox="0 0 240 160" style="width:88%;height:88%;position:relative;filter:drop-shadow(0 6px 12px rgba(0,0,0,0.5))">
+              <defs>
+                <!-- 金屬主漸層（亮金屬色） -->
+                <linearGradient :id="'metalA'+i" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#f1f5f9"/>
+                  <stop offset="50%" stop-color="#cbd5e0"/>
+                  <stop offset="100%" stop-color="#475569"/>
+                </linearGradient>
+                <!-- 金屬高光線性漸層 -->
+                <linearGradient :id="'metalB'+i" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#94a3b8"/>
+                  <stop offset="50%" stop-color="#fff"/>
+                  <stop offset="100%" stop-color="#475569"/>
+                </linearGradient>
+                <!-- 金色高光 -->
+                <radialGradient :id="'goldGlow'+i" cx="50%" cy="30%" r="60%">
+                  <stop offset="0%" stop-color="#fde68a" stop-opacity="0.6"/>
+                  <stop offset="60%" stop-color="#c9a95c" stop-opacity="0.2"/>
+                  <stop offset="100%" stop-color="transparent"/>
+                </radialGradient>
+              </defs>
+
+              <!-- ① 鐵線材料：盤狀（橢圓堆疊 + 金屬光暈 + 高光） -->
+              <g v-if="i===0" transform="translate(120,80)">
+                <!-- 底部光暈 -->
+                <ellipse cx="0" cy="35" rx="95" ry="8" fill="rgba(0,0,0,0.4)"/>
+                <!-- 盤側面（深色立體） -->
+                <ellipse cx="0" cy="2" rx="85" ry="32" fill="#334155"/>
+                <ellipse cx="0" cy="0" rx="85" ry="32" fill="#475569"/>
+                <!-- 多重鐵線環 -->
+                <ellipse cx="0" cy="-2" rx="85" ry="30" fill="none" :stroke="'url(#metalA'+i+')'" stroke-width="2.2" stroke-linecap="round"/>
+                <ellipse cx="0" cy="-2" rx="74" ry="26" fill="none" :stroke="'url(#metalA'+i+')'" stroke-width="2" stroke-linecap="round" opacity="0.95"/>
+                <ellipse cx="0" cy="-2" rx="63" ry="22" fill="none" :stroke="'url(#metalA'+i+')'" stroke-width="1.8" stroke-linecap="round" opacity="0.9"/>
+                <ellipse cx="0" cy="-2" rx="52" ry="18" fill="none" :stroke="'url(#metalA'+i+')'" stroke-width="1.8" stroke-linecap="round" opacity="0.85"/>
+                <ellipse cx="0" cy="-2" rx="41" ry="14" fill="none" :stroke="'url(#metalA'+i+')'" stroke-width="1.6" stroke-linecap="round" opacity="0.8"/>
+                <ellipse cx="0" cy="-2" rx="30" ry="10" fill="none" :stroke="'url(#metalA'+i+')'" stroke-width="1.6" stroke-linecap="round" opacity="0.75"/>
+                <ellipse cx="0" cy="-2" rx="19" ry="7" fill="none" :stroke="'url(#metalA'+i+')'" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+                <!-- 鐵線頭尾突出 -->
+                <line x1="-85" y1="-3" x2="-85" y2="-38" :stroke="'url(#metalA'+i+')'" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="85" y1="-3" x2="85" y2="-38" :stroke="'url(#metalA'+i+')'" stroke-width="2.5" stroke-linecap="round"/>
+                <!-- 高光 -->
+                <ellipse cx="-30" cy="-25" rx="40" ry="6" fill="rgba(255,255,255,0.3)"/>
+                <ellipse cx="0" cy="-2" rx="85" ry="32" fill="url(#goldGlow0)" opacity="0.5"/>
+              </g>
+
+              <!-- ② 彎折成型：4 個彎折鐵件（不同形狀，立體感） -->
+              <g v-else-if="i===1" transform="translate(20,30)">
+                <!-- ㄇ 字 -->
+                <g transform="translate(20,10)" fill="none" stroke-linecap="round">
+                  <path d="M0,0 L0,60 L40,60 L40,0" stroke="#1e293b" stroke-width="6"/>
+                  <path d="M0,0 L0,60 L40,60 L40,0" :stroke="'url(#metalA'+i+')'" stroke-width="4"/>
+                  <circle cx="0" cy="0" r="4" fill="#cbd5e0" stroke="#475569" stroke-width="0.8"/>
+                  <circle cx="40" cy="0" r="4" fill="#cbd5e0" stroke="#475569" stroke-width="0.8"/>
+                </g>
+                <!-- S 鉤 -->
+                <g transform="translate(85,8)" fill="none" stroke-linecap="round">
+                  <path d="M0,5 Q15,5 15,22 Q15,38 30,38 Q45,38 45,55 L45,65" stroke="#1e293b" stroke-width="6"/>
+                  <path d="M0,5 Q15,5 15,22 Q15,38 30,38 Q45,38 45,55 L45,65" :stroke="'url(#metalA'+i+')'" stroke-width="4"/>
+                  <circle cx="0" cy="5" r="4" fill="#cbd5e0" stroke="#475569" stroke-width="0.8"/>
+                  <circle cx="45" cy="65" r="4" fill="#cbd5e0" stroke="#475569" stroke-width="0.8"/>
+                </g>
+                <!-- 圓圈鉤 -->
+                <g transform="translate(155,30)" fill="none" stroke-linecap="round">
+                  <circle cx="0" cy="0" r="20" stroke="#1e293b" stroke-width="6"/>
+                  <circle cx="0" cy="0" r="20" :stroke="'url(#metalA'+i+')'" stroke-width="4"/>
+                  <path d="M0,-20 L0,-32" stroke="#1e293b" stroke-width="6" stroke-linecap="round"/>
+                  <path d="M0,-20 L0,-32" :stroke="'url(#metalA'+i+')'" stroke-width="4" stroke-linecap="round"/>
+                </g>
+              </g>
+
+              <!-- ③ 點焊組立：3D 金屬網格（立體 + 焊點高光） -->
+              <g v-else-if="i===2" transform="translate(40,20)">
+                <!-- 陰影 -->
+                <rect x="2" y="2" width="160" height="110" fill="rgba(0,0,0,0.3)"/>
+                <!-- 框 -->
+                <rect x="0" y="0" width="160" height="110" fill="rgba(20,30,50,0.4)" stroke="#1e293b" stroke-width="3"/>
+                <rect x="0" y="0" width="160" height="110" fill="none" :stroke="'url(#metalA'+i+')'" stroke-width="2"/>
+                <!-- 直線 -->
+                <g :stroke="'url(#metalA'+i+')'" fill="none" stroke-width="1.3">
+                  <line v-for="x in [22,44,66,88,110,132]" :key="'v'+x" :x1="x" y1="0" :x2="x" y2="110"/>
+                  <line v-for="y in [27,55,82]" :key="'h'+y" x1="0" :y1="y" x2="160" :y2="y"/>
+                </g>
+                <!-- 焊點（金色高光球） -->
+                <g v-for="p in [[22,27],[66,27],[110,27],[44,55],[88,55],[132,55],[22,82],[66,82],[110,82]]" :key="p[0]+'_'+p[1]">
+                  <circle :cx="p[0]" :cy="p[1]" r="3.5" fill="#fde68a"/>
+                  <circle :cx="p[0]-1" :cy="p[1]-1" r="1.2" fill="#fff8e1"/>
+                </g>
+              </g>
+
+              <!-- ④ 鐵線製品：不鏽鋼籃（3D 等角） -->
+              <g v-else-if="i===3" transform="translate(30,20)">
+                <!-- 陰影 -->
+                <ellipse cx="90" cy="125" rx="90" ry="6" fill="rgba(0,0,0,0.4)"/>
+                <!-- 籃身 -->
+                <path d="M0,30 L20,15 L160,15 L180,30 L180,110 L160,125 L20,125 L0,110 Z" fill="rgba(50,65,95,0.3)" stroke="#1e293b" stroke-width="2"/>
+                <!-- 上緣 -->
+                <path d="M0,30 L20,15 L160,15 L180,30 Z" fill="rgba(20,30,50,0.5)" :stroke="'url(#metalA'+i+')'" stroke-width="2"/>
+                <!-- 直立網格 -->
+                <g :stroke="'url(#metalA'+i+')'" fill="none" stroke-width="1.5" stroke-linecap="round">
+                  <line v-for="(x,j) in [25,55,90,125,155]" :key="'b'+j"
+                        :x1="x - (j-2)*1.5" y1="20" :x2="x" y2="120"/>
+                  <line x1="0" y1="50" x2="180" y2="50" stroke-width="1.2"/>
+                  <line x1="0" y1="75" x2="180" y2="75" stroke-width="1.2"/>
+                  <line x1="0" y1="100" x2="180" y2="100" stroke-width="1.2"/>
+                </g>
+                <!-- 提把 -->
+                <path d="M55,15 Q70,-2 90,-2 Q110,-2 125,15" fill="none" stroke="#1e293b" stroke-width="5" stroke-linecap="round"/>
+                <path d="M55,15 Q70,-2 90,-2 Q110,-2 125,15" fill="none" :stroke="'url(#metalA'+i+')'" stroke-width="3" stroke-linecap="round"/>
+                <!-- 高光 -->
+                <ellipse cx="40" cy="40" rx="25" ry="15" fill="rgba(255,255,255,0.15)"/>
+              </g>
+
+              <!-- ⑤ 表面處理：金屬棒 + 拋光高光 -->
+              <g v-else-if="i===4" transform="translate(20,40)">
+                <!-- 圓柱底（陰影） -->
+                <rect x="0" y="42" width="200" height="6" fill="rgba(0,0,0,0.4)"/>
+                <!-- 主圓柱 -->
+                <rect x="0" y="0" width="200" height="40" :fill="'url(#metalA'+i+')'" stroke="#1e293b" stroke-width="1"/>
+                <!-- 拋光紋（橫向高光線） -->
+                <line v-for="y in [4,9,14,19,24,29,34]" :key="'l'+y" x1="0" :y1="y" x2="200" :y2="y"
+                      stroke="rgba(255,255,255,0.18)" stroke-width="0.5"/>
+                <!-- 上方金色光暈 -->
+                <rect x="0" y="0" width="200" height="40" :fill="'url(#goldGlow'+i+')'" opacity="0.6"/>
+                <!-- 兩側端 -->
+                <ellipse cx="0" cy="20" rx="3" ry="20" fill="#475569"/>
+                <ellipse cx="200" cy="20" rx="3" ry="20" fill="#94a3b8"/>
+                <!-- 高光線 -->
+                <line x1="20" y1="6" x2="180" y2="6" stroke="#fff" stroke-width="1.5" opacity="0.6"/>
+                <line x1="20" y1="9" x2="180" y2="9" stroke="#fff" stroke-width="0.5" opacity="0.3"/>
+              </g>
+
+              <!-- ⑥ 品質保證：盾牌（立體金屬 + 金色勾） -->
+              <g v-else transform="translate(120,80)">
+                <!-- 陰影 -->
+                <ellipse cx="0" cy="65" rx="40" ry="6" fill="rgba(0,0,0,0.4)"/>
+                <!-- 盾牌底 -->
+                <path d="M-32,-58 L0,-66 L32,-58 V-10 Q32,38 0,62 Q-32,38 -32,-10 Z"
+                      :fill="'url(#metalA'+i+')'" stroke="#1e293b" stroke-width="2"/>
+                <!-- 高光 -->
+                <path d="M-26,-50 L-3,-56 V20 Q-3,40 -10,52 L-26,40 Z"
+                      fill="rgba(255,255,255,0.18)"/>
+                <!-- 金色內框 -->
+                <path d="M-26,-52 L0,-60 L26,-52 V-10 Q26,32 0,56 Q-26,32 -26,-10 Z"
+                      fill="none" stroke="#c9a95c" stroke-width="1.5" opacity="0.8"/>
+                <!-- 金色勾 -->
+                <polyline points="-13,-2 -2,12 18,-15" fill="none" stroke="#fde68a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="-13,-2 -2,12 18,-15" fill="none" stroke="#7c5e1f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+              </g>
+            </svg>
+            <!-- 4 角金色點綴 -->
+            <div style="position:absolute;top:8px;left:8px;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px rgba(201,169,92,0.6)"></div>
+            <div style="position:absolute;top:8px;right:8px;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px rgba(201,169,92,0.6)"></div>
+            <div style="position:absolute;bottom:8px;left:8px;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px rgba(201,169,92,0.6)"></div>
+            <div style="position:absolute;bottom:8px;right:8px;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px rgba(201,169,92,0.6)"></div>
+          </div>
+          <div style="padding:18px 16px 20px;text-align:center;background:linear-gradient(180deg,#fff,#fafbfc)">
+            <h3 style="color:var(--primary);font-size:16px;font-weight:bold;letter-spacing:3px;margin-bottom:8px">
+              {{ p.title }}
+            </h3>
+            <p style="color:#555;font-size:12px;line-height:1.7;letter-spacing:0.5px">{{ p.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ★ A：我們的優勢（4 卡，深藍底 + 金色 icon） -->
+    <div v-if="settings.about.whyChooseUs && settings.about.whyChooseUs.length"
+         style="margin:24px 0;padding:40px 30px;background:linear-gradient(135deg,#1a2a4a,#0d1830,#2d3e50);
+                color:#fff;border-radius:6px;
+                box-shadow:0 4px 20px rgba(0,0,0,0.2);
+                position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;
+                  background-image:
+                    repeating-linear-gradient(0deg, transparent 0, transparent 39px, rgba(255,255,255,0.03) 39px, rgba(255,255,255,0.03) 40px),
+                    repeating-linear-gradient(90deg, transparent 0, transparent 39px, rgba(255,255,255,0.03) 39px, rgba(255,255,255,0.03) 40px)"></div>
+      <h2 style="text-align:left;margin-bottom:30px;font-size:26px;letter-spacing:4px;font-weight:bold;position:relative">
+        <span style="background:linear-gradient(90deg,#fde68a,#e6d090,#c9a95c);
+                     -webkit-background-clip:text;background-clip:text;color:transparent">
+          我們的優勢
+        </span>
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;position:relative">
+        <div v-for="(c, i) in settings.about.whyChooseUs" :key="i"
+             style="text-align:center;padding:24px 16px">
+          <div style="width:74px;height:74px;margin:0 auto 14px;
+                      background:linear-gradient(135deg,#fde68a,#c9a95c,#7c5e1f);
+                      border-radius:50%;display:flex;align-items:center;justify-content:center;
+                      font-size:34px;color:#3a2a0c;
+                      box-shadow:0 4px 14px rgba(0,0,0,0.4), inset 0 2px 0 rgba(255,255,255,0.4)">
+            {{ c.icon }}
+          </div>
+          <h3 style="color:var(--accent-light);font-size:17px;margin-bottom:10px;letter-spacing:3px;font-weight:bold">
+            {{ c.title }}
+          </h3>
+          <p style="color:rgba(255,255,255,0.85);font-size:13px;line-height:1.7">{{ c.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ★ A：底部 4 個圖示（堅固耐用 STRONG / 品質保證 QUALITY / 誠信服務 SERVICE / 穩固基礎 STABILITY） -->
+    <div v-if="settings.about.bottomFeatures && settings.about.bottomFeatures.length"
+         style="margin:24px 0;padding:30px 20px;
+                background:linear-gradient(135deg,#1a2a4a,#2d3e50);
+                border-top:4px solid var(--accent);border-bottom:4px solid var(--accent);
+                border-radius:6px;color:#fff">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;max-width:1000px;margin:0 auto">
+        <div v-for="(f, i) in settings.about.bottomFeatures" :key="i"
+             style="text-align:center;padding:8px;
+                    border-right:1px dashed rgba(201,169,92,0.3);"
+             :style="{borderRight: i === settings.about.bottomFeatures.length - 1 ? 'none' : '1px dashed rgba(201,169,92,0.3)'}">
+          <div style="font-size:48px;margin-bottom:8px;
+                      background:linear-gradient(180deg,#fde68a,#c9a95c);
+                      -webkit-background-clip:text;background-clip:text;color:transparent;
+                      filter:drop-shadow(0 2px 4px rgba(201,169,92,0.4))">
+            {{ f.icon }}
+          </div>
+          <div style="font-size:18px;font-weight:bold;letter-spacing:3px;color:#fff;margin-bottom:3px">
+            {{ f.titleZh }}
+          </div>
+          <div style="font-size:11px;letter-spacing:4px;color:var(--accent-light);font-weight:500">
+            {{ f.titleEn }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 主要客群 -->
+    <div v-if="settings.about.customers && settings.about.customers.length" style="margin:24px 0;padding:24px 20px;background:#fff;border:1px solid var(--border-dark);border-top:3px solid var(--primary);border-radius:2px;text-align:center">
+      <h2 style="margin-bottom:16px;color:var(--primary);font-size:20px">▎ 服務對象 ▎</h2>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+        <span v-for="(c, i) in settings.about.customers" :key="i"
+              style="padding:6px 14px;background:var(--metal-grad);color:var(--accent);border:1px solid var(--accent);border-radius:14px;font-size:13px;letter-spacing:1px">
+          {{ c }}
+        </span>
+      </div>
+    </div>
+
+    <!-- ★ A：聯絡我們（含業務經理 + 4 大資訊欄） -->
+    <div style="margin:24px 0;padding:36px 30px;
+                background:linear-gradient(135deg,#1a2a4a,#0d1830);
+                border-radius:6px;color:#fff;
+                box-shadow:0 4px 20px rgba(0,0,0,0.2)">
+      <!-- 標題 -->
+      <h2 style="text-align:center;margin-bottom:24px;font-size:24px;letter-spacing:4px;font-weight:bold">
+        <span style="background:linear-gradient(90deg,#fde68a,#e6d090,#c9a95c);
+                     -webkit-background-clip:text;background-clip:text;color:transparent">
+          ▎ 聯 絡 我 們 ▎
+        </span>
+      </h2>
+
+      <!-- 4 欄聯絡資訊 -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">
+        <div v-if="settings.contactPhone" style="display:flex;align-items:center;gap:12px;padding:14px;background:rgba(255,255,255,0.05);border-left:3px solid var(--accent);border-radius:4px">
+          <div style="font-size:24px">📞</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:11px;letter-spacing:2px;color:rgba(230,208,144,0.85);margin-bottom:2px">電話</div>
+            <a :href="'tel:' + settings.contactPhone" style="font-size:16px;color:#fff;font-weight:bold;text-decoration:none">{{ settings.contactPhone }}</a>
+          </div>
+        </div>
+        <div v-if="settings.contactEmail" style="display:flex;align-items:center;gap:12px;padding:14px;background:rgba(255,255,255,0.05);border-left:3px solid var(--accent);border-radius:4px">
+          <div style="font-size:24px">✉</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:11px;letter-spacing:2px;color:rgba(230,208,144,0.85);margin-bottom:2px">Email</div>
+            <a :href="'mailto:' + settings.contactEmail" style="font-size:13px;color:#fff;word-break:break-all;text-decoration:none">{{ settings.contactEmail }}</a>
+          </div>
+        </div>
+        <div v-if="settings.contactAddress" style="display:flex;align-items:center;gap:12px;padding:14px;background:rgba(255,255,255,0.05);border-left:3px solid var(--accent);border-radius:4px">
+          <div style="font-size:24px">📍</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:11px;letter-spacing:2px;color:rgba(230,208,144,0.85);margin-bottom:2px">公司地址</div>
+            <div style="font-size:13px;color:#fff;line-height:1.5">{{ settings.contactAddress }}</div>
+          </div>
+        </div>
+        <div v-if="settings.taxId" style="display:flex;align-items:center;gap:12px;padding:14px;background:rgba(255,255,255,0.05);border-left:3px solid var(--accent);border-radius:4px">
+          <div style="font-size:24px">🏢</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:11px;letter-spacing:2px;color:rgba(230,208,144,0.85);margin-bottom:2px">統一編號</div>
+            <div style="font-size:15px;font-family:monospace;color:#fff;font-weight:bold">{{ settings.taxId }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:24px;padding-top:20px;border-top:1px dashed rgba(201,169,92,0.3)">
+        <button @click="goHome" style="padding:14px 38px;background:linear-gradient(180deg,#fde68a,#c9a95c,#7c5e1f);color:#3a2a0c;border:1px solid #5a4818;border-radius:4px;font-weight:bold;font-size:15px;letter-spacing:3px;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,0.3)">
+          🛒 立即訂購商品
+        </button>
+      </div>
+    </div>
+
+    <!-- 版權 -->
+    <div style="text-align:center;padding:18px;color:#888;font-size:12px;letter-spacing:2px">
+      © 2026 {{ settings.shopName || '暘基五金有限公司' }} 版權所有
+    </div>
+  </div>
+
+  <!-- ============ MY ORDERS ============ -->
+  <div v-if="view==='orders'" class="layout" style="grid-template-columns:1fr">
+    <div>
+      <div class="toolbar">
+        <h2>我的訂單</h2>
+        <button class="btn btn-default" @click="goHome">回商城</button>
+      </div>
+      <div v-if="!user" class="empty">
+        <div class="icon">🔒</div>
+        <p>請先登入查看訂單</p>
+        <button class="btn btn-primary" style="margin-top:14px" @click="openAuth('login')">立即登入</button>
+      </div>
+      <div v-else-if="myOrders.length===0" class="empty">
+        <div class="icon">📋</div>
+        <p>還沒有訂單</p>
+      </div>
+      <div v-else>
+        <div class="order-card" v-for="o in myOrders" :key="o.id">
+          <div class="order-head">
+            <span>訂單編號：{{ o.orderNo }} · {{ formatDate(o.createdAt) }}</span>
+            <span class="status" :class="'status-'+o.status">{{ statusText(o.status) }}</span>
+          </div>
+          <div class="order-body">
+            <div class="order-row" v-for="item in o.items" :key="item.productId">
+              <img :src="item.image" v-if="item.image" @error="$event.target.style.visibility='hidden'">
+              <div style="flex:1;min-width:0">
+                <div style="font-size:14px;line-height:1.5">{{ item.name }}</div>
+                <div style="font-size:12px;color:#888">數量 {{ item.qty }} × NT$ {{ item.price }}</div>
+              </div>
+              <div style="color:var(--primary);font-weight:bold">NT$ {{ item.subtotal }}</div>
+            </div>
+          </div>
+          <div class="order-foot">
+            共 {{ o.items.length }} 項商品 · 合計 <span class="total">NT$ {{ o.total }}</span>
+          </div>
+          <!-- 待付款的銀行轉帳訂單顯示帳戶資訊 -->
+          <div v-if="o.status==='pending' && o.paymentMethod==='transfer' && settings.bankAccount"
+               style="background:#fff8e1;padding:10px 14px;border-top:1px dashed var(--border);font-size:13px">
+            💳 待轉帳：<strong>{{ settings.bankName }}</strong> · 戶名 {{ settings.bankAccountName }} ·
+            帳號 <strong style="color:var(--primary)">{{ settings.bankAccount }}</strong>
+            <button @click="copyText(settings.bankAccount)" style="margin-left:6px;padding:1px 8px;font-size:11px;border:1px solid var(--accent);border-radius:3px;cursor:pointer;background:#fff">複製</button>
+          </div>
+          <!-- LINE 確認訂單 -->
+          <div v-if="o.status==='pending' && o.paymentMethod==='line' && (settings.lineAddFriendUrl||settings.lineOfficialId)"
+               style="background:#e8f5e9;padding:10px 14px;border-top:1px dashed var(--border);font-size:13px">
+            💬 請加 LINE 確認：
+            <a v-if="settings.lineAddFriendUrl" :href="settings.lineAddFriendUrl" target="_blank" style="color:#06c755;font-weight:bold">點此加好友</a>
+            <span v-else>{{ settings.lineOfficialId }}</span>
+            · 訂單編號 {{ o.orderNo }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PRODUCT DETAIL MODAL ============ -->
+  <div class="modal-mask" v-if="selectedProduct" @click.self="selectedProduct=null">
+    <div class="modal" style="max-width:900px">
+      <div class="modal-header">
+        <h3>商品詳情</h3>
+        <span class="modal-close" @click="selectedProduct=null">✕</span>
+      </div>
+      <div class="modal-body">
+        <div class="pd-grid">
+          <div>
+            <div class="pd-img-main">
+              <img v-if="pdMainImage" :src="pdMainImage">
+              <div v-else style="font-size:80px;color:#ccc">📦</div>
+            </div>
+            <div class="pd-thumbs" v-if="selectedProduct.images && selectedProduct.images.length>1">
+              <img v-for="(img,i) in selectedProduct.images" :key="i" :src="img"
+                   :class="{active:pdMainImage===img}" @click="pdMainImage=img">
+            </div>
+          </div>
+          <div>
+            <div class="pd-name">{{ selectedProduct.name }}</div>
+            <div class="pd-price-row">
+              <div class="pd-price">
+                <small>NT$</small> {{ priceFor(selectedProduct) }}
+                <small v-if="selectedProduct.unit">/ {{ selectedProduct.unit }}</small>
+              </div>
+              <div class="pd-stock">
+                庫存：{{ selectedProduct.stock }}
+                {{ selectedProduct.minOrder>1 ? '· 最低起訂 '+selectedProduct.minOrder+selectedProduct.unit : '' }}
+              </div>
+            </div>
+            <div v-if="visibleSpecs.length">
+              <div class="pd-spec-row" v-for="s in visibleSpecs" :key="s.name">
+                <label>{{ s.name }}</label>
+                <span>{{ s.value }}</span>
+              </div>
+            </div>
+            <div class="pd-spec-row">
+              <label>分類</label>
+              <span>{{ categoryName(selectedProduct.categoryId) }}</span>
+            </div>
+            <div class="pd-qty">
+              <button @click="pdQty=Math.max(selectedProduct.minOrder||1, pdQty-1)">−</button>
+              <input type="number" v-model.number="pdQty" :min="selectedProduct.minOrder||1" :max="selectedProduct.stock">
+              <button @click="pdQty=Math.min(selectedProduct.stock, pdQty+1)">＋</button>
+              <span style="margin-left:10px;color:#888;font-size:13px">{{ selectedProduct.unit }}</span>
+            </div>
+            <div class="pd-actions">
+              <button class="btn-cart" @click="addCartFromDetail" :disabled="selectedProduct.stock<=0">加入購物車</button>
+              <button class="btn-buy" @click="buyNow" :disabled="selectedProduct.stock<=0">立即購買</button>
+            </div>
+          </div>
+        </div>
+        <div class="pd-desc" v-if="selectedProduct.description">
+          <h4 style="margin-bottom:8px;color:#333">商品說明</h4>
+          {{ selectedProduct.description }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ CART DRAWER ============ -->
+  <div class="drawer-mask" v-if="cartOpen" @click="cartOpen=false"></div>
+  <div class="drawer" v-if="cartOpen">
+    <div class="drawer-header">
+      <h3>🛒 購物車（{{ cartCount }}）</h3>
+      <span class="modal-close" @click="cartOpen=false">✕</span>
+    </div>
+    <div class="drawer-body">
+      <div v-if="cart.length===0" class="empty" style="padding:40px 20px">
+        <div class="icon">🛒</div>
+        <p>購物車還是空的</p>
+      </div>
+      <div v-else>
+        <div class="cart-item" v-for="(item,i) in cart" :key="item.productId">
+          <img v-if="item.image" :src="item.image" @error="$event.target.style.visibility='hidden'">
+          <div v-else style="width:60px;height:60px;background:#f5f5f5;border-radius:4px;display:flex;align-items:center;justify-content:center">📦</div>
+          <div class="cart-item-info">
+            <div class="cart-item-name">{{ item.name }}</div>
+            <div class="cart-item-price">NT$ {{ item.price }}</div>
+            <div class="cart-item-actions">
+              <div class="cart-qty">
+                <button @click="updateCartQty(i, item.qty-1)">−</button>
+                <input type="number" :value="item.qty" @input="updateCartQty(i, parseInt($event.target.value)||1)">
+                <button @click="updateCartQty(i, item.qty+1)">＋</button>
+              </div>
+              <span class="cart-remove" @click="removeFromCart(i)">移除</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="drawer-footer" v-if="cart.length>0">
+      <!-- 🎁 進度提示（再差多少達標） -->
+      <div v-if="cartProgressHints.length > 0" style="background:linear-gradient(180deg,#fff8e1,#fff3cd);border:1px solid var(--accent);border-radius:4px;padding:10px;margin-bottom:10px">
+        <div v-for="(h, hi) in cartProgressHints" :key="hi" :style="{marginBottom: hi < cartProgressHints.length - 1 ? '6px' : '0'}">
+          <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+            <span>{{ h.icon }} {{ h.label }}</span>
+            <span style="color:#888">{{ Math.round(h.progress) }}%</span>
+          </div>
+          <div style="background:rgba(0,0,0,0.08);height:4px;border-radius:2px;overflow:hidden">
+            <div :style="{width: h.progress + '%', height: '100%', background: h.color, transition: 'width .3s'}"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 已套用折扣 -->
+      <div v-if="cartPromoResult.appliedPromos.length > 0" style="background:#f0fdf4;border:1px solid var(--success);border-radius:4px;padding:8px 10px;margin-bottom:8px;font-size:12px">
+        <div v-for="(ap, ai) in cartPromoResult.appliedPromos" :key="ai" style="display:flex;justify-content:space-between;color:#15803d">
+          <span>✓ {{ ap.name }}（{{ ap.label }}）</span>
+          <span>− NT$ {{ ap.off }}</span>
+        </div>
+      </div>
+
+      <!-- 贈品提示 -->
+      <div v-if="cartPromoResult.giftItems.length > 0" style="background:#fef2f2;border:1px solid #dc2626;border-radius:4px;padding:10px;margin-bottom:8px;font-size:12px">
+        <div style="color:#991b1b;font-weight:bold;margin-bottom:6px">🎁 您獲得贈品！</div>
+        <div v-for="(g, gi) in cartPromoResult.giftItems" :key="gi" style="display:flex;gap:10px;align-items:center;padding:8px 0;border-top:1px dashed #fca5a5">
+          <img v-if="g.image" :src="g.image" style="width:80px;height:80px;object-fit:cover;border-radius:5px;border:2px solid #fbbf24;flex-shrink:0;box-shadow:0 1px 3px rgba(0,0,0,0.15)">
+          <div v-else style="width:80px;height:80px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:36px;border-radius:5px;border:2px dashed #fbbf24;flex-shrink:0">🎁</div>
+          <div style="flex:1;min-width:0">
+            <div style="color:#dc2626;font-weight:bold;font-size:14px">{{ g.gift }}</div>
+            <div v-if="g.description" style="color:#555;font-size:12px;line-height:1.5;margin-top:2px">{{ g.description }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 小計分行 -->
+      <div v-if="cartPromoResult.promoDiscount > 0 || shippingFee > 0" style="font-size:12px;color:#666;margin-bottom:6px">
+        <div style="display:flex;justify-content:space-between"><span>商品小計</span><span>NT$ {{ cartSubtotal }}</span></div>
+        <div v-if="cartPromoResult.promoDiscount > 0" style="display:flex;justify-content:space-between;color:var(--success)"><span>促銷折扣</span><span>− NT$ {{ cartPromoResult.promoDiscount }}</span></div>
+        <div style="display:flex;justify-content:space-between"><span>運費</span><span :style="{color: shippingFee === 0 ? 'var(--success)' : 'inherit'}">{{ shippingFee === 0 ? '免運' : 'NT$ '+shippingFee }}</span></div>
+      </div>
+
+      <div class="cart-total">
+        <span>應付</span>
+        <span class="price">NT$ {{ cartTotal + shippingFee }}</span>
+      </div>
+      <button class="checkout-btn" @click="goCheckout" :disabled="cart.length===0">前往結帳</button>
+    </div>
+  </div>
+
+  <!-- ============ CHECKOUT MODAL ============ -->
+  <div class="modal-mask" v-if="checkoutOpen" @click.self="checkoutOpen=false">
+    <div class="modal" style="max-width:640px">
+      <div class="modal-header">
+        <h3>確認訂單</h3>
+        <span class="modal-close" @click="checkoutOpen=false">✕</span>
+      </div>
+      <div class="modal-body">
+        <h4 style="margin-bottom:10px">商品清單</h4>
+        <div style="background:#fafafa;border-radius:6px;padding:10px;margin-bottom:16px">
+          <div v-for="item in cart" :key="item.productId" style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #eee;font-size:13px">
+            <span>{{ item.name }} × {{ item.qty }}</span>
+            <span style="color:var(--primary)">NT$ {{ item.qty * item.price }}</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding-top:10px;font-weight:bold">
+            <span>商品小計</span>
+            <span style="color:var(--primary)">NT$ {{ cartTotal }}</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;color:#666">
+            <span>運費</span>
+            <span>{{ shippingFee>0 ? 'NT$ '+shippingFee : '免運' }}</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding-top:6px;font-size:18px;font-weight:bold">
+            <span>應付金額</span>
+            <span style="color:var(--primary)">NT$ {{ cartTotal + shippingFee }}</span>
+          </div>
+        </div>
+
+        <h4 style="margin-bottom:10px">收件資訊</h4>
+        <div class="form-grid">
+          <div class="form-row">
+            <label>收件人姓名 <span class="req">*</span></label>
+            <input v-model="checkout.name">
+          </div>
+          <div class="form-row">
+            <label>聯絡電話 <span class="req">*</span></label>
+            <input v-model="checkout.phone">
+          </div>
+        </div>
+        <div class="form-row">
+          <label>送貨地址 <span class="req">*</span></label>
+          <input v-model="checkout.address" placeholder="例：台北市中山區XX路XX號">
+        </div>
+        <div class="form-row">
+          <label>付款方式</label>
+          <select v-model="checkout.paymentMethod">
+            <option value="cod">貨到付款</option>
+            <option value="transfer">銀行轉帳</option>
+            <option value="line" v-if="settings.lineOfficialId || settings.lineAddFriendUrl">LINE 聯絡確認</option>
+          </select>
+        </div>
+
+        <!-- 💳 選銀行轉帳 → 顯示帳戶資訊 -->
+        <div v-if="checkout.paymentMethod==='transfer' && settings.bankAccount"
+             style="background:linear-gradient(180deg,#fff8e1,#fff3cd);border:1px solid var(--accent);border-radius:4px;padding:14px;margin-bottom:14px">
+          <h4 style="color:var(--primary);margin-bottom:8px">💳 銀行轉帳資訊</h4>
+          <table style="width:100%;font-size:14px;line-height:1.8">
+            <tr><td style="color:var(--text-light);width:80px">銀行</td><td><strong>{{ settings.bankName }}<span v-if="settings.bankCode" style="color:var(--text-light);margin-left:6px">({{ settings.bankCode }})</span></strong></td></tr>
+            <tr><td style="color:var(--text-light)">戶名</td><td><strong>{{ settings.bankAccountName }}</strong></td></tr>
+            <tr><td style="color:var(--text-light)">帳號</td><td><strong style="color:var(--primary);font-size:16px;letter-spacing:2px">{{ settings.bankAccount }}</strong>
+              <button @click="copyText(settings.bankAccount)" style="margin-left:8px;padding:2px 10px;font-size:12px;border:1px solid var(--accent);border-radius:3px;cursor:pointer;background:#fff">📋 複製</button>
+            </td></tr>
+          </table>
+          <div style="font-size:12px;color:var(--text-light);margin-top:8px;padding-top:8px;border-top:1px dashed var(--border)">
+            ※ 下單後請於 3 日內匯款，並把訂單編號回傳給我們確認。
+          </div>
+        </div>
+
+        <!-- LINE 聯絡 -->
+        <div v-if="checkout.paymentMethod==='line' && (settings.lineOfficialId || settings.lineAddFriendUrl)"
+             style="background:linear-gradient(180deg,#e8f5e9,#c8e6c9);border:1px solid #4caf50;border-radius:4px;padding:14px;margin-bottom:14px">
+          <h4 style="color:#2e7d32;margin-bottom:8px">💬 LINE 聯絡下單</h4>
+          <p style="font-size:13px;line-height:1.8">
+            下單後請加我們的 LINE，並提供訂單編號方便確認與安排出貨：
+          </p>
+          <div v-if="settings.lineAddFriendUrl" style="margin-top:8px">
+            <a :href="settings.lineAddFriendUrl" target="_blank" style="display:inline-block;padding:8px 18px;background:#06c755;color:#fff;text-decoration:none;border-radius:4px;font-weight:bold">
+              📲 加 LINE 好友
+            </a>
+            <span v-if="settings.lineOfficialId" style="margin-left:10px;color:#555;font-size:13px">
+              或搜尋 <strong>{{ settings.lineOfficialId }}</strong>
+            </span>
+          </div>
+          <div v-else-if="settings.lineOfficialId">
+            搜尋 LINE ID：<strong style="font-size:16px">{{ settings.lineOfficialId }}</strong>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label>備註</label>
+          <textarea v-model="checkout.note" placeholder="請填寫特殊需求或留言"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" @click="checkoutOpen=false">取消</button>
+        <button class="btn btn-primary" @click="submitOrder" :disabled="submitting">
+          {{ submitting ? '處理中...' : '確認下單' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MEMBER PROFILE MODAL ============ -->
+  <div class="modal-mask" v-if="profileOpen" @click.self="profileOpen=false">
+    <div class="modal" style="max-width:500px">
+      <div class="modal-header">
+        <h3>👤 會員中心</h3>
+        <span class="modal-close" @click="profileOpen=false">✕</span>
+      </div>
+      <div class="modal-body">
+        <div :style="{background: userLevel ? `linear-gradient(135deg, ${userLevel.color}cc, ${userLevel.color}88)` : 'linear-gradient(180deg,#fff8e1,#fff3cd)', padding:'18px', borderRadius:'6px', marginBottom:'14px', textAlign:'center', color: userLevel ? '#fff' : 'inherit'}">
+          <img v-if="user && user.linePictureUrl" :src="user.linePictureUrl" style="width:64px;height:64px;border-radius:50%;border:3px solid #fff;margin-bottom:8px">
+          <h4 style="margin-bottom:6px;font-size:18px">{{ user && (user.name || user.email) }}</h4>
+          <div v-if="userLevel" style="font-size:20px;letter-spacing:2px">{{ userLevel.icon }} {{ userLevel.name }}</div>
+          <div v-if="userLevel && userLevel.discount < 1" style="margin-top:4px;font-size:13px">
+            享 {{ Math.round(userLevel.discount * 100) }}% 折扣
+          </div>
+          <div style="font-size:12px;margin-top:8px;opacity:.9">
+            累積消費 NT$ {{ myTotalSpent.toLocaleString() }}
+          </div>
+          <!-- 下一級進度條 -->
+          <div v-if="nextLevel" style="margin-top:10px;background:rgba(255,255,255,0.2);border-radius:10px;height:6px;overflow:hidden">
+            <div :style="{width: Math.min(100, myTotalSpent / nextLevel.threshold * 100) + '%', height:'100%', background:'#fff', transition:'width .3s'}"></div>
+          </div>
+          <div v-if="nextLevel" style="font-size:11px;margin-top:4px;opacity:.85">
+            再消費 NT$ {{ (nextLevel.threshold - myTotalSpent).toLocaleString() }} 升級為 {{ nextLevel.icon }} {{ nextLevel.name }}（{{ Math.round(nextLevel.discount*100) }}% 折扣）
+          </div>
+        </div>
+        <div class="form-row">
+          <label>姓名</label>
+          <input v-model="profileEdit.name">
+        </div>
+        <div class="form-row">
+          <label>電話</label>
+          <input v-model="profileEdit.phone" placeholder="0912-345-678">
+        </div>
+        <div class="form-row">
+          <label>常用收件地址</label>
+          <input v-model="profileEdit.address" placeholder="下次下單會自動帶入">
+        </div>
+        <div class="form-row" v-if="user && user.email">
+          <label>Email（不可修改）</label>
+          <input :value="user.email" disabled style="background:#f5f5f5">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" @click="profileOpen=false">取消</button>
+        <button class="btn btn-primary" @click="saveProfile">儲存修改</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ AUTH MODAL ============ -->
+  <div class="modal-mask" v-if="authOpen" @click.self="authOpen=false">
+    <div class="modal" style="max-width:400px">
+      <div class="modal-header">
+        <h3>{{ authMode==='login' ? '會員登入' : '會員註冊' }}</h3>
+        <span class="modal-close" @click="authOpen=false">✕</span>
+      </div>
+      <div class="modal-body">
+        <div class="auth-tabs">
+          <button :class="{active:authMode==='login'}" @click="authMode='login'">登入</button>
+          <button :class="{active:authMode==='register'}" @click="authMode='register'">註冊</button>
+        </div>
+        <div v-if="authMode==='register'" class="form-row">
+          <label>姓名</label>
+          <input v-model="auth.name">
+        </div>
+        <div v-if="authMode==='register'" class="form-row">
+          <label>電話</label>
+          <input v-model="auth.phone">
+        </div>
+        <div class="form-row">
+          <label>Email</label>
+          <input v-model="auth.email" type="email" placeholder="your@email.com">
+        </div>
+        <div class="form-row">
+          <label>密碼</label>
+          <input v-model="auth.password" type="password" placeholder="至少 6 位">
+        </div>
+        <button class="btn btn-primary" style="width:100%" @click="doAuth">
+          {{ authMode==='login' ? '登入' : '註冊' }}
+        </button>
+        <!-- ★ 忘記密碼連結（只登入分頁顯示） -->
+        <div v-if="authMode==='login'" style="text-align:center;margin-top:12px;font-size:13px">
+          <a @click="authOpen=false; forgotOpen()" style="color:var(--accent);cursor:pointer;text-decoration:underline">
+            🔑 忘記密碼？
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ★ 忘記密碼 Modal -->
+  <div class="modal-mask" v-if="forgotOpenFlag" @click.self="forgotOpenFlag=false">
+    <div class="modal" style="max-width:420px">
+      <div class="modal-header">
+        <h3>🔑 重設密碼</h3>
+        <span class="modal-close" @click="forgotOpenFlag=false">✕</span>
+      </div>
+      <div class="modal-body">
+        <!-- Step 1：驗證身份 -->
+        <div v-if="forgotForm.step === 1">
+          <div style="background:#f0f9ff;border:1px solid var(--info);padding:10px 14px;border-radius:4px;margin-bottom:12px;font-size:13px;line-height:1.7;color:#075985">
+            為確認是您本人，請填寫：<br>
+            ① 註冊時的 <strong>Email</strong><br>
+            ② 註冊時的 <strong>電話號碼</strong><br>
+            兩者都正確才可重設密碼。
+          </div>
+          <div class="form-row">
+            <label>📧 註冊 Email</label>
+            <input v-model="forgotForm.email" type="email" placeholder="your@email.com">
+          </div>
+          <div class="form-row">
+            <label>📱 註冊電話</label>
+            <input v-model="forgotForm.phone" placeholder="例：0912345678">
+          </div>
+          <button class="btn btn-primary" style="width:100%" @click="forgotVerify">
+            ✅ 驗證身份
+          </button>
+        </div>
+
+        <!-- Step 2：設新密碼 -->
+        <div v-else-if="forgotForm.step === 2">
+          <div style="background:#dcfce7;border:1px solid var(--success);padding:10px 14px;border-radius:4px;margin-bottom:12px;font-size:13px;color:#166534">
+            ✓ 身份驗證通過<br>
+            請設定新密碼（至少 6 字）
+          </div>
+          <div class="form-row">
+            <label>🔒 新密碼</label>
+            <input v-model="forgotForm.newPassword" type="password" placeholder="至少 6 位">
+          </div>
+          <button class="btn btn-success" style="width:100%" @click="forgotReset">
+            💾 確認重設
+          </button>
+        </div>
+
+        <div style="margin-top:16px;text-align:center;font-size:12px;color:#666">
+          ⚠ 如忘記註冊電話，請改用 LINE 聯絡客服協助
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ LINE 浮動客服按鈕（右下角） ============ -->
+  <a v-if="settings.lineAddFriendUrl || settings.lineOfficialId"
+     :href="settings.lineAddFriendUrl || ('https://line.me/R/ti/p/' + encodeURIComponent(settings.lineOfficialId))"
+     target="_blank"
+     class="line-float-btn"
+     title="加 LINE 詢問">
+    <span style="font-size:24px">💬</span>
+    <span style="font-size:11px;line-height:1;letter-spacing:1px;margin-top:2px">LINE</span>
+  </a>
+
+  <!-- ============ TOAST ============ -->
+  <div class="toast" :class="toast.type" v-if="toast.show">{{ toast.msg }}</div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="footer-wrap">
+      <div class="footer-col">
+        <h4>⚙ 關於暘基</h4>
+        <ul>
+          <li><strong>{{ settings.shopName || '暘基五金有限公司' }}</strong></li>
+          <li v-if="settings.shopNameEn" style="font-size:11px;letter-spacing:1px">{{ settings.shopNameEn }}</li>
+          <li v-if="settings.taxId">統編：{{ settings.taxId }}</li>
+          <li v-if="settings.contactAddress">📍 {{ settings.contactAddress }}</li>
+          <li v-if="settings.contactPhone">📞 {{ settings.contactPhone }}</li>
+          <li v-if="settings.contactEmail">✉ {{ settings.contactEmail }}</li>
+          <li v-if="settings.contactLine">💬 LINE: {{ settings.contactLine }}</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>🚚 購物說明</h4>
+        <ul>
+          <li>運費：滿 {{ settings.freeShippingThreshold || 1000 }} 免運</li>
+          <li>配送：3-5 個工作天</li>
+          <li>付款：貨到付款 / 銀行轉帳 / LINE Pay</li>
+          <li>批發大量訂購可洽詢</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>👤 會員服務</h4>
+        <ul>
+          <li><a @click="openAuth('login')" v-if="!user">會員登入</a><a @click="view='orders'" v-else>我的訂單</a></li>
+          <li><a @click="cartOpen=true">購物車</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      © 2026 {{ settings.shopName || '暘基五金有限公司' }}　|　{{ settings.slogan || '專業五金批發 · 品質保證' }}
+    </div>
+  </footer>
+</div>
+
+<!-- ============ FIREBASE SDKs ============ -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<!-- ============ LINE LIFF SDK ============ -->
+<script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<!-- ============ VUE 3 ============ -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+<script>
+/* ============================================================
+ * Firebase 設定 — yangji-shop 專案 (暘基商城)
+ * ============================================================ */
+const firebaseConfig = {
+  apiKey: "AIzaSyALtH7eE_n-tjiAd_nkHLms9_h9DxJ_Mms",
+  authDomain: "yangji-shop.firebaseapp.com",
+  projectId: "yangji-shop",
+  storageBucket: "yangji-shop.firebasestorage.app",
+  messagingSenderId: "302420682363",
+  appId: "1:302420682363:web:5f654474975c98f27b64de",
+  measurementId: "G-XSVPPXJ3PS"
+};
+
+/* ============================================================
+ * 商品 + 分類資料（已從 taohuo999.com 免洗紙杯分類匯入 20 件）
+ * 您可以進入 admin.html 編輯/新增/刪除這些商品
+ * ============================================================ */
+const SAMPLE_CATEGORIES = [
+  {"id": "cat-6434", "name": "01 日用百貨", "parentId": "", "sortOrder": 0},
+  {"id": "cat-6477", "name": "套裝掃把", "parentId": "cat-6434", "sortOrder": 0},
+  {"id": "cat-10605", "name": "單一掃把/畚鬥", "parentId": "cat-6434", "sortOrder": 1},
+  {"id": "cat-6658", "name": "退回衣叉", "parentId": "cat-6434", "sortOrder": 2},
+  {"id": "cat-6644", "name": "線拖曳", "parentId": "cat-6434", "sortOrder": 3},
+  {"id": "cat-6659", "name": "平板拖把", "parentId": "cat-6434", "sortOrder": 4},
+  {"id": "cat-6657", "name": "海綿拖把", "parentId": "cat-6434", "sortOrder": 5},
+  {"id": "cat-6478", "name": "衣架系列", "parentId": "cat-6434", "sortOrder": 6},
+  {"id": "cat-6748", "name": "塑膠衣架", "parentId": "cat-6434", "sortOrder": 7},
+  {"id": "cat-6673", "name": "玻璃刷/地刷", "parentId": "cat-6434", "sortOrder": 8},
+  {"id": "cat-6653", "name": "塑膠襪夾", "parentId": "cat-6434", "sortOrder": 9},
+  {"id": "cat-10657", "name": "不銹鋼襪夾", "parentId": "cat-6434", "sortOrder": 10},
+  {"id": "cat-6661", "name": "手機支架系列", "parentId": "cat-6434", "sortOrder": 11},
+  {"id": "cat-6648", "name": "燈籠掛件", "parentId": "cat-6434", "sortOrder": 12},
+  {"id": "cat-6649", "name": "中國結掛件", "parentId": "cat-6434", "sortOrder": 13},
+  {"id": "cat-52838", "name": "禮花筒", "parentId": "cat-6434", "sortOrder": 14},
+  {"id": "cat-6650", "name": "清潔球/鍋刷", "parentId": "cat-6434", "sortOrder": 15},
+  {"id": "cat-6645", "name": "洗碗布/蒸籠布", "parentId": "cat-6434", "sortOrder": 16},
+  {"id": "cat-6651", "name": "清潔抹布", "parentId": "cat-6434", "sortOrder": 17},
+  {"id": "cat-6647", "name": "保鮮膜/袋", "parentId": "cat-6434", "sortOrder": 18},
+  {"id": "cat-6656", "name": "保鮮組合/錫紙", "parentId": "cat-6434", "sortOrder": 19},
+  {"id": "cat-26565", "name": "食品保鮮罩", "parentId": "cat-6434", "sortOrder": 20},
+  {"id": "cat-6669", "name": "免洗紙杯", "parentId": "cat-6434", "sortOrder": 21},
+  {"id": "cat-6654", "name": "免洗餐具", "parentId": "cat-6434", "sortOrder": 22},
+  {"id": "cat-6643", "name": "菜罩系列", "parentId": "cat-6434", "sortOrder": 23},
+  {"id": "cat-6646", "name": "垃圾袋", "parentId": "cat-6434", "sortOrder": 24},
+  {"id": "cat-10820", "name": "單卷垃圾袋", "parentId": "cat-6434", "sortOrder": 25},
+  {"id": "cat-6668", "name": "開店手提袋", "parentId": "cat-6434", "sortOrder": 26},
+  {"id": "cat-6652", "name": "洗臉巾系列", "parentId": "cat-6434", "sortOrder": 27},
+  {"id": "cat-79148", "name": "壓縮毛巾", "parentId": "cat-6434", "sortOrder": 28},
+  {"id": "cat-6642", "name": "濕紙巾系列", "parentId": "cat-6434", "sortOrder": 29},
+  {"id": "cat-50033", "name": "濕廚房巾", "parentId": "cat-6434", "sortOrder": 30},
+  {"id": "cat-63017", "name": "節點", "parentId": "", "sortOrder": 100},
+  {"id": "cat-89956", "name": "外貿新品", "parentId": "", "sortOrder": 101},
+  {"id": "cat-6433", "name": "02 塑膠製品", "parentId": "", "sortOrder": 102},
+  {"id": "cat-6444", "name": "03 家居用品", "parentId": "", "sortOrder": 103},
+  {"id": "cat-6440", "name": "04 廚房用品", "parentId": "", "sortOrder": 104},
+  {"id": "cat-6437", "name": "05不鏽鋼類", "parentId": "", "sortOrder": 105},
+  {"id": "cat-72081", "name": "12個品牌成套系列", "parentId": "", "sortOrder": 106},
+  {"id": "cat-6436", "name": "06 精美水杯", "parentId": "", "sortOrder": 107},
+  {"id": "cat-6435", "name": "07 玻璃系列", "parentId": "", "sortOrder": 108},
+  {"id": "cat-6441", "name": "08日化系列", "parentId": "", "sortOrder": 109},
+  {"id": "cat-6446", "name": "09 電器系列", "parentId": "", "sortOrder": 110},
+  {"id": "cat-64334", "name": "10 數位產品", "parentId": "", "sortOrder": 111},
+  {"id": "cat-6443", "name": "11 文體用品", "parentId": "", "sortOrder": 112},
+  {"id": "cat-6439", "name": "13 針織/包類", "parentId": "", "sortOrder": 113},
+  {"id": "cat-6438", "name": "14 五金系列", "parentId": "", "sortOrder": 114},
+  {"id": "cat-6442", "name": "15 兒童玩具", "parentId": "", "sortOrder": 115},
+  {"id": "cat-6447", "name": "16 夏季用品", "parentId": "", "sortOrder": 116},
+  {"id": "cat-11719", "name": "17 飾品系列", "parentId": "", "sortOrder": 117},
+  {"id": "cat-24196", "name": "18 美妝系列", "parentId": "", "sortOrder": 118},
+  {"id": "cat-6445", "name": "19 擺飾/掛件", "parentId": "", "sortOrder": 119},
+  {"id": "cat-6448", "name": "20 冬季用品", "parentId": "", "sortOrder": 120},
+  {"id": "cat-6451", "name": "21 陶瓷製品", "parentId": "", "sortOrder": 121},
+  {"id": "cat-89897", "name": "22 外貿專區", "parentId": "", "sortOrder": 122},
+  {"id": "cat-6450", "name": "開店用品", "parentId": "", "sortOrder": 123},
+  {"id": "cat-6449", "name": "處理特價商品", "parentId": "", "sortOrder": 124}
+];
+
+const SAMPLE_PRODUCTS = [
+  {"id": "p-3853656", "name": "7090休閒塑杯180ml/150只", "categoryId": "cat-6669", "price": 31, "origPrice": 6.2, "stock": 100, "unit": "包", "minOrder": 1, "images": ["assets/imgs/7532640_602349-1.jpg.full.jpg"], "description": "7090休閒塑杯180ml/150只\n貨號：602349\n適用：批發、零售、聚會、辦公室", "specs": [{"name": "容量", "value": "180ml"}, {"name": "數量", "value": "150 只/包"}, {"name": "貨號", "value": "602349"}], "isActive": true, "tag": "602349", "createdAt": 1777734161034},
+  {"id": "p-3853655", "name": "7112特色紙杯210ml/120只", "categoryId": "cat-6669", "price": 32, "origPrice": 6.3, "stock": 100, "unit": "包", "minOrder": 1, "images": ["assets/imgs/7532634_602347-1.jpg.full.jpg"], "description": "7112特色紙杯210ml/120只\n貨號：602347\n適用：批發、零售、聚會、辦公室", "specs": [{"name": "容量", "value": "210ml"}, {"name": "數量", "value": "120 只/包"}, {"name": "貨號", "value": "602347"}], "isActive": true, "tag": "602347", "createdAt": 1777734101034},
+  {"id": "p-3829437", "name": "1117福字袋裝紙杯230ml/100只", "categoryId": "cat-6669", "price": 34, "origPrice": 6.8, "stock": 100, "unit": "包", "minOrder": 1, "images": ["assets/imgs/7472144_602164-1.jpg.full.jpg"], "description": "1117福字袋裝紙杯230ml/100只\n貨號：602164\n適用：批發、零售、聚會、辦公室", "specs": [{"name": "容量", "value": "230ml"}, {"name": "數量", "value": "100 只/包"}, {"name": "貨號", "value": "602164"}], "isActive": true, "tag": "602164", "createdAt": 1777734041034},
+  {"id": "p-3829436", "name": "1118特惠紙杯235ml/150只", "categoryId": "cat-6669", "price": 34, "origPrice": 6.9, "stock": 100, "unit": "包", "minOrder": 1, "images": ["assets/imgs/7472141_602163-1.jpg.full.jpg"], "description": "1118特惠紙杯235ml/150只\n貨號：602163\n適用：批發、零售、聚會、辦公室", "specs": [{"name": "容量", "value": "235ml"}, {"name": "數量", "value": "150 只/包"}, {"name": "貨號", "value": "602163"}], "isActive": true, "tag": "602163", "createdAt": 1777733981035},
+  {"id": "p-3829435", "name": "0027 商務特厚紙杯235ml/50只", "categoryId": "cat-6669", "price": 20, "origPrice": 3.9, "stock": 100, "unit": "包", "minOrder": 1, "images": ["assets/imgs/7472138_602162-1.jpg.full.jpg"], "description": "0027 商務特厚紙杯235ml/50只\n貨號：602162\n適用：批發、零售、聚會、辦公室", "specs": [{"name": "容量", "value": "235ml"}, {"name": "數量", "value": "50 只/包"}, {"name": "貨號", "value": "602162"}], "isActive": true, "tag": "602162", "createdAt": 1777733921035},
+  {"id": "p-3829434", "name": "0010 商務特厚紙杯235ml/100只", "categoryId": "cat-6669", "price": 39, "origPrice": 7.8, "stock": 100, "unit": "包", "minOrder": 1, "images": ["assets/imgs/7472135_602161-1.jpg.full.jpg"], "description": "0010 商務特厚紙杯235ml/100只\n貨號：602161\n適用：批發、零售、聚會、辦公室", "specs": [{"name": "容量", "value": "235ml"}, {"name": "數量", "value": "100 只/包"}, {"name": "貨號", "value": "602161"}], "isActive": true, "tag": "602161", "createdAt": 1777733861035},
+  {"id": "p-3829433", "name": "1113輕鬆雙色紙杯230ml/50只", "categoryId": "cat-6669", "price": 20, "origPrice": 3.9, "stock": 100, "unit": "包", "minOrder": 1, "images": ["assets/imgs/7472132_602160-1.jpg.full.jpg"], "description": "1113輕鬆雙色紙杯230ml/50只\n貨號：602160\n適用：批發、零售、聚會、辦公室", "specs": [{"name": "容量", "value": "230ml"}, {"name": "數量", "value": "50 只/包"}, {"name": "貨號", "value": "602160"}], "isActive": true, "tag": "602160", "createdAt": 1777733801035},
+  {"id": "p-3829432", "name": "1115水果四色紙杯230ml/88只", "categoryId": "cat-6669", "price": 32, "origPrice": 6.3, "stock": 100, "unit": "包", "minOrder": 1, "images": ["assets/imgs/7472129_602159-1.jpg.full.jpg"], "description": "1115水果四色紙杯230ml/88只\n貨號：602159\n適用：批發、零售、聚會、辦公室", "specs": [{"name": "容量", "value": "230ml"}, {"name": "數量", "value": "88 只/包"}, {"name": "貨號", "value": "602159"}], "isActive": true, "tag": "602159", "createdAt": 1777733741035},
+  {"id": "p-3829431", "name": "0386音樂紙杯235ml/50只裝", "categoryId": "cat-6669", "price": 16, "origPrice": 3.2, "stock": 100, "unit": "包", "minOrder": 1, "images": ["assets/imgs/7472126_602158-1.jpg.full.jpg"], "description": "0386音樂紙杯235ml/50只裝\n貨號：602158\n適用：批發、零售、聚會、辦公室", "specs": [{"name": "容量", "value": "235ml"}, {"name": "數量", "value": "50 只/包"}, {"name": "貨號", "value": "602158"}], "isActive": true, "tag": "602158", "createdAt": 1777733681035},
+  {"id": "p-3829430", "name": "0379音樂紙杯235ml/100只", "categoryId": "cat-6669", "price": 31, "origPrice": 6.2, "stock": 100, "unit": "包", "minOrder": 1, "images": ["assets/imgs/7472123_602157-1.jpg.full.jpg"], "description": "0379音樂紙杯235ml/100只\n貨號：602157\n適用：批發、零售、聚會、辦公室", "specs": [{"name": "容量", "value": "235ml"}, {"name": "數量", "value": "100 只/包"}, {"name": "貨號", "value": "602157"}], "isActive": true, "tag": "602157", "createdAt": 1777733621035},
+  {"id": "p-3829429", "name": "1000個陽光紙杯235ml/50只", "categoryId": "cat-6669", "price": 13, "origPrice": 2.6, "stock": 100, "unit": "包", "minOrder": 1, "images": ["assets/imgs/7472120_602156-1.jpg.full.jpg"], "description": "1000個陽光紙杯235ml/50只\n貨號：602156\n適用：批發、零售、聚會、辦公室", "specs": [{"name": "容量", "value": "235ml"}, {"name": "數量", "value": "1000 只/包"}, {"name": "貨號", "value": "602156"}], "isActive": true, "tag": "602156", "createdAt": 1777733561035},
+  {"id": "p-3829428", "name": "009陽光紙杯235ml/100只", "categoryId": "cat-6669", "price": 25, "origPrice": 5.0, "stock": 100, "unit": "包", "minOrder": 1, "images": ["assets/imgs/7472117_602155-1.jpg.full.jpg"], "description": "009陽光紙杯235ml/100只\n貨號：602155\n適用：批發、零售、聚會、辦公室", "specs": [{"name": "容量", "value": "235ml"}, {"name": "數量", "value": "100 只/包"}, {"name": "貨號", "value": "602155"}], "isActive": true, "tag": "602155", "createdAt": 1777733501035},
+  {"id": "p-3615933", "name": "1346一次性塑杯210只170ml", "categoryId": "cat-6669", "price": 34, "origPrice": 6.7, "stock": 100, "unit": "包", "minOrder": 1, "images": ["assets/imgs/6842732_856276-1.jpg.full.jpg"], "description": "1346一次性塑杯210只170ml\n貨號：856276\n適用：批發、零售、聚會、辦公室", "specs": [{"name": "容量", "value": "170ml"}, {"name": "數量", "value": "210 只/包"}, {"name": "貨號", "value": "856276"}], "isActive": true, "tag": "856276", "createdAt": 1777733441035},
+  {"id": "p-3427210", "name": "9855時尚塑膠膠杯100只", "categoryId": "cat-6669", "price": 17, "origPrice": 3.4, "stock": 100, "unit": "包", "minOrder": 1, "images": ["assets/imgs/6521641_CP853305-1.jpg.full.jpg"], "description": "9855時尚塑膠膠杯100只\n貨號：CP853305\n適用：批發、零售、聚會、辦公室", "specs": [{"name": "數量", "value": "100 只/包"}, {"name": "貨號", "value": "CP853305"}], "isActive": true, "tag": "CP853305", "createdAt": 1777733381035},
+  {"id": "p-3085729", "name": "杯小樂紙杯0305(樂享杯80只裝)", "categoryId": "cat-6669", "price": 33, "origPrice": 6.6, "stock": 100, "unit": "包", "minOrder": 1, "images": ["assets/imgs/6084405_855504-1.jpg.full.jpg"], "description": "杯小樂紙杯0305(樂享杯80只裝)\n貨號：855504\n適用：批發、零售、聚會、辦公室", "specs": [{"name": "數量", "value": "80 只/包"}, {"name": "貨號", "value": "855504"}], "isActive": true, "tag": "855504", "createdAt": 1777733321035},
+  {"id": "p-3085728", "name": "杯小樂紙杯0304(樂享杯40隻裝)", "categoryId": "cat-6669", "price": 17, "origPrice": 3.45, "stock": 100, "unit": "包", "minOrder": 1, "images": ["assets/imgs/6084402_855503-1.jpg.full.jpg"], "description": "杯小樂紙杯0304(樂享杯40隻裝)\n貨號：855503\n適用：批發、零售、聚會、辦公室", "specs": [{"name": "數量", "value": "40 只/包"}, {"name": "貨號", "value": "855503"}], "isActive": true, "tag": "855503", "createdAt": 1777733261035},
+  {"id": "p-3085727", "name": "杯小樂紙杯0301(樂飲20只裝)", "categoryId": "cat-6669", "price": 7, "origPrice": 1.4, "stock": 100, "unit": "包", "minOrder": 1, "images": ["assets/imgs/6084399_855502-1.jpg.full.jpg"], "description": "杯小樂紙杯0301(樂飲20只裝)\n貨號：855502\n適用：批發、零售、聚會、辦公室", "specs": [{"name": "數量", "value": "20 只/包"}, {"name": "貨號", "value": "855502"}], "isActive": true, "tag": "855502", "createdAt": 1777733201035},
+  {"id": "p-3085726", "name": "0006(拾光紙杯50只裝)230ML", "categoryId": "cat-6669", "price": 15, "origPrice": 3.05, "stock": 100, "unit": "包", "minOrder": 1, "images": ["assets/imgs/6091923_2b98f1a4169b74260c0d76ab3f9eac5a.jpg.full.jpg"], "description": "0006(拾光紙杯50只裝)230ML\n貨號：855501\n適用：批發、零售、聚會、辦公室", "specs": [{"name": "數量", "value": "50 只/包"}, {"name": "貨號", "value": "855501"}], "isActive": true, "tag": "855501", "createdAt": 1777733141035},
+  {"id": "p-3085725", "name": "0051(榮拾好運紙杯100只裝)", "categoryId": "cat-6669", "price": 33, "origPrice": 6.6, "stock": 100, "unit": "包", "minOrder": 1, "images": ["assets/imgs/6084396_855500-1.jpg.full.jpg"], "description": "0051(榮拾好運紙杯100只裝)\n貨號：855500\n適用：批發、零售、聚會、辦公室", "specs": [{"name": "數量", "value": "100 只/包"}, {"name": "貨號", "value": "855500"}], "isActive": true, "tag": "855500", "createdAt": 1777733081035},
+  {"id": "p-3085724", "name": "0059(榮拾幸運塑杯100只裝)180ml", "categoryId": "cat-6669", "price": 29, "origPrice": 5.8, "stock": 100, "unit": "包", "minOrder": 1, "images": ["assets/imgs/6084393_855498-1.jpg.full.jpg"], "description": "0059(榮拾幸運塑杯100只裝)180ml\n貨號：855498\n適用：批發、零售、聚會、辦公室", "specs": [{"name": "容量", "value": "180ml"}, {"name": "數量", "value": "100 只/包"}, {"name": "貨號", "value": "855498"}], "isActive": true, "tag": "855498", "createdAt": 1777733021035}
+];
+
+const DEFAULT_SETTINGS = {
+  shopName: '暘基五金有限公司',
+  shopNameEn: 'YANG JI HARDWARE CO., LTD.',
+  taxId: '83273097',
+  slogan: '堅固 · 精準 · 值得信賴',
+  shopLogo: '',
+  contactPhone: '0935-912-208',
+  contactLine: '',
+  contactEmail: 'yang.ji.hardware@gmail.com',
+  contactAddress: '彰化縣伸港鄉定興村定興路53號',
+  shippingFee: 80,
+  freeShippingThreshold: 1000,
+  announcement: '⚙ 暘基五金 · 日用百貨批發特價！紙杯/塑杯多訂多優惠 · 滿千免運',
+  // 💳 銀行轉帳
+  bankName:'', bankCode:'', bankAccount:'', bankAccountName:'',
+  // 💬 LINE 連動
+  lineOfficialId:'', lineAddFriendUrl:'', liffId:'',
+  // 👑 會員等級
+  memberLevels: [
+    { id:'L0', name:'一般會員', discount:1.00, threshold:0,     color:'#94a3b8', icon:'👤' },
+    { id:'L1', name:'銀卡會員', discount:0.95, threshold:5000,  color:'#64748b', icon:'🥈' },
+    { id:'L2', name:'金卡會員', discount:0.90, threshold:20000, color:'#c9a95c', icon:'🥇' },
+    { id:'L3', name:'白金會員', discount:0.85, threshold:50000, color:'#1a2a4a', icon:'💎' }
+  ],
+  // 💱 計價公式（多幣別 + 關稅級距）
+  pricing: {
+    exchangeRates: [
+      { code:'CNY', name:'人民幣', symbol:'¥',  rate: 5 },
+      { code:'USD', name:'美元',   symbol:'$',  rate: 32 },
+      { code:'JPY', name:'日幣',   symbol:'¥',  rate: 0.21 },
+      { code:'KRW', name:'韓元',   symbol:'₩',  rate: 0.024 },
+      { code:'HKD', name:'港幣',   symbol:'HK$', rate: 4.1 },
+      { code:'EUR', name:'歐元',   symbol:'€',  rate: 35 },
+      { code:'TWD', name:'台幣',   symbol:'NT$', rate: 1 }
+    ],
+    defaultCurrency: 'CNY',
+    tariffPresets: [
+      { name:'免稅', rate:0 }, { name:'一般商品', rate:6 },
+      { name:'紡織品', rate:8 }, { name:'電器類', rate:5 },
+      { name:'食品類', rate:12 }, { name:'菸酒類', rate:30 }
+    ],
+    defaultTariff: 6,
+    shippingSeaPerKg: 25, shippingAirPerKg: 200, shippingByItem: 30,
+    defaultMode: 'sea', defaultMargin: 30
+  },
+  // 🤖 智慧分類規則
+  autoCategorize: { enabled: true, rules: [] },
+  // 🏬 倉庫
+  warehouses: [
+    { id:'wh-main', code:'A', name:'主倉', isActive:true }
+  ],
+  // 🎉 促銷活動
+  promotions: [],
+  // 🧭 上方分類列（可後台排序、顯示/隱藏、加自訂連結）
+  navItems: [
+    { id:'about',     label:'🏢 關於暘基',  type:'about',      visible:true,  sortOrder:0 },
+    { id:'promo',     label:'🎉 活動',      type:'promotions', visible:true,  sortOrder:1 },
+    { id:'all',       label:'全部商品',     type:'all',        visible:true,  sortOrder:2 },
+    { id:'top-cats',  label:'(自動：前 7 個分類)', type:'top-categories', visible:true, sortOrder:3 }
+  ],
+  // 🏢 形象官網
+  about: {
+    enabled: true,
+    title: '關於暘基',
+    heroTitle: '專業鐵線加工製品',          // ★ A：Hero 主標
+    heroSubtitle: '客製化加工 · 品質穩定 · 交期準確',
+    intro: '暘基五金有限公司專業生產各式鐵線加工製品，擁有多年豐富經驗與技術，提供客製化加工服務。',
+    description: '暘基五金有限公司專業生產各式鐵線加工製品，從原料到成品，層層把關，確保品質穩定，滿足各產業需求，是您值得信賴的合作夥伴。\n我們堅持每一條鐵線、每一個彎折、每一個焊點都符合客戶需求，並通過嚴格品檢，確保產品一致性與耐用性。',
+    services: ['鐵線加工', '彎折成型', '點焊組立', '表面處理'],     // ★ A：4 主要服務
+    bannerImage: '',
+    salesPerson: '黃司瑩',                   // ★ A：業務經理
+    salesTitle: '業務經理',
+    // ★ A：產品介紹（6 卡）
+    productCategories: [
+      { icon:'🪢', title:'鐵線材料',     description:'多種線徑規格，品質穩定，符合各類加工需求' },
+      { icon:'🔧', title:'鐵線彎折成型', description:'專業彎折技術，形狀精準，應用廣泛' },
+      { icon:'⚡', title:'點焊組立',     description:'精密點焊，結構穩固，美觀耐用' },
+      { icon:'🛒', title:'鐵線製品',     description:'各式鐵線製品製造，可客製化設計' },
+      { icon:'✨', title:'表面處理',     description:'多種表面處理方式，提升耐用與美觀' },
+      { icon:'📐', title:'品質保證',     description:'嚴格品管，每批產品檢驗合格才出貨' }
+    ],
+    // ★ A：我們的優勢（4 卡）
+    whyChooseUs: [
+      { icon:'💎', title:'品質穩定', description:'嚴格品管流程，確保產品一致性' },
+      { icon:'🛠', title:'專業技術', description:'多年加工經驗，提供最佳解決方案' },
+      { icon:'🤝', title:'客製服務', description:'依客戶需求量身打造，滿足各種應用需求' },
+      { icon:'🚚', title:'交期準確', description:'生產效率高，準時交貨不延誤' }
+    ],
+    // ★ A：底部 4 圖示（STRONG/QUALITY/SERVICE/STABILITY）
+    bottomFeatures: [
+      { icon:'🛡', titleZh:'堅固耐用', titleEn:'STRONG' },
+      { icon:'💎', titleZh:'品質保證', titleEn:'QUALITY' },
+      { icon:'🤝', titleZh:'誠信服務', titleEn:'SERVICE' },
+      { icon:'🏛', titleZh:'穩固基礎', titleEn:'STABILITY' }
+    ],
+    // 主要服務對象（B2B 貿易類專業用語）
+    customers: ['OEM／ODM 製造商', '五金製品工廠', '食品器具廠', '家用品製造廠', '出口貿易商', '工程承包商', '系統整合商', '專案採購單位'],
+    galleryImages: []
+  }
+};
+
+/* ============================================================
+ * 初始化 Firebase（若尚未設定，回退到 localStorage 模式）
+ * ============================================================ */
+let db = null, auth = null, useFirebase = false;
+try {
+  if (firebaseConfig.apiKey && !firebaseConfig.apiKey.includes('REPLACE')) {
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+    auth = firebase.auth();
+    useFirebase = true;
+    console.log('[商城] Firebase 已連線');
+  } else {
+    console.warn('[商城] Firebase 未設定，使用本地 localStorage 模式');
+  }
+} catch (e) {
+  console.error('[商城] Firebase 初始化失敗：', e);
+}
+
+/* ============================================================
+ * 本地儲存（離線備援）
+ * ============================================================ */
+const STORE = {
+  products:'shop_products',
+  categories:'shop_categories',
+  orders:'shop_orders',
+  cart:'shop_cart',
+  user:'shop_user',
+  settings:'shop_settings',
+  dataVersion:'shop_data_version'
+};
+const load = (k, d=null) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d } catch(e) { return d } };
+const save = (k, v) => localStorage.setItem(k, JSON.stringify(v));
+
+/* ★ 通用單號編碼 helper（與 admin.html 同步）：西元/民國年月日 + 4 碼流水 */
+function generateDocCode(prefix, allDocs, dateFormat, docField) {
+  const now = new Date();
+  let dateStr;
+  if (dateFormat === 'roc') {
+    const roc = now.getFullYear() - 1911;
+    dateStr = String(roc).padStart(3,'0') + String(now.getMonth()+1).padStart(2,'0') + String(now.getDate()).padStart(2,'0');
+  } else {
+    dateStr = now.getFullYear() + String(now.getMonth()+1).padStart(2,'0') + String(now.getDate()).padStart(2,'0');
+  }
+  const head = (prefix || '') + dateStr + '-';
+  const fields = docField ? [docField] : ['orderNo', 'purchaseNo', 'code', 'no'];
+  let max = 0;
+  for (const d of (allDocs || [])) {
+    let code = '';
+    for (const f of fields) { if (d[f]) { code = d[f]; break; } }
+    if (!code || !code.startsWith(head)) continue;
+    const tail = code.slice(head.length);
+    const n = parseInt(tail, 10);
+    if (!isNaN(n) && n > max) max = n;
+  }
+  return head + String(max + 1).padStart(4, '0');
+}
+
+// 一次性遷移：偵測到舊範例資料就用最新 taohuo999 商品覆蓋
+const DATA_VERSION = 'yangji-2026-05-07-wireproducts';
+if (load(STORE.dataVersion) !== DATA_VERSION) {
+  save(STORE.products, SAMPLE_PRODUCTS);
+  save(STORE.categories, SAMPLE_CATEGORIES);
+  // 強制更新預設設定（公司資料帶入）
+  const oldSettings = load(STORE.settings, {}) || {};
+  // ★ 移除舊「快速到貨 24-48」/「夜市攤商」等舊用語，強制用新貿易用語版
+  const oldAbout = oldSettings.about || {};
+  const hasOldWhyChooseUs = Array.isArray(oldAbout.whyChooseUs) &&
+    oldAbout.whyChooseUs.some(c => /快速到貨|24-48|工廠直送/.test((c && c.title) || (c && c.description) || ''));
+  const hasOldCustomers = Array.isArray(oldAbout.customers) &&
+    oldAbout.customers.some(c => /夜市|便利商店|連鎖餐廳|小吃|網拍|辦公室/.test(c || ''));
+  const cleanAbout = (hasOldWhyChooseUs || hasOldCustomers)
+    ? { ...oldAbout, whyChooseUs: DEFAULT_SETTINGS.about.whyChooseUs, customers: DEFAULT_SETTINGS.about.customers, services: DEFAULT_SETTINGS.about.services, heroTitle: DEFAULT_SETTINGS.about.heroTitle, heroSubtitle: DEFAULT_SETTINGS.about.heroSubtitle }
+    : oldAbout;
+
+  save(STORE.settings, {
+    ...DEFAULT_SETTINGS,
+    ...oldSettings,
+    // 以下這些欄位若使用者沒填過，用預設值；填過則保留
+    shopName: oldSettings.shopName || DEFAULT_SETTINGS.shopName,
+    shopNameEn: oldSettings.shopNameEn || DEFAULT_SETTINGS.shopNameEn,
+    taxId: oldSettings.taxId || DEFAULT_SETTINGS.taxId,
+    slogan: oldSettings.slogan || DEFAULT_SETTINGS.slogan,
+    contactEmail: oldSettings.contactEmail || DEFAULT_SETTINGS.contactEmail,
+    contactAddress: oldSettings.contactAddress || DEFAULT_SETTINGS.contactAddress,
+    contactPhone: oldSettings.contactPhone || DEFAULT_SETTINGS.contactPhone || '',
+    contactLine: oldSettings.contactLine || '',
+    announcement: oldSettings.announcement || DEFAULT_SETTINGS.announcement,
+    about: { ...DEFAULT_SETTINGS.about, ...cleanAbout }
+  });
+  save(STORE.dataVersion, DATA_VERSION);
+  console.log('[商城] 已更新到', DATA_VERSION, hasOldWhyChooseUs ? '（清掉舊「快速到貨/工廠直送」用語）' : '', hasOldCustomers ? '（清掉舊「夜市/便利商店」服務對象）' : '');
+}
+
+/* ============================================================
+ * Vue App
+ * ============================================================ */
+const { createApp, computed, ref, reactive, onMounted, watch } = Vue;
+
+createApp({
+  data() {
+    return {
+      // 資料
+      products: load(STORE.products, SAMPLE_PRODUCTS),
+      categories: load(STORE.categories, SAMPLE_CATEGORIES),
+      orders: load(STORE.orders, []),
+      settings: (() => {
+        const stored = load(STORE.settings, {}) || {};
+        const merged = { ...DEFAULT_SETTINGS, ...stored };
+        merged.pricing = { ...DEFAULT_SETTINGS.pricing, ...(stored.pricing || {}) };
+        if (!Array.isArray(merged.pricing.exchangeRates) || merged.pricing.exchangeRates.length === 0) {
+          merged.pricing.exchangeRates = [...DEFAULT_SETTINGS.pricing.exchangeRates];
+        }
+        merged.about = { ...DEFAULT_SETTINGS.about, ...(stored.about || {}) };
+        if (!Array.isArray(merged.memberLevels) || merged.memberLevels.length === 0) {
+          merged.memberLevels = [...DEFAULT_SETTINGS.memberLevels];
+        }
+        if (!Array.isArray(merged.warehouses)) merged.warehouses = [...(DEFAULT_SETTINGS.warehouses || [])];
+        if (!Array.isArray(merged.promotions)) merged.promotions = [];
+        return merged;
+      })(),
+      user: load(STORE.user, null),
+
+      // UI 狀態
+      view: 'shop',          // shop | orders
+      currentCategory: null,
+      searchQuery: '',
+      sortBy: 'default',
+      page: 1,
+      pageSize: 24,
+      expandedCats: {},
+      loading: false,
+
+      // 商品詳情
+      selectedProduct: null,
+      pdMainImage: '',
+      pdQty: 1,
+
+      // 購物車
+      cart: load(STORE.cart, []),
+      cartOpen: false,
+
+      // 結帳
+      checkoutOpen: false,
+      submitting: false,
+      checkout: { name:'', phone:'', address:'', paymentMethod:'cod', note:'' },
+
+      // 認證
+      authOpen: false,
+      authMode: 'login',
+      // ★ 忘記密碼
+      forgotOpenFlag: false,
+      forgotForm: { email:'', phone:'', newPassword:'', step:1 },
+      auth: { name:'', phone:'', email:'', password:'' },
+
+      // 會員中心
+      profileOpen: false,
+      profileEdit: { name:'', phone:'', address:'' },
+
+      // 提示
+      toast: { show:false, msg:'', type:'', timer:null }
+    }
+  },
+
+  computed: {
+    topCategories() {
+      // 純依 sortOrder 排序（您可在後台「分類管理」用 ↑↓ 按鈕調整順序）
+      return this.categories.filter(c => !c.parentId).sort((a, b) => (a.sortOrder||0) - (b.sortOrder||0));
+    },
+    /* ★ 上方 nav 排序（依 settings.navItems）— 沒設就走預設 */
+    sortedNavItems() {
+      const items = (this.settings && this.settings.navItems && this.settings.navItems.length > 0)
+        ? this.settings.navItems
+        : [
+            { id:'about',    label:'🏢 關於暘基', type:'about',          visible:true, sortOrder:0 },
+            { id:'promo',    label:'🎉 活動',     type:'promotions',     visible:true, sortOrder:1 },
+            { id:'all',      label:'全部商品',    type:'all',            visible:true, sortOrder:2 },
+            { id:'top-cats', label:'前 7 個分類', type:'top-categories', visible:true, sortOrder:3, limit:7 }
+          ];
+      return items.filter(n => n.visible !== false).slice().sort((a,b) => (a.sortOrder||0) - (b.sortOrder||0));
+    },
+    /* ★ 商品詳情頁的規格 — 過濾 visible=false（後台勾隱藏）+ 垃圾欄位（舊資料殘留）
+       讓前台不會再顯示 __EMPTY_X / PINPINFAMILY 等廠商抬頭垃圾 */
+    visibleSpecs() {
+      const p = this.selectedProduct;
+      if (!p || !Array.isArray(p.specs)) return [];
+      return p.specs.filter(s => {
+        if (!s) return false;
+        if (s.visible === false) return false;  // 後台勾隱藏
+        const n = String(s.name || '').trim();
+        const v = String(s.value || '').trim();
+        if (!n) return false;
+        // 過濾垃圾（雙保險，舊資料用）
+        if (/^__EMPTY/i.test(n)) return false;
+        if (/^\d+$/.test(n)) return false;
+        if (/(PINPINFAMILY|Quotation|報價單|報價日期|供應商店面|業務員|客戶名稱|客戶電話|店面地址|公司名稱|Tel\s*[:：]|salesman|requestor|Purchsing)/i.test(n)) return false;
+        if (/(PINPINFAMILY|Quotation)/i.test(v)) return false;
+        return true;
+      });
+    },
+    currentCategoryName() {
+      if (!this.currentCategory) return '全部商品';
+      const c = this.categories.find(c=>c.id===this.currentCategory);
+      return c ? c.name : '商品';
+    },
+    cartCount() {
+      return this.cart.reduce((s,i)=>s+i.qty, 0);
+    },
+    cartSubtotal() {
+      // 商品小計（套用會員等級折扣前的「item.price」已是會員價，所以直接加總）
+      return this.cart.reduce((s,i)=>s+i.qty*i.price, 0);
+    },
+    activePromotions() {
+      // 篩出「啟用 + 在時間範圍內」的促銷活動
+      const now = Date.now();
+      return (this.settings.promotions || []).filter(p => {
+        if (!p || !p.enabled) return false;
+        if (p.startAt) { const s = new Date(p.startAt).getTime(); if (!isNaN(s) && now < s) return false; }
+        if (p.endAt) { const e = new Date(p.endAt).getTime(); if (!isNaN(e) && now > e) return false; }
+        return true;
+      });
+    },
+    marqueeText() {
+      // 從 promotions 自動生成跑馬燈文字
+      const items = [];
+      for (const p of this.activePromotions) {
+        if (p.type === 'sitewide_discount') items.push(`🌐 ${p.name}：全館 ${100 - (p.value||0)} 折`);
+        else if (p.type === 'spend_discount') items.push(`💸 滿 NT$ ${p.threshold} 享 ${100 - (p.value||0)} 折`);
+        else if (p.type === 'bundle') items.push(`📦 ${p.name}：${this.bundleScopeText(p)} ${p.qty} 件 NT$ ${p.fixedPrice}`);
+        else if (p.type === 'gift') items.push(`🎁 ${p.name}：滿額好禮`);
+        else if (p.type === 'free_shipping') items.push(`🚚 滿 NT$ ${p.threshold} 免運`);
+      }
+      // 結合 settings.announcement
+      if (this.settings.announcement) items.unshift(this.settings.announcement);
+      return items.join('　|　');
+    },
+    cartPromoResult() {
+      // 計算購物車的所有促銷
+      const subtotal = this.cartSubtotal;
+      let promoDiscount = 0;     // 折扣金額
+      const appliedPromos = [];  // 已套用的活動描述
+      const giftItems = [];       // 贈品清單
+
+      // ★ B 診斷：每次重算都印一次，業主能看為什麼促銷沒生效
+      if (this.cart.length > 0) {
+        const allPromos = this.settings.promotions || [];
+        if (allPromos.length === 0) {
+          console.warn('[購物車] ⚠ settings.promotions 是空的 — 可能後台沒儲存或前台/後台 origin 不同');
+        } else {
+          console.group('[購物車促銷診斷]');
+          console.log(`系統總共 ${allPromos.length} 個促銷活動`);
+          allPromos.forEach((p, i) => {
+            const now = Date.now();
+            const reasons = [];
+            if (!p.enabled) reasons.push('未啟用');
+            if (p.startAt) { const s = new Date(p.startAt).getTime(); if (!isNaN(s) && now < s) reasons.push('還沒開始'); }
+            if (p.endAt) { const e = new Date(p.endAt).getTime(); if (!isNaN(e) && now > e) reasons.push('已結束'); }
+            console.log(`  #${i+1} 「${p.name}」(${p.type}) — ${reasons.length === 0 ? '✓ 啟用中' : '✗ ' + reasons.join(' / ')}`);
+          });
+          console.log(`過濾後 activePromotions: ${this.activePromotions.length} 個`);
+          console.groupEnd();
+        }
+      }
+
+      // 0. N 件特價（bundle）— 支援多區任選 + 進階「每分類最低件數」
+      const bundles = this.activePromotions.filter(p => p.type === 'bundle' && p.fixedPrice > 0);
+      // debug 預設開（業主可在 console 看計算過程）
+      const debugBundle = bundles.length > 0;
+      for (const b of bundles) {
+        if (debugBundle) console.log('[bundle]', b.name, b);
+
+        // ─── 進階模式：每分類最低件數 ───
+        if (b.requireMinPerCategory && Array.isArray(b.categoryRequirements) && b.categoryRequirements.length > 0) {
+          // 為每個分類算出可拆成幾組（含子分類）
+          let canMake = Infinity;
+          const reqDetails = [];
+          for (const req of b.categoryRequirements) {
+            const itemsInCat = this.cart.filter(ci => {
+              const prod = this.products.find(p => p.id === ci.productId);
+              return this.isInCategoryOrChildren(prod, req.categoryId);
+            });
+            const qtyInCat = itemsInCat.reduce((s, i) => s + i.qty, 0);
+            const groupsThisCat = Math.floor(qtyInCat / (req.minQty || 1));
+            if (groupsThisCat < canMake) canMake = groupsThisCat;
+            reqDetails.push({ catId: req.categoryId, minQty: req.minQty, qtyInCat, groups: groupsThisCat });
+            if (debugBundle) console.log(`  [${this.categoryName(req.categoryId)}] 需 ${req.minQty} 件 / 有 ${qtyInCat} 件（含子分類）→ 可組 ${groupsThisCat} 套`);
+          }
+          if (canMake === Infinity) canMake = 0;
+          if (debugBundle) console.log('  → 可組總共', canMake, '套');
+
+          if (canMake > 0) {
+            // 收集每分類取最高價 minQty × canMake 件
+            const bundleItems = [];
+            for (const req of b.categoryRequirements) {
+              const expanded = [];
+              this.cart.filter(ci => {
+                const prod = this.products.find(p => p.id === ci.productId);
+                return this.isInCategoryOrChildren(prod, req.categoryId);
+              }).forEach(ci => {
+                for (let k = 0; k < ci.qty; k++) expanded.push({ ...ci });
+              });
+              expanded.sort((a, b2) => (b2.price || 0) - (a.price || 0));
+              const need = (req.minQty || 1) * canMake;
+              bundleItems.push(...expanded.slice(0, need));
+            }
+            const originalSum = bundleItems.reduce((s, i) => s + (i.price || 0), 0);
+            const bundlePrice = canMake * b.fixedPrice;
+            const off = originalSum - bundlePrice;
+            if (off > 0) {
+              promoDiscount += off;
+              const scopeLabel = b.categoryRequirements.map(r => `${this.categoryName(r.categoryId)} ${r.minQty}件`).join(' + ');
+              appliedPromos.push({
+                name: b.name,
+                off: Math.round(off),
+                label: `${scopeLabel} = NT$ ${b.fixedPrice}（已組成 ${canMake} 套）`
+              });
+            }
+          }
+          continue;
+        }
+
+        // ─── 簡單模式：任選 N 件 ───
+        if (!(b.qty > 0)) continue;
+        const catIds = Array.isArray(b.categoryIds) ? b.categoryIds : (b.categoryId ? [b.categoryId] : []);
+        const eligibleItems = this.cart.filter(ci => {
+          if (catIds.length === 0) return true;
+          const prod = this.products.find(p => p.id === ci.productId);
+          return catIds.some(cid => this.isInCategoryOrChildren(prod, cid));
+        });
+        const totalQty = eligibleItems.reduce((s, i) => s + i.qty, 0);
+        const groups = Math.floor(totalQty / b.qty);
+        if (debugBundle) console.log('  簡單模式：適用分類', catIds, '/ 購物車符合件數', totalQty, '/ 可組', groups, '套');
+        if (groups > 0) {
+          const expandedItems = [];
+          eligibleItems.forEach(ci => {
+            for (let k = 0; k < ci.qty; k++) expandedItems.push({ ...ci });
+          });
+          expandedItems.sort((a, b2) => (b2.price || 0) - (a.price || 0));
+          const bundleQty = groups * b.qty;
+          const bundleItems = expandedItems.slice(0, bundleQty);
+          const originalSum = bundleItems.reduce((s, i) => s + (i.price || 0), 0);
+          const bundlePrice = groups * b.fixedPrice;
+          const off = originalSum - bundlePrice;
+          if (off > 0) {
+            promoDiscount += off;
+            let scopeLabel = '全部商品';
+            if (catIds.length >= 1) {
+              const names = catIds.map(id => this.categoryName(id)).slice(0, 3);
+              scopeLabel = names.join('+') + (catIds.length > 3 ? '…' : '') + ' 任選';
+            }
+            appliedPromos.push({
+              name: b.name,
+              off: Math.round(off),
+              label: `${scopeLabel} ${b.qty} 件 NT$ ${b.fixedPrice}（已組成 ${groups} 套）`
+            });
+          }
+        }
+      }
+
+      // 1. 全館折扣 → 取最高一個
+      const sitewide = this.activePromotions.filter(p => p.type === 'sitewide_discount');
+      if (sitewide.length) {
+        const best = sitewide.reduce((a,b) => (a.value||0) > (b.value||0) ? a : b);
+        const off = subtotal * (best.value || 0) / 100;
+        promoDiscount += off;
+        appliedPromos.push({ name: best.name, off: Math.round(off), label: `全館 ${best.value}% off` });
+      }
+
+      // 2. 滿額折扣 → 取符合條件中最高 value
+      const spendDiscounts = this.activePromotions.filter(p => p.type === 'spend_discount' && subtotal >= (p.threshold || 0));
+      if (spendDiscounts.length) {
+        const best = spendDiscounts.reduce((a,b) => (a.value||0) > (b.value||0) ? a : b);
+        const off = subtotal * (best.value || 0) / 100;
+        promoDiscount += off;
+        appliedPromos.push({ name: best.name, off: Math.round(off), label: `滿 ${best.threshold} 享 ${best.value}% off` });
+      }
+
+      // 3. 滿額贈 → 列出符合的階梯（支援 累贈 / 最高階 兩種模式）
+      const giftPromos = this.activePromotions.filter(p => p.type === 'gift');
+      for (const gp of giftPromos) {
+        const sortedTiers = (gp.tiers || []).slice().sort((a,b) => (b.threshold||0) - (a.threshold||0));
+        const matchedTiers = sortedTiers.filter(t => subtotal >= (t.threshold || 0));
+        if (matchedTiers.length === 0) continue;
+        // giftMode='cumulative' 累贈：全給；其他（'highest' / 預設）只給最高
+        const tiersToGive = (gp.giftMode === 'cumulative') ? matchedTiers : [matchedTiers[0]];
+        for (const t of tiersToGive) {
+          giftItems.push({
+            name: gp.name,
+            gift: t.gift,
+            image: t.image,
+            description: t.description,
+            threshold: t.threshold
+          });
+        }
+      }
+
+      const finalSubtotal = Math.max(0, Math.round(subtotal - promoDiscount));
+      return {
+        subtotal,
+        promoDiscount: Math.round(promoDiscount),
+        appliedPromos,
+        giftItems,
+        finalSubtotal
+      };
+    },
+    cartTotal() {
+      // 套用所有折扣後的小計
+      return this.cartPromoResult.finalSubtotal;
+    },
+    cartFreeShipThreshold() {
+      // 取最低門檻的免運（活動 OR 舊設定）
+      const fs = this.activePromotions
+        .filter(p => p.type === 'free_shipping' && (p.threshold||0) > 0)
+        .map(p => p.threshold);
+      const old = this.settings.freeShippingThreshold || 0;
+      const all = fs.concat(old > 0 ? [old] : []);
+      return all.length ? Math.min(...all) : 0;
+    },
+    shippingFee() {
+      const threshold = this.cartFreeShipThreshold;
+      if (threshold > 0 && this.cartTotal >= threshold) return 0;
+      return this.settings.shippingFee || 0;
+    },
+    cartProgressHints() {
+      // 計算「還差多少」進度提示
+      const subtotal = this.cartSubtotal;  // 用折扣前小計來計算門檻
+      const hints = [];
+
+      // 免運進度
+      const freeShipT = this.cartFreeShipThreshold;
+      if (freeShipT > 0 && subtotal < freeShipT) {
+        hints.push({
+          icon: '🚚',
+          label: `再買 NT$ ${(freeShipT - subtotal).toLocaleString()} 享免運`,
+          progress: Math.min(100, subtotal / freeShipT * 100),
+          color: '#06c755'
+        });
+      }
+
+      // 滿額折扣進度（找最近的下一階）
+      const spendNotYet = this.activePromotions
+        .filter(p => p.type === 'spend_discount' && subtotal < (p.threshold || 0))
+        .sort((a,b) => (a.threshold||0) - (b.threshold||0));
+      if (spendNotYet.length) {
+        const next = spendNotYet[0];
+        hints.push({
+          icon: '💸',
+          label: `再買 NT$ ${(next.threshold - subtotal).toLocaleString()} 享 ${next.value}% off`,
+          progress: Math.min(100, subtotal / next.threshold * 100),
+          color: 'var(--accent)'
+        });
+      }
+
+      // 滿額贈進度（每個 gift promo 的下一階）
+      const giftPromos = this.activePromotions.filter(p => p.type === 'gift');
+      for (const gp of giftPromos) {
+        const tiers = (gp.tiers || []).slice().sort((a,b) => (a.threshold||0) - (b.threshold||0));
+        const next = tiers.find(t => subtotal < (t.threshold || 0));
+        if (next) {
+          hints.push({
+            icon: '🎁',
+            label: `再買 NT$ ${(next.threshold - subtotal).toLocaleString()} 加贈「${next.gift}」`,
+            progress: Math.min(100, subtotal / next.threshold * 100),
+            color: '#dc2626'
+          });
+        }
+      }
+
+      // 升等會員（已有 nextLevel computed）
+      if (this.user && this.nextLevel) {
+        const totalSpent = this.myTotalSpent + subtotal;
+        if (totalSpent < this.nextLevel.threshold) {
+          hints.push({
+            icon: this.nextLevel.icon,
+            label: `再消費 NT$ ${(this.nextLevel.threshold - totalSpent).toLocaleString()} 升級為「${this.nextLevel.name}」（${Math.round(this.nextLevel.discount * 100)}%）`,
+            progress: Math.min(100, totalSpent / this.nextLevel.threshold * 100),
+            color: this.nextLevel.color || 'var(--primary)'
+          });
+        }
+      }
+
+      return hints;
+    },
+    filteredProducts() {
+      let list = this.products.filter(p => p.isActive !== false);
+      if (this.currentCategory) {
+        const childIds = this.categories.filter(c=>c.parentId===this.currentCategory).map(c=>c.id);
+        const ids = [this.currentCategory, ...childIds];
+        list = list.filter(p => ids.includes(p.categoryId));
+      }
+      if (this.searchQuery.trim()) {
+        const q = this.searchQuery.trim().toLowerCase();
+        list = list.filter(p =>
+          (p.name||'').toLowerCase().includes(q) ||
+          (p.description||'').toLowerCase().includes(q) ||
+          (p.specs||[]).some(s => (s.value||'').toLowerCase().includes(q))
+        );
+      }
+      const sorted = [...list];
+      if (this.sortBy === 'priceAsc') sorted.sort((a,b)=>this.priceFor(a)-this.priceFor(b));
+      else if (this.sortBy === 'priceDesc') sorted.sort((a,b)=>this.priceFor(b)-this.priceFor(a));
+      else if (this.sortBy === 'newest') sorted.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+      else sorted.sort((a,b)=>(a.sortOrder||0)-(b.sortOrder||0));
+      return sorted;
+    },
+    pagedProducts() {
+      const start = (this.page-1) * this.pageSize;
+      return this.filteredProducts.slice(start, start+this.pageSize);
+    },
+    totalPages() {
+      return Math.max(1, Math.ceil(this.filteredProducts.length / this.pageSize));
+    },
+    pageRange() {
+      const total = this.totalPages, cur = this.page;
+      const arr = [];
+      const start = Math.max(1, cur-2);
+      const end = Math.min(total, start+4);
+      for (let i = start; i <= end; i++) arr.push(i);
+      return arr;
+    },
+    myOrders() {
+      if (!this.user) return [];
+      return this.orders.filter(o => o.userId === this.user.uid).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+    },
+    myTotalSpent() {
+      return this.myOrders.filter(o => o.status !== 'cancelled').reduce((s,o)=>s+(o.total||0), 0);
+    },
+    userLevel() {
+      const levels = (this.settings.memberLevels || []).slice().sort((a,b) => (b.threshold||0) - (a.threshold||0));
+      if (levels.length === 0) return null;
+      const total = this.myTotalSpent;
+      return levels.find(L => total >= (L.threshold||0)) || levels[levels.length-1];
+    },
+    nextLevel() {
+      // 比目前等級門檻更高的下一級
+      const levels = (this.settings.memberLevels || []).slice().sort((a,b) => (a.threshold||0) - (b.threshold||0));
+      const total = this.myTotalSpent;
+      return levels.find(L => total < (L.threshold||0));
+    }
+  },
+
+  watch: {
+    cart: { handler(v) { save(STORE.cart, v) }, deep:true },
+    'searchQuery'() { this.page = 1 },
+    'currentCategory'() { this.page = 1 },
+    'sortBy'() { this.page = 1 },
+    'settings.brandPrimary'() { this.applyBrandColors(); },
+    'settings.brandAccent'() { this.applyBrandColors(); },
+    'settings.brandAccentLight'() { this.applyBrandColors(); },
+    'settings.brandAccentDark'() { this.applyBrandColors(); }
+  },
+
+  mounted() {
+    this.subscribeData();
+    this.subscribeAuth();
+    this.initLiff();
+    if (this.user && !this.checkout.name) {
+      this.checkout.name = this.user.name || '';
+      this.checkout.phone = this.user.phone || '';
+      this.checkout.address = this.user.address || '';
+    }
+    // ★ 套用後台儲存的品牌色（前台同步）
+    this.applyBrandColors();
+  },
+
+  methods: {
+    /* ★ 套用品牌色到 CSS variables（後台改 → 前台跟著變） */
+    applyBrandColors() {
+      const s = this.settings || {};
+      const root = document.documentElement.style;
+      if (s.brandPrimary)      root.setProperty('--primary', s.brandPrimary);
+      if (s.brandPrimary)      root.setProperty('--brand-navy', s.brandPrimary);
+      if (s.brandAccent)       root.setProperty('--accent', s.brandAccent);
+      if (s.brandAccent)       root.setProperty('--brand-gold', s.brandAccent);
+      if (s.brandAccentLight)  root.setProperty('--accent-light', s.brandAccentLight);
+      if (s.brandAccentDark)   root.setProperty('--accent-dark', s.brandAccentDark);
+    },
+    /* ============ 資料同步 ============ */
+    subscribeData() {
+      if (!useFirebase) return;
+      this.loading = true;
+      db.collection('products').onSnapshot(snap => {
+        this.products = snap.docs.map(d => ({ id:d.id, ...d.data() }));
+        save(STORE.products, this.products);
+        this.loading = false;
+      }, err => { console.error(err); this.loading = false });
+      db.collection('categories').onSnapshot(snap => {
+        this.categories = snap.docs.map(d => ({ id:d.id, ...d.data() }));
+        save(STORE.categories, this.categories);
+      });
+      db.collection('settings').doc('main').onSnapshot(doc => {
+        if (doc.exists) {
+          this.settings = { ...DEFAULT_SETTINGS, ...doc.data() };
+          save(STORE.settings, this.settings);
+        }
+      });
+      // 訂閱自己的訂單
+      if (this.user) {
+        db.collection('orders').where('userId','==',this.user.uid)
+          .onSnapshot(snap => {
+            this.orders = snap.docs.map(d => ({ id:d.id, ...d.data() }));
+            save(STORE.orders, this.orders);
+          });
+      }
+    },
+
+    subscribeAuth() {
+      if (!useFirebase) return;
+      auth.onAuthStateChanged(async (fbUser) => {
+        if (fbUser) {
+          const doc = await db.collection('users').doc(fbUser.uid).get();
+          const profile = doc.exists ? doc.data() : {};
+          this.user = {
+            uid: fbUser.uid,
+            email: fbUser.email,
+            name: profile.name || '',
+            phone: profile.phone || '',
+            address: profile.address || '',
+            role: profile.role || 'customer'
+          };
+          save(STORE.user, this.user);
+          // 重新訂閱訂單
+          db.collection('orders').where('userId','==',this.user.uid)
+            .onSnapshot(snap => {
+              this.orders = snap.docs.map(d => ({ id:d.id, ...d.data() }));
+              save(STORE.orders, this.orders);
+            });
+        } else {
+          this.user = null;
+          save(STORE.user, null);
+        }
+      });
+    },
+
+    /* ============ 通用 ============ */
+    showToast(msg, type='') {
+      this.toast.show = true; this.toast.msg = msg; this.toast.type = type;
+      clearTimeout(this.toast.timer);
+      this.toast.timer = setTimeout(()=>{ this.toast.show = false }, 2200);
+    },
+    async copyText(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        this.showToast('已複製：' + text, 'success');
+      } catch (e) {
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta);
+        ta.select(); document.execCommand('copy');
+        ta.remove();
+        this.showToast('已複製', 'success');
+      }
+    },
+    async initLiff() {
+      // 啟動 LIFF（如果 settings.liffId 有設定且 LIFF SDK 已載入）
+      if (!this.settings.liffId || typeof liff === 'undefined') return;
+      try {
+        await liff.init({ liffId: this.settings.liffId });
+        if (liff.isLoggedIn()) {
+          const profile = await liff.getProfile();
+          const lineUid = 'line-' + profile.userId;
+
+          // ★ 同步進 shop_users 會員清單（後台「會員管理」才看得到）
+          //   優先比對 lineUserId,沒有的話再用 uid
+          const usersList = load('shop_users', []) || [];
+          let existing = usersList.find(u => u.lineUserId === profile.userId)
+                      || usersList.find(u => u.uid === lineUid);
+          if (existing) {
+            // 既有會員,更新最新 LINE 資料(顯示名/頭像可能改過)
+            existing.name = existing.name || profile.displayName;
+            existing.lineUserId = profile.userId;
+            existing.linePictureUrl = profile.pictureUrl;
+            existing.lastLoginAt = Date.now();
+            save('shop_users', usersList);
+            this.user = existing;
+          } else {
+            // 新 LINE 客戶,加進會員清單
+            const newUser = {
+              uid: lineUid,
+              email: '',
+              name: profile.displayName || 'LINE 客戶',
+              phone: '',
+              address: '',
+              role: 'customer',
+              lineUserId: profile.userId,
+              linePictureUrl: profile.pictureUrl,
+              levelId: 'L0',
+              totalSpent: 0,
+              isActive: true,
+              createdAt: Date.now(),
+              lastLoginAt: Date.now(),
+              source: 'liff'           // 標記:來源是 LIFF 自動登入
+            };
+            usersList.push(newUser);
+            save('shop_users', usersList);
+            this.user = newUser;
+            console.log('[商城] LIFF 新會員自動建立:', profile.displayName);
+
+            // Firebase 同步(如有啟用)
+            if (typeof useFirebase !== 'undefined' && useFirebase && typeof db !== 'undefined') {
+              try {
+                await db.collection('users').doc(lineUid).set(newUser);
+              } catch (e) { console.warn('[商城] LIFF 會員 Firebase 同步失敗:', e.message); }
+            }
+          }
+          save(STORE.user, this.user);
+          console.log('[商城] LIFF 自動登入:', profile.displayName);
+        }
+      } catch (e) {
+        console.warn('[商城] LIFF 初始化失敗（可能不是在 LINE 內開）：', e.message);
+      }
+    },
+
+    priceFor(p) {
+      // 1) 個別商品有設 VIP 價且使用者非一般會員 → 用 VIP 價（個別優惠優先）
+      if (p.vipPrice && this.userLevel && this.userLevel.discount < 1) return p.vipPrice;
+      // 2) 套用會員等級折扣
+      if (this.userLevel && this.userLevel.discount && this.userLevel.discount < 1) {
+        return Math.round(p.price * this.userLevel.discount);
+      }
+      return p.price;
+    },
+
+    /* ★ B：商品是否屬於指定分類（含子分類）— 例：商品分類在「免洗紙杯」算屬於父「外貿新品」 */
+    isInCategoryOrChildren(prod, targetCatId) {
+      if (!prod || !targetCatId) return false;
+      if (prod.categoryId === targetCatId) return true;
+      // 走父鏈
+      let cur = this.categories.find(c => c.id === prod.categoryId);
+      let safety = 0;
+      while (cur && cur.parentId && safety++ < 10) {
+        if (cur.parentId === targetCatId) return true;
+        cur = this.categories.find(c => c.id === cur.parentId);
+      }
+      return false;
+    },
+
+    /* ★ B：bundle 適用範圍文字（支援進階「每分類最低件數」+ 簡單版任選） */
+    bundleScopeText(p) {
+      if (!p) return '全部商品';
+      // 進階模式
+      if (p.requireMinPerCategory && Array.isArray(p.categoryRequirements) && p.categoryRequirements.length > 0) {
+        return p.categoryRequirements.map(r => `${this.categoryName(r.categoryId)} ${r.minQty} 件`).join(' + ');
+      }
+      // 簡單模式
+      const ids = Array.isArray(p.categoryIds) ? p.categoryIds : (p.categoryId ? [p.categoryId] : []);
+      if (ids.length === 0) return '全部商品';
+      if (ids.length === 1) return this.categoryName(ids[0]);
+      const names = ids.map(id => this.categoryName(id)).slice(0, 3);
+      return names.join(' + ') + (ids.length > 3 ? '…等 ' + ids.length + ' 區' : '') + ' 任選';
+    },
+
+    categoryName(id) {
+      const c = this.categories.find(c=>c.id===id);
+      return c ? c.name : '未分類';
+    },
+
+    getChildren(parentId) {
+      return this.categories.filter(c=>c.parentId===parentId).sort((a,b)=>(a.sortOrder||0)-(b.sortOrder||0));
+    },
+
+    formatDate(ts) {
+      if (!ts) return '';
+      const d = new Date(typeof ts === 'object' && ts.seconds ? ts.seconds*1000 : ts);
+      return d.getFullYear()+'/'+(d.getMonth()+1).toString().padStart(2,'0')+'/'+d.getDate().toString().padStart(2,'0')+' '+
+             d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0');
+    },
+
+    statusText(s) {
+      return { pending:'待處理', paid:'已付款', shipped:'已出貨', completed:'已完成', cancelled:'已取消' }[s] || s;
+    },
+
+    /* ============ 導航 ============ */
+    goHome() { this.view='shop'; this.currentCategory=null; this.searchQuery=''; this.page=1 },
+    selectCategory(id) {
+      if (this.currentCategory === id && id) {
+        this.expandedCats[id] = !this.expandedCats[id];
+      } else {
+        this.currentCategory = id;
+        if (id) this.expandedCats[id] = true;
+      }
+      this.view = 'shop';
+      this.page = 1;
+    },
+    doSearch() { this.view='shop'; this.page=1 },
+
+    /* ============ 商品詳情 ============ */
+    openProduct(p) {
+      this.selectedProduct = p;
+      this.pdMainImage = (p.images && p.images[0]) || '';
+      this.pdQty = p.minOrder || 1;
+    },
+
+    /* ============ 購物車 ============ */
+    quickAdd(p) {
+      if (p.stock <= 0) return;
+      this.addToCart(p, p.minOrder || 1);
+      this.showToast('已加入購物車', 'success');
+    },
+
+    addCartFromDetail() {
+      if (!this.selectedProduct) return;
+      this.addToCart(this.selectedProduct, this.pdQty);
+      this.showToast('已加入購物車', 'success');
+      this.selectedProduct = null;
+    },
+
+    addToCart(product, qty) {
+      const existing = this.cart.find(i => i.productId === product.id);
+      if (existing) {
+        existing.qty = Math.min(product.stock, existing.qty + qty);
+      } else {
+        this.cart.push({
+          productId: product.id,
+          name: product.name,
+          price: this.priceFor(product),
+          image: (product.images && product.images[0]) || '',
+          qty: qty,
+          unit: product.unit || ''
+        });
+      }
+    },
+
+    updateCartQty(i, qty) {
+      qty = Math.max(1, qty || 1);
+      const item = this.cart[i];
+      const product = this.products.find(p=>p.id===item.productId);
+      if (product) item.qty = Math.min(product.stock, qty);
+      else item.qty = qty;
+    },
+
+    removeFromCart(i) {
+      this.cart.splice(i, 1);
+    },
+
+    buyNow() {
+      this.addCartFromDetail();
+      this.cartOpen = false;
+      this.goCheckout();
+    },
+
+    /* ============ 結帳 ============ */
+    goCheckout() {
+      if (this.cart.length === 0) return;
+      if (!this.user) {
+        this.showToast('請先登入', 'error');
+        this.openAuth('login');
+        return;
+      }
+      this.cartOpen = false;
+      this.checkout.name = this.user.name || this.checkout.name;
+      this.checkout.phone = this.user.phone || this.checkout.phone;
+      this.checkout.address = this.user.address || this.checkout.address;
+      this.checkoutOpen = true;
+    },
+
+    async submitOrder() {
+      if (!this.checkout.name || !this.checkout.phone || !this.checkout.address) {
+        this.showToast('請填寫完整收件資訊', 'error');
+        return;
+      }
+      // 庫存檢查
+      for (const item of this.cart) {
+        const prod = this.products.find(p => p.id === item.productId);
+        if (prod && prod.stock < item.qty) {
+          this.showToast(`「${item.name}」庫存不足（剩 ${prod.stock}）`, 'error');
+          return;
+        }
+      }
+      this.submitting = true;
+      try {
+        const existingOrders = (this.orders || []).concat(load(STORE.orders, []) || []);
+        const prefix = (this.settings && this.settings.codeNumberOrderPrefix) || 'O';
+        const fmt = (this.settings && this.settings.codeNumberFormat) || 'gregorian';
+        const orderNo = generateDocCode(prefix, existingOrders, fmt, 'orderNo');
+        const items = this.cart.map(i => ({
+          productId: i.productId,
+          name: i.name,
+          image: i.image,
+          price: i.price,
+          qty: i.qty,
+          subtotal: i.price * i.qty
+        }));
+        const order = {
+          orderNo,
+          userId: this.user.uid,
+          userName: this.checkout.name,
+          userPhone: this.checkout.phone,
+          shippingAddress: this.checkout.address,
+          items,
+          itemTotal: this.cartTotal,
+          shipping: this.shippingFee,
+          total: this.cartTotal + this.shippingFee,
+          status: 'pending',
+          paymentMethod: this.checkout.paymentMethod,
+          note: this.checkout.note,
+          // 若是 LIFF 登入或 LINE 綁定的會員，記錄 LINE userId 方便回覆
+          lineUserId: this.user.lineUserId || '',
+          createdAt: Date.now(),
+          updatedAt: Date.now()
+        };
+
+        // 自動扣庫存
+        const stockUpdates = [];
+        this.products = this.products.map(p => {
+          const item = items.find(it => it.productId === p.id);
+          if (item) {
+            const newStock = Math.max(0, (p.stock||0) - item.qty);
+            stockUpdates.push({ id: p.id, stock: newStock });
+            return { ...p, stock: newStock };
+          }
+          return p;
+        });
+        save(STORE.products, this.products);
+
+        if (useFirebase) {
+          await db.collection('orders').add(order);
+          // 同步扣庫存到雲端
+          try {
+            const batch = db.batch();
+            stockUpdates.forEach(u => batch.update(db.collection('products').doc(u.id), { stock: u.stock }));
+            await batch.commit();
+          } catch (e) { console.error('庫存同步失敗：', e) }
+        } else {
+          order.id = 'order-' + Date.now();
+          this.orders.push(order);
+          save(STORE.orders, this.orders);
+        }
+
+        // 觸發 Webhook 通知
+        await this.notifyOrder(order);
+
+        this.cart = [];
+        save(STORE.cart, this.cart);
+        this.checkoutOpen = false;
+        this.checkout.note = '';
+
+        // 顯示下單成功訊息（含付款指示）
+        const lines = [`✅ 下單成功！訂單編號 ${orderNo}`];
+        if (order.paymentMethod === 'transfer' && this.settings.bankAccount) {
+          lines.push('');
+          lines.push(`💳 請於 3 日內轉帳：`);
+          if (this.settings.bankName) lines.push(`銀行：${this.settings.bankName}${this.settings.bankCode ? ' ('+this.settings.bankCode+')' : ''}`);
+          if (this.settings.bankAccountName) lines.push(`戶名：${this.settings.bankAccountName}`);
+          lines.push(`帳號：${this.settings.bankAccount}`);
+          lines.push(`金額：NT$ ${order.total}`);
+          if (this.settings.lineOfficialId || this.settings.lineAddFriendUrl) {
+            lines.push('');
+            lines.push(`匯款後請加 LINE${this.settings.lineOfficialId ? ' '+this.settings.lineOfficialId : ''} 通知，並回傳訂單編號`);
+          }
+        } else if (order.paymentMethod === 'line' && (this.settings.lineOfficialId || this.settings.lineAddFriendUrl)) {
+          lines.push('');
+          lines.push(`💬 請加 LINE${this.settings.lineOfficialId ? ' '+this.settings.lineOfficialId : ''} 並提供訂單編號 ${orderNo}`);
+        } else {
+          lines.push('可在「我的訂單」追蹤狀態');
+        }
+        alert(lines.join('\n'));
+
+        this.showToast('下單成功！', 'success');
+        this.view = 'orders';
+      } catch (e) {
+        console.error(e);
+        this.showToast('下單失敗：' + e.message, 'error');
+      } finally {
+        this.submitting = false;
+      }
+    },
+
+    /* ============ 訂單 Webhook 通知 ============ */
+    async notifyOrder(order) {
+      if (!this.settings.notifyOnOrder || !this.settings.webhookUrl) return;
+      const url = this.settings.webhookUrl;
+      const isDiscord = url.includes('discord.com/api/webhooks');
+      const isSlack = url.includes('hooks.slack.com');
+      try {
+        const itemList = order.items.map(i => `· ${i.name} × ${i.qty} = NT$${i.subtotal}`).join('\n');
+        let body;
+        if (isDiscord) {
+          body = JSON.stringify({
+            content: `🛒 **新訂單通知**\n訂單編號：${order.orderNo}\n收件人：${order.userName}\n電話：${order.userPhone}\n地址：${order.shippingAddress}\n\n**商品：**\n${itemList}\n\n**總計：NT$ ${order.total}**`
+          });
+        } else if (isSlack) {
+          body = JSON.stringify({
+            text: `🛒 新訂單 ${order.orderNo}\n${order.userName} - NT$ ${order.total}\n${itemList}`
+          });
+        } else {
+          body = JSON.stringify({
+            type: 'order',
+            orderNo: order.orderNo,
+            userName: order.userName,
+            phone: order.userPhone,
+            address: order.shippingAddress,
+            items: order.items,
+            total: order.total
+          });
+        }
+        await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body
+        });
+      } catch (e) {
+        console.error('通知發送失敗（不影響訂單）:', e);
+      }
+    },
+
+    /* ============ 會員中心 ============ */
+    openProfile() {
+      if (!this.user) { this.openAuth('login'); return }
+      this.profileEdit = {
+        name: this.user.name || '',
+        phone: this.user.phone || '',
+        address: this.user.address || ''
+      };
+      this.profileOpen = true;
+    },
+    async saveProfile() {
+      if (!this.user) return;
+      const updates = {
+        name: this.profileEdit.name,
+        phone: this.profileEdit.phone,
+        address: this.profileEdit.address
+      };
+      this.user = { ...this.user, ...updates };
+      save(STORE.user, this.user);
+      if (useFirebase && this.user.uid && !this.user.uid.startsWith('local-') && !this.user.uid.startsWith('line-')) {
+        try {
+          await db.collection('users').doc(this.user.uid).set(updates, { merge: true });
+        } catch (e) { console.error(e) }
+      }
+      this.profileOpen = false;
+      this.showToast('資料已更新', 'success');
+    },
+
+    /* ============ 認證 ============ */
+    openAuth(mode='login') {
+      this.authMode = mode;
+      this.authOpen = true;
+    },
+
+    async doAuth() {
+      const { email, password, name, phone } = this.auth;
+      if (!email || !password) { this.showToast('請輸入 Email 與密碼','error'); return }
+      if (password.length < 6) { this.showToast('密碼至少 6 字','error'); return }
+
+      // ★ 會員清單（多會員陣列）
+      const usersList = load('shop_users', []) || [];
+
+      try {
+        if (this.authMode === 'register') {
+          if (!name) { this.showToast('請填姓名','error'); return }
+          if (!phone) { this.showToast('請填電話（忘記密碼會用到）','error'); return }
+          // email 重複檢查
+          if (usersList.some(u => u.email === email)) {
+            this.showToast('此 Email 已註冊過，請改用「登入」', 'error'); return;
+          }
+          const u = {
+            uid: 'local-' + Date.now(),
+            email, password, name, phone,
+            role: 'customer',
+            createdAt: Date.now()
+          };
+          usersList.push(u);
+          save('shop_users', usersList);
+          // 同時設為當下登入會員
+          this.user = u;
+          save(STORE.user, u);
+          // Firebase 同步（可選）
+          if (useFirebase) {
+            try {
+              const cred = await auth.createUserWithEmailAndPassword(email, password);
+              await db.collection('users').doc(cred.user.uid).set({ email, name, phone, role:'customer', createdAt: Date.now() });
+            } catch (e) { console.warn('[商城] Firebase 註冊失敗（保留本地）:', e.message); }
+          }
+          this.showToast(`歡迎加入，${name}！`, 'success');
+        } else {
+          // ★ 登入：從會員清單找 email + 比對密碼
+          const found = usersList.find(u => u.email === email);
+          if (!found) {
+            this.showToast('此 Email 還沒註冊', 'error'); return;
+          }
+          if (found.password !== password) {
+            this.showToast('密碼錯誤', 'error'); return;
+          }
+          if (found.blocked) {
+            this.showToast('此帳號已被停用，請聯絡客服', 'error'); return;
+          }
+          this.user = found;
+          save(STORE.user, found);
+          // Firebase 同步登入（可選）
+          if (useFirebase) {
+            try { await auth.signInWithEmailAndPassword(email, password); }
+            catch (e) { console.warn('[商城] Firebase 登入失敗（保留本地）:', e.message); }
+          }
+          this.showToast(`歡迎回來，${found.name || found.email}`, 'success');
+        }
+        this.authOpen = false;
+        this.auth = { name:'', phone:'', email:'', password:'' };
+      } catch (e) {
+        this.showToast(e.message || '操作失敗', 'error');
+      }
+    },
+
+    /* ★ 會員忘記密碼：填 email + 電話 → 比對 → 重設 */
+    forgotOpen() {
+      this.forgotForm = { email:'', phone:'', newPassword:'', step:1 };
+      this.forgotOpenFlag = true;
+    },
+    forgotVerify() {
+      const { email, phone } = this.forgotForm;
+      if (!email || !phone) { this.showToast('請填 Email 與註冊時的電話', 'error'); return; }
+      const usersList = load('shop_users', []) || [];
+      const found = usersList.find(u => u.email === email);
+      if (!found) { this.showToast('查無此 Email', 'error'); return; }
+      // 電話正規化比對（去 - 和空格）
+      const normPhone = (s) => String(s || '').replace(/[\s\-]/g, '');
+      if (normPhone(found.phone) !== normPhone(phone)) {
+        this.showToast('電話與註冊時不符', 'error'); return;
+      }
+      this.forgotForm.step = 2;
+      this.showToast('驗證成功，請設新密碼', 'success');
+    },
+    forgotReset() {
+      const { email, newPassword } = this.forgotForm;
+      if (!newPassword || newPassword.length < 6) { this.showToast('新密碼至少 6 字', 'error'); return; }
+      const usersList = load('shop_users', []) || [];
+      const idx = usersList.findIndex(u => u.email === email);
+      if (idx < 0) { this.showToast('找不到該 Email', 'error'); return; }
+      usersList[idx].password = newPassword;
+      usersList[idx].passwordResetAt = Date.now();
+      save('shop_users', usersList);
+      this.forgotOpenFlag = false;
+      this.forgotForm = { email:'', phone:'', newPassword:'', step:1 };
+      this.showToast('✅ 密碼已重設，請用新密碼登入', 'success');
+      // 自動切到登入分頁、預填 email
+      this.authMode = 'login';
+      this.auth.email = email;
+      this.authOpen = true;
+    },
+
+    async logout() {
+      if (useFirebase) await auth.signOut();
+      this.user = null; save(STORE.user, null);
+      this.view = 'shop';
+      this.showToast('已登出', 'success');
+    }
+  }
+}).mount('#app');
+</script>
+</body>
+</html>

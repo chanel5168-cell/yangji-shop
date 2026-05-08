@@ -1,0 +1,458 @@
+[
+  {
+    "id": "cat-6434",
+    "origId": "6434",
+    "name": "01 日用百貨",
+    "parentId": "",
+    "sortOrder": 0,
+    "isActive": true
+  },
+  {
+    "id": "cat-6477",
+    "origId": "6477",
+    "name": "套裝掃把",
+    "parentId": "cat-6434",
+    "sortOrder": 0,
+    "isActive": true
+  },
+  {
+    "id": "cat-10605",
+    "origId": "10605",
+    "name": "單一掃把/畚鬥",
+    "parentId": "cat-6434",
+    "sortOrder": 1,
+    "isActive": true
+  },
+  {
+    "id": "cat-6658",
+    "origId": "6658",
+    "name": "退回衣叉",
+    "parentId": "cat-6434",
+    "sortOrder": 2,
+    "isActive": true
+  },
+  {
+    "id": "cat-6644",
+    "origId": "6644",
+    "name": "線拖曳",
+    "parentId": "cat-6434",
+    "sortOrder": 3,
+    "isActive": true
+  },
+  {
+    "id": "cat-6659",
+    "origId": "6659",
+    "name": "平板拖把",
+    "parentId": "cat-6434",
+    "sortOrder": 4,
+    "isActive": true
+  },
+  {
+    "id": "cat-6657",
+    "origId": "6657",
+    "name": "海綿拖把",
+    "parentId": "cat-6434",
+    "sortOrder": 5,
+    "isActive": true
+  },
+  {
+    "id": "cat-6478",
+    "origId": "6478",
+    "name": "衣架系列",
+    "parentId": "cat-6434",
+    "sortOrder": 6,
+    "isActive": true
+  },
+  {
+    "id": "cat-6748",
+    "origId": "6748",
+    "name": "塑膠衣架",
+    "parentId": "cat-6434",
+    "sortOrder": 7,
+    "isActive": true
+  },
+  {
+    "id": "cat-6673",
+    "origId": "6673",
+    "name": "玻璃刷/地刷",
+    "parentId": "cat-6434",
+    "sortOrder": 8,
+    "isActive": true
+  },
+  {
+    "id": "cat-6653",
+    "origId": "6653",
+    "name": "塑膠襪夾",
+    "parentId": "cat-6434",
+    "sortOrder": 9,
+    "isActive": true
+  },
+  {
+    "id": "cat-10657",
+    "origId": "10657",
+    "name": "不銹鋼襪夾",
+    "parentId": "cat-6434",
+    "sortOrder": 10,
+    "isActive": true
+  },
+  {
+    "id": "cat-6661",
+    "origId": "6661",
+    "name": "手機支架系列",
+    "parentId": "cat-6434",
+    "sortOrder": 11,
+    "isActive": true
+  },
+  {
+    "id": "cat-6648",
+    "origId": "6648",
+    "name": "燈籠掛件",
+    "parentId": "cat-6434",
+    "sortOrder": 12,
+    "isActive": true
+  },
+  {
+    "id": "cat-6649",
+    "origId": "6649",
+    "name": "中國結掛件",
+    "parentId": "cat-6434",
+    "sortOrder": 13,
+    "isActive": true
+  },
+  {
+    "id": "cat-52838",
+    "origId": "52838",
+    "name": "禮花筒",
+    "parentId": "cat-6434",
+    "sortOrder": 14,
+    "isActive": true
+  },
+  {
+    "id": "cat-6650",
+    "origId": "6650",
+    "name": "清潔球/鍋刷",
+    "parentId": "cat-6434",
+    "sortOrder": 15,
+    "isActive": true
+  },
+  {
+    "id": "cat-6645",
+    "origId": "6645",
+    "name": "洗碗布/蒸籠布",
+    "parentId": "cat-6434",
+    "sortOrder": 16,
+    "isActive": true
+  },
+  {
+    "id": "cat-6651",
+    "origId": "6651",
+    "name": "清潔抹布",
+    "parentId": "cat-6434",
+    "sortOrder": 17,
+    "isActive": true
+  },
+  {
+    "id": "cat-6647",
+    "origId": "6647",
+    "name": "保鮮膜/袋",
+    "parentId": "cat-6434",
+    "sortOrder": 18,
+    "isActive": true
+  },
+  {
+    "id": "cat-6656",
+    "origId": "6656",
+    "name": "保鮮組合/錫紙",
+    "parentId": "cat-6434",
+    "sortOrder": 19,
+    "isActive": true
+  },
+  {
+    "id": "cat-26565",
+    "origId": "26565",
+    "name": "食品保鮮罩",
+    "parentId": "cat-6434",
+    "sortOrder": 20,
+    "isActive": true
+  },
+  {
+    "id": "cat-6669",
+    "origId": "6669",
+    "name": "免洗紙杯",
+    "parentId": "cat-6434",
+    "sortOrder": 21,
+    "isActive": true
+  },
+  {
+    "id": "cat-6654",
+    "origId": "6654",
+    "name": "免洗餐具",
+    "parentId": "cat-6434",
+    "sortOrder": 22,
+    "isActive": true
+  },
+  {
+    "id": "cat-6643",
+    "origId": "6643",
+    "name": "菜罩系列",
+    "parentId": "cat-6434",
+    "sortOrder": 23,
+    "isActive": true
+  },
+  {
+    "id": "cat-6646",
+    "origId": "6646",
+    "name": "垃圾袋",
+    "parentId": "cat-6434",
+    "sortOrder": 24,
+    "isActive": true
+  },
+  {
+    "id": "cat-10820",
+    "origId": "10820",
+    "name": "單卷垃圾袋",
+    "parentId": "cat-6434",
+    "sortOrder": 25,
+    "isActive": true
+  },
+  {
+    "id": "cat-6668",
+    "origId": "6668",
+    "name": "開店手提袋",
+    "parentId": "cat-6434",
+    "sortOrder": 26,
+    "isActive": true
+  },
+  {
+    "id": "cat-6652",
+    "origId": "6652",
+    "name": "洗臉巾系列",
+    "parentId": "cat-6434",
+    "sortOrder": 27,
+    "isActive": true
+  },
+  {
+    "id": "cat-79148",
+    "origId": "79148",
+    "name": "壓縮毛巾",
+    "parentId": "cat-6434",
+    "sortOrder": 28,
+    "isActive": true
+  },
+  {
+    "id": "cat-6642",
+    "origId": "6642",
+    "name": "濕紙巾系列",
+    "parentId": "cat-6434",
+    "sortOrder": 29,
+    "isActive": true
+  },
+  {
+    "id": "cat-50033",
+    "origId": "50033",
+    "name": "濕廚房巾",
+    "parentId": "cat-6434",
+    "sortOrder": 30,
+    "isActive": true
+  },
+  {
+    "id": "cat-63017",
+    "origId": "63017",
+    "name": "節點",
+    "parentId": "",
+    "sortOrder": 100,
+    "isActive": false
+  },
+  {
+    "id": "cat-89956",
+    "origId": "89956",
+    "name": "外貿新品",
+    "parentId": "",
+    "sortOrder": 101,
+    "isActive": false
+  },
+  {
+    "id": "cat-6433",
+    "origId": "6433",
+    "name": "02 塑膠製品",
+    "parentId": "",
+    "sortOrder": 102,
+    "isActive": false
+  },
+  {
+    "id": "cat-6444",
+    "origId": "6444",
+    "name": "03 家居用品",
+    "parentId": "",
+    "sortOrder": 103,
+    "isActive": false
+  },
+  {
+    "id": "cat-6440",
+    "origId": "6440",
+    "name": "04 廚房用品",
+    "parentId": "",
+    "sortOrder": 104,
+    "isActive": false
+  },
+  {
+    "id": "cat-6437",
+    "origId": "6437",
+    "name": "05不鏽鋼類",
+    "parentId": "",
+    "sortOrder": 105,
+    "isActive": false
+  },
+  {
+    "id": "cat-72081",
+    "origId": "72081",
+    "name": "12個品牌成套系列",
+    "parentId": "",
+    "sortOrder": 106,
+    "isActive": false
+  },
+  {
+    "id": "cat-6436",
+    "origId": "6436",
+    "name": "06 精美水杯",
+    "parentId": "",
+    "sortOrder": 107,
+    "isActive": false
+  },
+  {
+    "id": "cat-6435",
+    "origId": "6435",
+    "name": "07 玻璃系列",
+    "parentId": "",
+    "sortOrder": 108,
+    "isActive": false
+  },
+  {
+    "id": "cat-6441",
+    "origId": "6441",
+    "name": "08日化系列",
+    "parentId": "",
+    "sortOrder": 109,
+    "isActive": false
+  },
+  {
+    "id": "cat-6446",
+    "origId": "6446",
+    "name": "09 電器系列",
+    "parentId": "",
+    "sortOrder": 110,
+    "isActive": false
+  },
+  {
+    "id": "cat-64334",
+    "origId": "64334",
+    "name": "10 數位產品",
+    "parentId": "",
+    "sortOrder": 111,
+    "isActive": false
+  },
+  {
+    "id": "cat-6443",
+    "origId": "6443",
+    "name": "11 文體用品",
+    "parentId": "",
+    "sortOrder": 112,
+    "isActive": false
+  },
+  {
+    "id": "cat-6439",
+    "origId": "6439",
+    "name": "13 針織/包類",
+    "parentId": "",
+    "sortOrder": 113,
+    "isActive": false
+  },
+  {
+    "id": "cat-6438",
+    "origId": "6438",
+    "name": "14 五金系列",
+    "parentId": "",
+    "sortOrder": 114,
+    "isActive": false
+  },
+  {
+    "id": "cat-6442",
+    "origId": "6442",
+    "name": "15 兒童玩具",
+    "parentId": "",
+    "sortOrder": 115,
+    "isActive": false
+  },
+  {
+    "id": "cat-6447",
+    "origId": "6447",
+    "name": "16 夏季用品",
+    "parentId": "",
+    "sortOrder": 116,
+    "isActive": false
+  },
+  {
+    "id": "cat-11719",
+    "origId": "11719",
+    "name": "17 飾品系列",
+    "parentId": "",
+    "sortOrder": 117,
+    "isActive": false
+  },
+  {
+    "id": "cat-24196",
+    "origId": "24196",
+    "name": "18 美妝系列",
+    "parentId": "",
+    "sortOrder": 118,
+    "isActive": false
+  },
+  {
+    "id": "cat-6445",
+    "origId": "6445",
+    "name": "19 擺飾/掛件",
+    "parentId": "",
+    "sortOrder": 119,
+    "isActive": false
+  },
+  {
+    "id": "cat-6448",
+    "origId": "6448",
+    "name": "20 冬季用品",
+    "parentId": "",
+    "sortOrder": 120,
+    "isActive": false
+  },
+  {
+    "id": "cat-6451",
+    "origId": "6451",
+    "name": "21 陶瓷製品",
+    "parentId": "",
+    "sortOrder": 121,
+    "isActive": false
+  },
+  {
+    "id": "cat-89897",
+    "origId": "89897",
+    "name": "22 外貿專區",
+    "parentId": "",
+    "sortOrder": 122,
+    "isActive": false
+  },
+  {
+    "id": "cat-6450",
+    "origId": "6450",
+    "name": "開店用品",
+    "parentId": "",
+    "sortOrder": 123,
+    "isActive": false
+  },
+  {
+    "id": "cat-6449",
+    "origId": "6449",
+    "name": "處理特價商品",
+    "parentId": "",
+    "sortOrder": 124,
+    "isActive": false
+  }
+]
