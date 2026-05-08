@@ -326,7 +326,14 @@ table.tbl{width:100%;border-collapse:collapse}
     </div>
     <div class="form-row">
       <label>密碼</label>
-      <input v-model="loginForm.password" type="password" @keyup.enter="doLogin">
+      <div style="position:relative">
+        <input v-model="loginForm.password" :type="loginPwShow ? 'text' : 'password'" @keyup.enter="doLogin" style="padding-right:38px;width:100%;box-sizing:border-box">
+        <button type="button" @click="loginPwShow = !loginPwShow" tabindex="-1"
+                :title="loginPwShow ? '隱藏密碼' : '顯示密碼'"
+                style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;padding:4px 6px;color:#666">
+          {{ loginPwShow ? '🙈' : '👁' }}
+        </button>
+      </div>
     </div>
     <button class="btn btn-primary" style="width:100%;padding:10px;font-size:15px" @click="doLogin">登入後台</button>
     <p style="margin-top:14px;text-align:center;font-size:12px;color:var(--text-light)">
@@ -4187,7 +4194,14 @@ table.tbl{width:100%;border-collapse:collapse}
       </div>
       <div class="form-row">
         <label>密碼<span class="req">*</span></label>
-        <input v-model="editingAdmin.password" type="text" placeholder="至少 6 字" style="font-family:monospace">
+        <div style="position:relative">
+          <input v-model="editingAdmin.password" :type="adminPwShow ? 'text' : 'password'" placeholder="至少 6 字" style="font-family:monospace;padding-right:38px;width:100%;box-sizing:border-box">
+          <button type="button" @click="adminPwShow = !adminPwShow" tabindex="-1"
+                  :title="adminPwShow ? '隱藏密碼' : '顯示密碼'"
+                  style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;padding:4px 6px;color:#666">
+            {{ adminPwShow ? '🙈' : '👁' }}
+          </button>
+        </div>
         <div class="hint">⚠ 密碼以明碼存於 localStorage（適合內部小團隊用）。如需高安全性請接 Firebase Auth。</div>
       </div>
     </div>
@@ -7422,6 +7436,9 @@ createApp({
       productExcelUpdateModal: null,    // Excel 更新預覽 modal
       licensePromptOpen: false,        // 啟用碼輸入 modal
       licenseKeyInput: '',
+      // 密碼顯示/隱藏切換 (👁 / 🙈)
+      loginPwShow: false,
+      adminPwShow: false,
       licenseInfo: { valid:false, expiry:'', company:'', daysLeft:0 },
       /* 危險區清除 — 可勾要清的項 */
       wipeOpts: { products:true, orders:true, purchases:true, users:true, suppliers:false, categories:false, checks:true, promotions:true, transfers:true, settings:false, adminUsers:false },
