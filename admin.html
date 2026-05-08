@@ -12567,6 +12567,16 @@ createApp({
       if (idx >= 0) this.adminUsers[idx] = { ...u };
       else this.adminUsers.push({ ...u });
       save('shop_adminUsers', this.adminUsers);
+      // ★ 同步到 Firebase (多裝置共享後台帳號清單)
+      if (useFirebase) {
+        try { db.collection('adminUsers').doc(u.id).set(JSON.parse(JSON.stringify(u))); }
+        catch (e) { console.warn('[adminUsers] Firebase 同步失敗:', e.message); }
+      }
+      // 若改的是自己當下登入的帳號 → 更新 currentUser (避免 email 顯示錯)
+      if (this.currentUser && this.currentUser.id === u.id) {
+        this.currentUser = { ...this.currentUser, email: u.email, name: u.name, role: u.role };
+        save(STORE.adminLogin, this.currentUser);
+      }
       this.showToast(`帳號「${u.name || u.email}」已儲存`, 'success');
       this.editingAdmin = null;
     },
