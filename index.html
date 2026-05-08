@@ -130,6 +130,28 @@ header.main-header{
 /* 頂部橫條右側公告（靜態，截斷顯示） */
 .cat-nav-announce{font-size:13px;color:var(--accent);padding:0 16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:400px}
 
+/* 🎯 跑馬燈 — 工業金屬風(深藍背景+金字),滿版 */
+.marquee-wrap{
+  background:linear-gradient(90deg,var(--primary,#1a2a4a) 0%,#2d4a7a 50%,var(--primary,#1a2a4a) 100%);
+  color:var(--accent,#c9a95c); border-bottom:2px solid var(--accent,#c9a95c);
+  overflow:hidden; height:34px; display:flex; align-items:center;
+  position:relative; box-shadow:0 1px 4px rgba(0,0,0,0.15);
+}
+.marquee-track{
+  display:inline-block; white-space:nowrap;
+  animation:marqueeScroll 38s linear infinite;
+  padding-left:100%;
+}
+.marquee-content{
+  font-size:13px; letter-spacing:0.5px; font-weight:500;
+}
+@keyframes marqueeScroll{
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+/* 滑鼠移上去暫停(讓客戶看清楚) */
+.marquee-wrap:hover .marquee-track{ animation-play-state:paused }
+
 /* 🎉 促銷橫幅區塊（首頁顯示） */
 .promo-banner{
   background:linear-gradient(135deg,#fff8e1,#fff3cd);
@@ -542,9 +564,15 @@ footer{
         <div v-else-if="n.type==='new'" class="cat-nav-item" :class="{active: view==='new'}" @click="view='new'">{{ n.label || '🆕 新品' }}</div>
       </template>
       <div class="cat-nav-spacer"></div>
-      <div class="cat-nav-announce" v-if="settings.announcement">📢 {{ settings.announcement }}</div>
     </div>
   </nav>
+
+  <!-- ★ 跑馬燈 — 結合 settings.announcement + 啟用中促銷活動。可在後台 系統設定 開關 -->
+  <div class="marquee-wrap" v-if="(settings.marqueeEnabled !== false) && marqueeText">
+    <div class="marquee-track">
+      <span class="marquee-content">📢 {{ marqueeText }}　|　{{ marqueeText }}　|　{{ marqueeText }}</span>
+    </div>
+  </div>
 
   <!-- ============ 🎉 促銷橫幅（首頁顯示） ============ -->
   <div v-if="view==='shop' && activePromotions.length > 0" style="max-width:1280px;margin:0 auto;padding:0 16px">

@@ -2968,8 +2968,15 @@ table.tbl{width:100%;border-collapse:collapse}
               </div>
             </div>
             <div class="form-row">
-              <label>公告（顯示於頂部跑馬燈）</label>
-              <textarea v-model="settings.announcement" rows="2"></textarea>
+              <label>
+                <input type="checkbox" :checked="settings.marqueeEnabled !== false" @change="settings.marqueeEnabled = $event.target.checked" style="margin-right:6px;transform:scale(1.2);vertical-align:middle">
+                <strong>啟用頂部跑馬燈</strong>
+              </label>
+              <div class="hint" style="font-size:11px;margin-top:4px">關閉後前台不顯示跑馬燈;預設開啟,自動結合公告 + 啟用中促銷活動文字</div>
+            </div>
+            <div class="form-row">
+              <label>公告文字（顯示於頂部跑馬燈,可空白讓只跑促銷）</label>
+              <textarea v-model="settings.announcement" rows="2" placeholder="例:歡迎光臨暘基五金線上商城 · 滿千免運"></textarea>
             </div>
             <button class="btn btn-primary" @click="saveSettings">💾 儲存設定</button>
           </div>
