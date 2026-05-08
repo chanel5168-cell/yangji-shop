@@ -7,11 +7,13 @@
 
 ## 🎯 一句話
 
-**暘基五金的 B2B 批發商城。單檔 HTML SPA + Firebase 雲端 + LINE LIFF + 工業金屬風 UI。內建批次匯入/分類管理/會員等級折扣/統計分析。**
+**暘基五金的 B2B 批發商城。單檔 HTML SPA + Firebase 雲端 + LINE LIFF + 工業金屬風 UI。內建批次匯入/分類管理/會員等級折扣/統計分析。已上 GitHub Pages 公網。**
 
-- 業主：黃司瑩 / 暘基五金有限公司
+- 業主：黃司瑩(司瑩 / chanel) / 暘基五金有限公司
 - 主檔：[index.html](./index.html)（前台）+ [admin.html](./admin.html)（後台）
-- 部署：本地 `start-server.py` Python 伺服器（含 /_proxy + /upload 端點）
+- 部署：本地 `start-server.py` Python 伺服器 + GitHub Pages 公網
+- 公網網址：**https://chanel5168-cell.github.io/yangji-shop/**
+- Firebase 專案：`yangji-shop` ([Console](https://console.firebase.google.com/project/yangji-shop))
 - 完整功能說明：[暘基商城操作手冊.md](./暘基商城操作手冊.md)
 
 ---
@@ -19,8 +21,8 @@
 ## 🏃 接手第一動作
 
 1. 讀完本檔（5 分鐘）
-2. 掃過 [暘基商城操作手冊.md](./暘基商城操作手冊.md)（10 分鐘）
-3. 看 [WIP_狀態_2026-05-04.md](./WIP_狀態_2026-05-04.md) 知道最新進度與待辦
+2. **看最新 [WIP_狀態_2026-05-08.md](./WIP_狀態_2026-05-08.md) 知道最新進度與待辦**
+3. 掃過 [暘基商城操作手冊.md](./暘基商城操作手冊.md)（10 分鐘）
 
 ### 啟動伺服器
 
@@ -69,7 +71,7 @@ settings/main 系統設定（含 memberLevels 陣列）
 
 ## 🚨 已踩雷紀錄（必看）
 
-詳見 [WIP_狀態_2026-05-04.md](./WIP_狀態_2026-05-04.md) 的「踩雷紀錄」章節。最關鍵的：
+詳見 [WIP_狀態_2026-05-08.md](./WIP_狀態_2026-05-08.md) 的「踩雷紀錄」章節。最關鍵的：
 
 1. **file:// vs http://localhost localStorage 不互通** — 一律用 http://localhost
 2. **簡體字辨識**（doImport 同時支援繁/簡欄名）
@@ -77,6 +79,12 @@ settings/main 系統設定（含 memberLevels 陣列）
 4. **DATA_VERSION 遷移要小心覆蓋資料**
 5. **Vue.mount() 只能掛到一個元素** — admin.html 用 #app + v-if 切換 login/admin
 6. **start-server.py 強制 no-cache** — 解決瀏覽器快取問題
+7. ★ **Vue 3 method vs computed 語意陷阱** — 屬性訪問 (`xxx.kind`) 必須用 computed,method 在 template 直接讀屬性會拿到 function 物件的 `.kind`(永遠 undefined)。licenseStatus / isReadOnly / licenseDebugInfo 都已搬到 computed
+8. ★ **Firestore onSnapshot 不能 `length > 0` 過濾** — 雲端清空時本地不會更新。直接覆蓋本地,雲端是真相來源(adminUsers 例外保留 length 檢查避免空雲清掉預設帳號)
+9. ★ **GitHub Pages 子目錄絕對路徑會 404** — `/assets/...` 在子目錄下會 404,要用相對路徑 `assets/...`。`migrateImagePaths()` 自動修
+10. ★ **Firebase 首次連線會用空雲覆蓋本地** — `bootstrapFirebaseFromLocal()` 在訂閱前先把本地推上去,flag `shop_firebase_bootstrapped_v1` 確保只跑一次
+11. ★ **Bash 環境 SSL 憑證問題** — Claude 的 Bash 工具 curl/git push GitHub 會失敗。指令需在使用者的 PowerShell 跑
+12. ★ **LINE 設定欄位不能貼整段 HTML** — 「LINE 官方帳號 ID」只填 @xxx,「加好友連結」只填 https://lin.ee/xxx
 
 ---
 
