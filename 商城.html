@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>暘基五金商城 — 工程師技術文件</title>
+
+<!-- marked.js 將 markdown 渲染成 HTML -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<!-- highlight.js 給 code block 上色 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-dark.min.css">
+<script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/core.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/languages/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/languages/css.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/languages/xml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/languages/json.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/languages/bash.min.js"></script>
+
+<style>
+:root {
+  --primary: #1a2a4a;     /* 鋼鐵深藍 */
+  --primary-light: #2d4a7a;
+  --accent: #c9a95c;      /* 黃銅金 */
+  --accent-light: #fde68a;
+  --accent-dark: #7c5e1f;
+  --bg: #f7f6f1;          /* 米白底 */
+  --text: #2d3748;
+  --text-light: #718096;
+  --border: #e2e8f0;
+  --code-bg: #1e293b;
+  --warning: #fef3c7;
+  --warning-border: #f59e0b;
+}
+
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Microsoft JhengHei', 'PingFang TC', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  margin: 0;
+  padding: 0;
+}
+
+/* 頂部 banner — 工業金屬風 */
+.top-banner {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--primary) 100%);
+  color: var(--accent);
+  padding: 14px 24px;
+  border-bottom: 3px solid var(--accent);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.top-banner .brand {
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.top-banner .brand small {
+  color: rgba(253, 230, 138, 0.7);
+  font-weight: normal;
+  font-size: 12px;
+  margin-left: 8px;
+}
+.top-banner .actions {
+  display: flex;
+  gap: 8px;
+}
+.top-banner a {
+  color: var(--accent-light);
+  text-decoration: none;
+  font-size: 12px;
+  padding: 4px 12px;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.top-banner a:hover {
+  background: var(--accent);
+  color: var(--primary);
+}
+
+/* 主內容區 */
+.container {
+  max-width: 920px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 40px 60px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  border-top: 6px solid var(--accent);
+}
+
+/* 載入提示 */
+.loading {
+  text-align: center;
+  padding: 60px;
+  color: var(--text-light);
+  font-size: 14px;
+}
+.loading::after {
+  content: '...';
+  animation: dots 1.4s infinite;
+}
+@keyframes dots {
+  0%, 20% { content: '.'; }
+  40% { content: '..'; }
+  60%, 100% { content: '...'; }
+}
+
+/* Markdown 渲染後的樣式 */
+#content h1 {
+  color: var(--primary);
+  border-bottom: 4px double var(--accent);
+  padding-bottom: 12px;
+  margin-top: 0;
+  font-size: 28px;
+}
+#content h2 {
+  color: var(--primary);
+  border-left: 5px solid var(--accent);
+  padding-left: 14px;
+  margin-top: 36px;
+  font-size: 22px;
+}
+#content h3 {
+  color: var(--primary-light);
+  margin-top: 28px;
+  font-size: 18px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+#content h4 {
+  color: var(--accent-dark);
+  margin-top: 20px;
+  font-size: 15px;
+}
+#content blockquote {
+  border-left: 4px solid var(--accent);
+  background: var(--warning);
+  margin: 16px 0;
+  padding: 10px 18px;
+  color: var(--accent-dark);
+  border-radius: 0 4px 4px 0;
+}
+#content blockquote p { margin: 4px 0; }
+#content code {
+  background: #f5e9d0;
+  color: var(--accent-dark);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 13px;
+  font-family: 'Consolas', 'Monaco', monospace;
+}
+#content pre {
+  background: var(--code-bg);
+  color: #e2e8f0;
+  padding: 16px;
+  border-radius: 6px;
+  overflow-x: auto;
+  border-left: 4px solid var(--accent);
+  font-size: 13px;
+  line-height: 1.5;
+}
+#content pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+}
+#content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 16px 0;
+  font-size: 14px;
+}
+#content table th {
+  background: var(--primary);
+  color: var(--accent-light);
+  padding: 8px 12px;
+  text-align: left;
+  border: 1px solid var(--primary-light);
+}
+#content table td {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+}
+#content table tr:nth-child(even) {
+  background: #faf9f5;
+}
+#content ul, #content ol {
+  padding-left: 28px;
+}
+#content li {
+  margin: 4px 0;
+}
+#content a {
+  color: var(--primary-light);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+}
+#content a:hover {
+  color: var(--accent-dark);
+}
+#content hr {
+  border: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  margin: 36px 0;
+}
+
+/* 列印樣式 */
+@media print {
+  body { background: #fff; }
+  .top-banner { display: none; }
+  .container { box-shadow: none; padding: 20px; max-width: 100%; }
+  #content pre { page-break-inside: avoid; }
+  #content h1, #content h2, #content h3 { page-break-after: avoid; }
+}
+
+/* 手機 */
+@media (max-width: 768px) {
+  .container { padding: 20px; margin: 10px; }
+  #content h1 { font-size: 22px; }
+  #content h2 { font-size: 18px; }
+  #content table { font-size: 12px; }
+  #content pre { font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-banner">
+  <div class="brand">
+    🛒 暘基五金商城技術文件
+    <small>v3.2 · 2026-05-08 · 工程師版</small>
+  </div>
+  <div class="actions">
+    <a href="商城_使用說明.html">📘 業主使用手冊</a>
+    <a href="admin.html">⚙ 後台</a>
+    <a href="index.html">🛍 前台</a>
+    <a href="javascript:window.print()" title="列印">🖨</a>
+  </div>
+</div>
+
+<div class="container">
+  <div id="content" class="loading">載入文件中</div>
+</div>
+
+<script>
+fetch('商城.md')
+  .then(r => {
+    if (!r.ok) throw new Error('找不到 商城.md (HTTP ' + r.status + ')');
+    return r.text();
+  })
+  .then(md => {
+    // 設定 marked 用 highlight.js
+    marked.setOptions({
+      highlight: function(code, lang) {
+        if (lang && hljs.getLanguage(lang)) {
+          try { return hljs.highlight(code, { language: lang }).value; } catch (e) {}
+        }
+        try { return hljs.highlightAuto(code).value; } catch (e) {}
+        return code;
+      },
+      breaks: false,
+      gfm: true
+    });
+    document.getElementById('content').innerHTML = marked.parse(md);
+    document.getElementById('content').classList.remove('loading');
+    document.title = '🛒 暘基五金商城 — 工程師技術文件';
+  })
+  .catch(e => {
+    document.getElementById('content').innerHTML =
+      '<div style="color:#dc2626;padding:20px;background:#fee2e2;border-radius:4px">' +
+      '<strong>❌ 載入失敗</strong>: ' + e.message + '<br><br>' +
+      '請確認 <code>商城.md</code> 跟此 HTML 檔在同一個資料夾,並用 http:// (不要用 file://) 開啟。<br>' +
+      '本機: <code>http://localhost:8000/商城.html</code><br>' +
+      '公網: <code>https://chanel5168-cell.github.io/yangji-shop/商城.html</code>' +
+      '</div>';
+  });
+</script>
+
+</body>
+</html>
