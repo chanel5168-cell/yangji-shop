@@ -6710,9 +6710,9 @@ table.tbl{width:100%;border-collapse:collapse}
   </div>
 </div>
 
-<!-- ★ 授權狀態浮水印（永遠顯示，右上） -->
+<!-- ★ 授權狀態浮水印（永遠顯示，右上 — 往下避開 header「登出」連結） -->
 <div v-if="loggedIn && licenseStatus" :style="{
-        position:'fixed',right:'12px',top:'12px',
+        position:'fixed',right:'12px',top:'56px',
         background: licenseStatus.kind==='licensed' ? 'rgba(22,163,74,0.92)' : (licenseStatus.kind==='trial' ? 'rgba(245,158,11,0.92)' : 'rgba(220,38,38,0.92)'),
         color:'#fff',padding:'6px 12px',borderRadius:'20px',
         fontSize:'11px',cursor:'pointer',zIndex:50,
