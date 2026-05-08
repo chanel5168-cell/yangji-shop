@@ -8670,7 +8670,9 @@ createApp({
     if (this.loggedIn) {
       // ★ 首次連 Firebase:若雲端為空但本地有資料 → 先把本地推到雲端,再訂閱
       //   避免 onSnapshot 用空雲端覆蓋本地資料造成 seed 全失
-      this.bootstrapFirebaseFromLocal().then(() => this.subscribeAll());
+      this.bootstrapFirebaseFromLocal()
+        .then(() => this.migrateImagePaths())   // 接著修圖片路徑(本地+雲端)
+        .then(() => this.subscribeAll());
 
       // ★ 預設密碼警告 — 提醒使用者上線前要改密碼
       const DEFAULT_PWS = ['admin123', 'acc123', 'pick123', 'sales123'];
@@ -8847,6 +8849,41 @@ createApp({
       } catch (e) {
         console.error('[Firebase Bootstrap] 上傳失敗:', e);
         if (this.showToast) this.showToast('☁ 雲端初始化失敗:' + e.message, 'error');
+      }
+    },
+    /* ★ 一次性遷移:商品圖片絕對路徑 /assets/... → 相對路徑 assets/...
+       舊版 seed 用絕對路徑,在 GitHub Pages 子目錄下載不到圖。會同步到 Firebase。 */
+    async migrateImagePaths() {
+      const flagKey = 'shop_image_path_migrated_v1';
+      if (load(flagKey)) return;
+      try {
+        let migCnt = 0;
+        const updates = [];
+        this.products = (this.products || []).map(p => {
+          if (!Array.isArray(p.images) || p.images.length === 0) return p;
+          const fixed = p.images.map(url => (typeof url === 'string' && url.startsWith('/assets/')) ? url.slice(1) : url);
+          if (JSON.stringify(fixed) !== JSON.stringify(p.images)) {
+            migCnt++;
+            updates.push({ id: p.id, images: fixed });
+            return { ...p, images: fixed, updatedAt: Date.now() };
+          }
+          return p;
+        });
+        if (migCnt === 0) { save(flagKey, true); return; }
+        save(STORE.products, this.products);
+        // 同步到 Firebase
+        if (useFirebase) {
+          const batch = db.batch();
+          for (const u of updates) {
+            batch.update(db.collection('products').doc(u.id), { images: u.images, updatedAt: Date.now() });
+          }
+          await batch.commit();
+        }
+        save(flagKey, true);
+        console.log('%c[商城] 已修正 ' + migCnt + ' 件商品的圖片路徑(絕對 → 相對)','color:#16a34a;font-weight:bold');
+        if (this.showToast) this.showToast('🖼 已修正 ' + migCnt + ' 件商品圖片路徑', 'success');
+      } catch (e) {
+        console.error('[migrateImagePaths] 失敗:', e);
       }
     },
     /* ============ FIREBASE SUBSCRIPTIONS ============

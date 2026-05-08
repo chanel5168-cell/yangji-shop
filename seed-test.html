@@ -249,7 +249,8 @@ function seedAll() {
     const sp = shelfPlan[p.cat];
     const layer = layers[i % 3];   // 同類 3 件輪流上中下
     const fullShelf = sp.shelf + '-' + layer;
-    const imgPath = '/assets/imgs/' + imgFiles[i] + '.jpg';
+    // 用相對路徑(去掉開頭的 /),避免 GitHub Pages 子目錄找不到圖片
+    const imgPath = 'assets/imgs/' + imgFiles[i] + '.jpg';
     return {
       id: 'p-test-' + (1000 + i),
       name: p.name,
