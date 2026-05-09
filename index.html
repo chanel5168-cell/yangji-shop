@@ -118,7 +118,8 @@ header.main-header{
   box-shadow:inset 0 1px 0 rgba(255,255,255,0.05), 0 1px 2px rgba(0,0,0,0.2);
 }
 .cat-nav .wrap{max-width:1280px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:0;
-  overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+  overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+  touch-action:pan-x;overscroll-behavior-x:contain;
 }
 .cat-nav .wrap::-webkit-scrollbar{display:none}
 .cat-nav-item{padding:13px 18px;cursor:pointer;font-size:14px;white-space:nowrap;color:#e2e8f0;
