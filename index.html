@@ -117,16 +117,24 @@ header.main-header{
   border-bottom:1px solid rgba(0,0,0,0.5);
   box-shadow:inset 0 1px 0 rgba(255,255,255,0.05), 0 1px 2px rgba(0,0,0,0.2);
 }
-.cat-nav .wrap{max-width:1280px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:0}
+.cat-nav .wrap{max-width:1280px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:0;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.cat-nav .wrap::-webkit-scrollbar{display:none}
 .cat-nav-item{padding:13px 18px;cursor:pointer;font-size:14px;white-space:nowrap;color:#e2e8f0;
   border-right:1px solid rgba(255,255,255,0.05);transition:all .15s;position:relative;
-  display:inline-flex;align-items:center;
+  display:inline-flex;align-items:center;flex-shrink:0;
 }
 .cat-nav-item:hover{background:rgba(201,169,92,0.15);color:var(--accent)}
 .cat-nav-item.active{background:rgba(201,169,92,0.2);font-weight:bold;color:var(--accent);
   box-shadow:inset 0 -3px 0 var(--accent);
 }
-.cat-nav-spacer{flex:1}
+.cat-nav-spacer{flex:1;min-width:0}
+@media (max-width:768px){
+  .cat-nav-spacer{display:none}
+  .cat-nav .wrap{padding:0 12px}
+  .cat-nav-item{padding:11px 14px;font-size:13px}
+}
 /* 頂部橫條右側公告（靜態，截斷顯示） */
 .cat-nav-announce{font-size:13px;color:var(--accent);padding:0 16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:400px}
 
@@ -1192,7 +1200,7 @@ footer{
             <button @click="copyText(settings.bankAccount)" style="margin-left:6px;padding:1px 8px;font-size:11px;border:1px solid var(--accent);border-radius:3px;cursor:pointer;background:#fff">複製</button>
           </div>
           <!-- LINE 確認訂單 -->
-          <div v-if="o.status==='pending' && o.paymentMethod==='line' && (settings.lineAddFriendUrl||settings.lineOfficialId)"
+          <div v-if="o.status==='pending' && o.paymentMethod==='line' && validLineFloatUrl"
                style="background:#e8f5e9;padding:10px 14px;border-top:1px dashed var(--border);font-size:13px">
             💬 請加 LINE 確認：
             <a v-if="settings.lineAddFriendUrl" :href="settings.lineAddFriendUrl" target="_blank" style="color:#06c755;font-weight:bold">點此加好友</a>
@@ -1394,7 +1402,7 @@ footer{
           <select v-model="checkout.paymentMethod">
             <option value="cod">貨到付款</option>
             <option value="transfer">銀行轉帳</option>
-            <option value="line" v-if="settings.lineOfficialId || settings.lineAddFriendUrl">LINE 聯絡確認</option>
+            <option value="line" v-if="validLineFloatUrl">LINE 聯絡確認</option>
           </select>
         </div>
 
@@ -1415,7 +1423,7 @@ footer{
         </div>
 
         <!-- LINE 聯絡 -->
-        <div v-if="checkout.paymentMethod==='line' && (settings.lineOfficialId || settings.lineAddFriendUrl)"
+        <div v-if="checkout.paymentMethod==='line' && validLineFloatUrl"
              style="background:linear-gradient(180deg,#e8f5e9,#c8e6c9);border:1px solid #4caf50;border-radius:4px;padding:14px;margin-bottom:14px">
           <h4 style="color:#2e7d32;margin-bottom:8px">💬 LINE 聯絡下單</h4>
           <p style="font-size:13px;line-height:1.8">
@@ -1591,8 +1599,9 @@ footer{
   </div>
 
   <!-- ============ LINE 浮動客服按鈕（右下角） ============ -->
-  <a v-if="settings.lineAddFriendUrl || settings.lineOfficialId"
-     :href="settings.lineAddFriendUrl || ('https://line.me/R/ti/p/' + encodeURIComponent(settings.lineOfficialId))"
+  <!-- ⚠ 只在 validLineFloatUrl 有值時顯示。錯誤格式(LIFF / Login channel)會導致 LINE 400 → 攔截 -->
+  <a v-if="validLineFloatUrl"
+     :href="validLineFloatUrl"
      target="_blank"
      class="line-float-btn"
      title="加 LINE 詢問">
@@ -2016,6 +2025,20 @@ createApp({
   },
 
   computed: {
+    /* ★ LINE 浮動按鈕 URL — 只有設定正確時才回傳;
+       錯誤的格式(LIFF / Login Channel ID)會導致 400 Bad Request,所以攔截 */
+    validLineFloatUrl() {
+      const url = (this.settings.lineAddFriendUrl || '').trim();
+      const oid = (this.settings.lineOfficialId || '').trim();
+      // 1. 直接設了 Add Friend URL 且格式為 line.me/R/ti/p/...
+      if (url && /^https:\/\/line\.me\/R\/ti\/p\//i.test(url)) return url;
+      // 2. 官方 ID 必須以 @ 開頭(LINE OA basic ID)
+      if (oid && oid.startsWith('@')) {
+        return 'https://line.me/R/ti/p/' + encodeURIComponent(oid);
+      }
+      // 其他格式(LIFF URL / 純數字 Login Channel ID 等)→ 不顯示按鈕
+      return null;
+    },
     topCategories() {
       // 純依 sortOrder 排序（您可在後台「分類管理」用 ↑↓ 按鈕調整順序）
       return this.categories.filter(c => !c.parentId).sort((a, b) => (a.sortOrder||0) - (b.sortOrder||0));
